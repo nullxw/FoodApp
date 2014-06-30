@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>APIURL</key>
+	<string>http://192.168.0.122:8080/</string>
+	<key>adPicURL</key>
+	<string>http://192.168.0.245:8060</string>
+	<key>storesPicURL</key>
+	<string>http://www.quanjude.com.cn</string>
+</dict>
+</plist>

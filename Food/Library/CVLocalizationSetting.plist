@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Language</key>
+	<string>Chinese</string>
+	<key>Chinese</key>
+	<dict>
+		<key>My menu</key>
+		<string>我的菜单</string>
+		<key>Affirm Order</key>
+		<string>确认订单</string>
+		<key>money:%.2f</key>
+		<string>金额：%.2f</string>
+		<key>food:%d</key>
+		<string>已点菜品：%d</string>
+		<key>Have food</key>
+		<string>已点菜品</string>
+		<key>Additions:</key>
+		<string>特别备注：</string>
+		<key>Food</key>
+		<string>菜名</string>
+		<key>count</key>
+		<string>数量</string>
+		<key>Price</key>
+		<string>单价</string>
+		<key>Special requirements</key>
+		<string>请输入你的特殊要求!</string>
+		<key>tao</key>
+		<string>套</string>
+		<key>Menu</key>
+		<string>菜单</string>
+		<key>hot Food</key>
+		<string>热门菜品</string>
+		<key>All Food</key>
+		<string>全部菜品</string>
+		<key>Search</key>
+		<string>搜索</string>
+		<key>Failed to get the category</key>
+		<string>获取类别失败</string>
+		<key>Failed to get food</key>
+		<string>获取菜品失败</string>
+		<key>Self help order</key>
+		<string>自助点餐</string>
+		<key>city</key>
+		<string>城       市</string>
+		<key>stores</key>
+		<string>门       店</string>
+		<key>A due date</key>
+		<string>预定日期</string>
+		<key>market</key>
+		<string>餐       次</string>
+		<key>time</key>
+		<string>时       间</string>
+		<key>Select City</key>
+		<string>选择城市</string>
+		<key>Select Stores</key>
+		<string>选择门店</string>
+		<key>Select Date</key>
+		<string>选择日期</string>
+		<key>Select Market</key>
+		<string>选择市别</string>
+		<key>Select Time</key>
+		<string>选择时间</string>
+		<key>Next step</key>
+		<string>下一步</string>
+		<key>Prompt</key>
+		<string>提示</string>
+		<key>City code is empty</key>
+		<string>城市编码为空</string>
+		<key>OK</key>
+		<string>确定</string>
+		<key>cancel</key>
+		<string>取消</string>
+		<key>timeout</key>
+		<string>您选择的时间早于当前时间</string>
+		<key>My Vip cards</key>
+		<string>我的会员卡</string>
+		<key>Sure</key>
+		<string>是</string>
+		<key>No</key>
+		<string>否</string>
+		<key>Binding mobile phone</key>
+		<string>绑定手机</string>
+		<key>Phone number</key>
+		<string>手机号</string>
+		<key>Verification code</key>
+		<string>验证码</string>
+		<key>Please enter the phone number</key>
+		<string>请输入手机号码</string>
+		<key>Get verification code</key>
+		<string>获取验证码</string>
+		<key>Submit</key>
+		<string>提       交</string>
+		<key>Modify the binding mobile phone</key>
+		<string>修改绑定手机</string>
+		<key>Please correct phone number</key>
+		<string>请输正确手机号码</string>
+		<key>Haven&apos;t get verification code</key>
+		<string>还未获取验证码</string>
+		<key>Please enter the verification code</key>
+		<string>请输入验证码</string>
+		<key>Verification code is not correct</key>
+		<string>验证码不正确</string>
+		<key>Failed to get information</key>
+		<string>获取信息失败</string>
+		<key>Improve the personal information</key>
+		<string>完善个人信息</string>
+		<key>User name</key>
+		<string>用户名</string>
+		<key>Please enter your user name</key>
+		<string>请输入用户名</string>
+		<key>man</key>
+		<string>男士</string>
+		<key>woman</key>
+		<string>女士</string>
+		<key>Please enter the password</key>
+		<string>请输入密码</string>
+		<key>Please make sure the password</key>
+		<string>请确认密码</string>
+		<key>passWordPrompt</key>
+		<string>密码为6位(数字，字母，特殊符号)</string>
+		<key>province</key>
+		<string>省份</string>
+		<key>OnlyCity</key>
+		<string>城市</string>
+		<key>area</key>
+		<string>地区</string>
+		<key>Please select a province</key>
+		<string>请选择所在省份</string>
+		<key>Please select a city</key>
+		<string>请选择所在城市</string>
+		<key>Please select a region</key>
+		<string>请选择所在地区</string>
+		<key>skip</key>
+		<string>跳  过</string>
+		<key>You haven&apos;t choose province</key>
+		<string>你还未选择省份</string>
+		<key>You haven&apos;t choose city</key>
+		<string>你还未选择城市</string>
+		<key>You haven&apos;t choose region</key>
+		<string>你还未选择地区</string>
+		<key>Please enter the user name six to ten</key>
+		<string>请输入六到十位的用户名</string>
+		<key>Password length is not correct</key>
+		<string>密码长度不正确</string>
+		<key>My reservation</key>
+		<string>我的预定</string>
+		<key>My equipotential</key>
+		<string>我的等位</string>
+		<key>Online booking</key>
+		<string>在线订位
+</string>
+		<key>Self order</key>
+		<string>自助点餐</string>
+		<key>Preferential information</key>
+		<string>优惠信息</string>
+		<key>Line up your turn</key>
+		<string>排队叫号</string>
+		<key>Member management</key>
+		<string>会员管理</string>
+		<key>Store the query</key>
+		<string>店铺查询</string>
+		<key>Look at the map</key>
+		<string>查看地图</string>
+		<key>Other Settings</key>
+		<string>其他设置</string>
+		<key>Query</key>
+		<string>查      询</string>
+		<key>load...</key>
+		<string>数据加载...</string>
+		<key>Please first binding mobile phone number and improve the personal information</key>
+		<string>请先绑定手机号码和完善个人信息</string>
+		<key>Please first binding mobile phone number</key>
+		<string>请先绑定手机号码</string>
+		<key>No reservation record</key>
+		<string>暂无预定记录</string>
+		<key>Cancel the reservation</key>
+		<string>取消预定</string>
+		<key>Stores</key>
+		<string>店名</string>
+		<key>Date</key>
+		<string>日期</string>
+		<key>Time</key>
+		<string>时间</string>
+		<key>People</key>
+		<string>人数</string>
+		<key>Address</key>
+		<string>地址</string>
+		<key>Telephone</key>
+		<string>电话</string>
+		<key>Note</key>
+		<string>备注</string>
+		<key>Name</key>
+		<string>姓名</string>
+		<key>name</key>
+		<string>姓       名</string>
+		<key>phone number</key>
+		<string>手  机  号</string>
+		<key>Number</key>
+		<string>卡号</string>
+		<key>No equipotential record</key>
+		<string>暂无等位记录</string>
+		<key>Your allelic number</key>
+		<string>你的等位号码</string>
+		<key>Cancel the allelic</key>
+		<string>取消等位</string>
+		<key>Please enter the card payment password</key>
+		<string>请输入会员卡支付密码</string>
+		<key>Add the vip card</key>
+		<string>添加会员卡</string>
+		<key>Please enter the card number</key>
+		<string>请输入会员卡号</string>
+		<key>Password authentication</key>
+		<string>密码验证</string>
+		<key>Pay the password</key>
+		<string>支付密码</string>
+		<key>Enter the password for payment</key>
+		<string>请输入支付密码</string>
+		<key>Card type</key>
+		<string>卡类型</string>
+		<key>Agree</key>
+		<string>同意</string>
+		<key>User agreement</key>
+		<string>用户协议</string>
+		<key>Please enter the card is reserved phone number</key>
+		<string>请输入办理会员卡是预留的手机号码</string>
+		<key>Please see the 《user agreement》</key>
+		<string>请查看《用户协议》</string>
+		<key>The personal information submitted...</key>
+		<string>个人信息提交中...</string>
+		<key>Whether the membership card %@ unbound</key>
+		<string>是否对会员卡%@解除绑定</string>
+		<key>Remove the binding</key>
+		<string>解除绑定</string>
+		<key>The next time</key>
+		<string>下次再说</string>
+		<key>You haven&apos;t input the card number</key>
+		<string>你还未输入会员卡号</string>
+		<key>Fill in the card information</key>
+		<string>填写会员卡信息</string>
+		<key>Enter the id number</key>
+		<string>请输入证件号</string>
+		<key>Id Number</key>
+		<string>证  件  号</string>
+		<key>Document type</key>
+		<string>证件类型</string>
+		<key>Enter your name</key>
+		<string>请输入姓名</string>
+		<key>Select a credentials type</key>
+		<string>请选择证件类型</string>
+		<key>Please fill out the registration name card</key>
+		<string>请填写办理会员卡时登记的姓名</string>
+		<key>Please fill in the card registered mobile phone number</key>
+		<string>请填写办理会员卡时登记的手机号码</string>
+		<key>Back</key>
+		<string>返 回</string>
+		<key>binding membership card need SMS confirmation, verification code has been sent to your mobile phone %@......%@, please according to clew operation</key>
+		<string>绑定会员卡需要短信确认，验证码已经发送至你的手机%@......%@,请按照提示操作</string>
+		<key>Verification code error</key>
+		<string>验证码错误</string>
+		<key>Failed to get verification code, please get it again</key>
+		<string>获取验证码失败，请重新获取</string>
+		<key>Password confirmation</key>
+		<string>密码确认</string>
+		<key>Please enter payment password again</key>
+		<string>请再次输入支付密码</string>
+		<key>Please set the payment password</key>
+		<string>请设置支付密码</string>
+		<key>Two different input password \n please confirm and re-enter</key>
+		<string>两次输入密码不同\n请确认后重新输入</string>
+		<key>Pay the password will not change after confirmation whether \n determine pay password, or cancel to reset</key>
+		<string>支付密码一经确定将不可修改\n是否确定支付密码，或者取消重新设定</string>
+		<key>Balance</key>
+		<string>余       额</string>
+		<key>Integral</key>
+		<string>积       分</string>
+		<key>Securities</key>
+		<string>电  子  劵</string>
+		<key>Exclusive privilege</key>
+		<string>会员专享特权</string>
+		<key>Reset</key>
+		<string>重新设定</string>
+		<key>Recharge</key>
+		<string>充值记录</string>
+		<key>Expense</key>
+		<string>消费记录</string>
+		<key>Card explain</key>
+		<string>会员卡说明</string>
+		<key>Phone card center</key>
+		<string>会员卡中心电话</string>
+		<key>Apply to stores</key>
+		<string>适用门店</string>
+		<key>Unused</key>
+		<string>未使用</string>
+		<key>Used</key>
+		<string>已使用</string>
+		<key>Expired</key>
+		<string>已过期</string>
+		<key>Inactive</key>
+		<string>未激活</string>
+		<key>Temporarily no data</key>
+		<string>暂无数据</string>
+		<key>Modify payment password</key>
+		<string>修改支付密码</string>
+		<key>Original password</key>
+		<string>原   密   码</string>
+		<key>New password</key>
+		<string>新   密   码</string>
+		<key>Lose the original password</key>
+		<string>请输原密码</string>
+		<key>Enter a new password</key>
+		<string>请输入新密码</string>
+		<key>New password confirm</key>
+		<string>新密码确认</string>
+		<key>Make sure new password</key>
+		<string>请确认新密码</string>
+		<key>Two different password, please make sure the input again</key>
+		<string>两次密码不同，请确认重新输入</string>
+		<key>query</key>
+		<string>查询</string>
+		<key>Query the date</key>
+		<string>查询日期</string>
+		<key>%@  to  %@</key>
+		<string>%@  至  %@</string>
+		<key>%@Money</key>
+		<string>%@元</string>
+		<key>Expiration time</key>
+		<string>过期时间</string>
+		<key>Cash coupon number</key>
+		<string>现金劵号码</string>
+		<key>No prepaid phone records time period</key>
+		<string>时间段内暂无充值记录</string>
+		<key>No record of consumption period</key>
+		<string>时间段内暂无消费记录</string>
+		<key>Table type</key>
+		<string>桌位类型</string>
+		<key>The free table</key>
+		<string>空闲桌位</string>
+		<key>rooms</key>
+		<string>包间</string>
+		<key>Table for %@</key>
+		<string>%@人桌</string>
+		<key>Suitable for   people</key>
+		<string>适合  人</string>
+		<key>Suitable for 1~%@ people</key>
+		<string>适合1~%@人</string>
+		<key>people</key>
+		<string>人</string>
+		<key>Did not choose the table type</key>
+		<string>未选择台位类型</string>
+		<key>Reservation information</key>
+		<string>订位信息</string>
+		<key>Enter the order number</key>
+		<string>请输入订餐人数</string>
+		<key>Successful order</key>
+		<string>订单成功</string>
+		<key>Whether to order a meal</key>
+		<string>是否订餐</string>
+		<key>Please enter the order People</key>
+		<string>请输就餐人数</string>
+		<key>Locate failure</key>
+		<string>定位失败</string>
+		<key>The city is temporarily unable to store data</key>
+		<string>该城市暂无门店数据</string>
+		<key>Distance</key>
+		<string>距离</string>
+		<key>My location</key>
+		<string>我的位置</string>
+		<key>Map</key>
+		<string>地图</string>
+		<key>Planar map</key>
+		<string>平面地图</string>
+		<key>Scenery map</key>
+		<string>实景地图</string>
+		<key>The city is your turn stores</key>
+		<string>该城市暂无可叫号门店</string>
+		<key>Total number of table %@</key>
+		<string>总排队桌数 %@ 桌</string>
+		<key>Take number</key>
+		<string>手机取号</string>
+		<key>The current has called to %@</key>
+		<string>当前已叫至%@桌</string>
+		<key>Your line number</key>
+		<string>你的排队号码</string>
+		<key>Select the table type</key>
+		<string>选择台位类型</string>
+		<key>Before you have</key>
+		<string>你之前还有</string>
+		<key>tables</key>
+		<string>桌客人</string>
+		<key>Your choice is</key>
+		<string>你选择的是</string>
+		<key>Take number information please go to the APP page under&apos;my allelic&apos;queries in!</key>
+		<string>取号信息请到APP主页下方“我的等位”内查询!</string>
+		<key>Helpful hints</key>
+		<string>友情提示</string>
+		<key>No invalid number, according to your delay after 2 table arrangement, please forgive me!</key>
+		<string>过号不作废，按已叫号延迟2桌后安排，请见谅!</string>
+		<key>Select Province</key>
+		<string>选择省份</string>
+		<key>Select Area</key>
+		<string>选择区域</string>
+		<key>Change the binding phone</key>
+		<string>更改绑定手机</string>
+		<key>Check the binding phone</key>
+		<string>查看绑定手机</string>
+		<key>Forget the binding phone</key>
+		<string>忘记绑定手机</string>
+		<key>The binding information</key>
+		<string>绑定信息</string>
+		<key>Determine the cancellation of the current user information</key>
+		<string>确定注销当前用户信息</string>
+		<key>Logout success</key>
+		<string>注销成功</string>
+		<key>Logout failed</key>
+		<string>注销失败</string>
+		<key>Stores to choose</key>
+		<string>门店选择</string>
+		<key>If we give up change binding mobile phone number</key>
+		<string>是否放弃修改绑定手机</string>
+	</dict>
+</dict>
+</plist>
