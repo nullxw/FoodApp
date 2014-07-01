@@ -37,24 +37,37 @@
     [self.contentView addSubview:_foodLable];
     
     
+    
+    //App价格
+    _priceLableApp = [[RTLabel alloc] initWithFrame:CGRectZero];
+    _priceLableApp.frame = CGRectMake(90, 30, 70, 18);
+    _priceLableApp.backgroundColor = [UIColor clearColor];
+    _priceLableApp.textColor = [UIColor grayColor];
+    _priceLableApp.font = [UIFont systemFontOfSize:10.0];
+    [self.contentView addSubview:_priceLableApp];
+    
+    UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(80, 36, 60, 1)];
+    lineView.backgroundColor=[UIColor grayColor];
+    [self.contentView addSubview:lineView];
+    
     _priceLable = [[RTLabel alloc] initWithFrame:CGRectZero];
-    _priceLable.frame = CGRectMake(90, 45, 80, 20);
+    _priceLable.frame = CGRectMake(90, 50, 80, 20);
     _priceLable.backgroundColor = [UIColor clearColor];
     _priceLable.textColor = [UIColor redColor];
-    _priceLable.font = [UIFont systemFontOfSize:11.0];
+    _priceLable.font = [UIFont systemFontOfSize:10.0];
     [self.contentView addSubview:_priceLable];
     
     _plusBut = [[UIButton alloc] initWithFrame:CGRectZero];
     _plusBut.backgroundColor = [UIColor clearColor];
     [_plusBut setBackgroundImage:[UIImage imageNamed:@"Order_plus.png"] forState:UIControlStateNormal];
     [_plusBut addTarget:self action:@selector(plusClick) forControlEvents:UIControlEventTouchUpInside];
-    _plusBut.frame = CGRectMake(ScreenWidth-25, 40, 20, 20);
+    _plusBut.frame = CGRectMake(ScreenWidth-30, 40, 28, 28);
     [self.contentView addSubview:_plusBut];
     
     _countBut = [[UIButton alloc] initWithFrame:CGRectZero];
     _countBut.backgroundColor = [UIColor clearColor];
     [_countBut setBackgroundImage:[UIImage imageNamed:@"Order_Num.png"] forState:UIControlStateNormal];
-    _countBut.frame = CGRectMake(ScreenWidth-25*2, 38, 23, 23);
+    _countBut.frame = CGRectMake(ScreenWidth-27*2, 43, 23, 23);
     [self.contentView addSubview:_countBut];
     
     _tfcount = [[UITextField alloc] initWithFrame:CGRectZero];
@@ -71,7 +84,7 @@
     _minusBut.backgroundColor = [UIColor clearColor];
     [_minusBut setBackgroundImage:[UIImage imageNamed:@"Order_minus.png"] forState:UIControlStateNormal];
     [_minusBut addTarget:self action:@selector(minusClick) forControlEvents:UIControlEventTouchUpInside];
-    _minusBut.frame = CGRectMake(ScreenWidth-25*3, 40, 20, 20);
+    _minusBut.frame = CGRectMake(ScreenWidth-28*3, 40, 28, 28);
     [self.contentView addSubview:_minusBut];
     
 }
@@ -105,6 +118,7 @@
         _foodLable.text = [info objectForKey:@"des"];
         NSString *priceStr = [NSString stringWithFormat:@"￥%@元/%@",[info objectForKey:@"price"],@"套"];
         _priceLable.text = priceStr;
+        _priceLableApp.text = priceStr;
         _numberLable.text = [info objectForKey:@"pitcode"];
         [_recommendImage setImage:[UIImage imageNamed:@"defaultFood.png"]];
         [self setImagegrpStr:info];
@@ -140,6 +154,7 @@
         _foodLable.text = [info objectForKey:@"pdes"];
         NSString *priceStr = [NSString stringWithFormat:@"￥%@元/%@",[info objectForKey:@"price"],[info objectForKey:@"unit"]];
         _priceLable.text = priceStr;
+        _priceLableApp.text = priceStr;
         _numberLable.text = [info objectForKey:@"pitcode"];
         [_recommendImage setImage:[UIImage imageNamed:@"defaultFood.png"]];
         [self setSmallImage:info];

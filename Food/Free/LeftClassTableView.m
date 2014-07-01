@@ -43,8 +43,9 @@
     if (!cell){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
     }
-    
+    cell.textLabel.text=@"";
     cell.textLabel.text = [[classArray objectAtIndex:indexPath.row] objectForKey:@"des"];
+    cell.textLabel.font=[UIFont systemFontOfSize:13];
     return cell;
 }
 

@@ -15,6 +15,7 @@
     WebImageView     *_recommendImage;       //推荐头像
     UILabel         *_foodLable;            //菜名
     RTLabel         *_priceLable;         //价格
+    RTLabel         *_priceLableApp;        //APP价格
     RTLabel         *_numberLable;          //编号
     RTLabel         *_amountLable;            //数量
     UITextField         *_tfcount;            //已点菜品数量

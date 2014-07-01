@@ -67,4 +67,4 @@ static void bs_dispatch_sync_on_main_thread(dispatch_block_t block) {
 #define tableColorBlue [UIColor colorWithRed:106.0/255.0 green:183.0/255.0 blue:255.0/255.0 alpha:1.0]    //蓝色
 
 
-#define kLeftTableWidth 100
+#define kLeftTableWidth 90

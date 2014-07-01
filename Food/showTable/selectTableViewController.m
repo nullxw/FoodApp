@@ -127,7 +127,7 @@
         
         UIImageView *imageView=[[UIImageView alloc]init];
         
-        if(i!=index-1 && [[[storemessage.storeTableArray objectAtIndex:i]objectForKey:@"tableNum"]integerValue]<=0)
+        if((![storemessage.storeRoomArray count] && [[[storemessage.storeTableArray objectAtIndex:i]objectForKey:@"tableNum"]integerValue]<=0)||(i!=index-1&&[storemessage.storeRoomArray count] && [[[storemessage.storeTableArray objectAtIndex:i]objectForKey:@"tableNum"]integerValue]<=0))
         {
             [imageView setImage:[UIImage imageNamed:@"Public_sexcant.png"]];
             button.userInteractionEnabled=NO;
