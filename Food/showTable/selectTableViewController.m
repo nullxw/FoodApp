@@ -91,8 +91,8 @@
     _imageView=[[WebImageView alloc]initWithImage:[UIImage imageNamed:@"Public_default.png"]];
     _imageView.frame=CGRectMake(10, 10, SUPERVIEWWIDTH-20, SUPERVIEWWIDTH-120);
     [scroll addSubview:_imageView];
-//    [self getImage:storemessage.storeWbigPic];
-     [NSThread detachNewThreadSelector:@selector(getImage:) toTarget:self withObject:storemessage.storeWbigPic];
+    [self getImage:storemessage.storeWbigPic];
+//     [NSThread detachNewThreadSelector:@selector(getImage:) toTarget:self withObject:storemessage.storeWbigPic];
     
     _dataButton=[[NSMutableArray alloc]init];
     
@@ -126,7 +126,17 @@
         [button addSubview:lbl];
         
         UIImageView *imageView=[[UIImageView alloc]init];
-        [imageView setImage:[UIImage imageNamed:@"Public_sexNomal.png"]];
+        
+        if(i!=index-1 && [[[storemessage.storeTableArray objectAtIndex:i]objectForKey:@"tableNum"]integerValue]<=0)
+        {
+            [imageView setImage:[UIImage imageNamed:@"Public_sexcant.png"]];
+            button.userInteractionEnabled=NO;
+        }
+        else
+        {
+            [imageView setImage:[UIImage imageNamed:@"Public_sexNomal.png"]];
+            button.userInteractionEnabled=YES;
+        }
         imageView.frame=CGRectMake(0, 3, button.frame.size.width*0.2, button.frame.size.height-6);
         [button addSubview:imageView];
         ButtonHeight=button.frame.origin.y+50;
@@ -336,6 +346,16 @@
                         }
                     }
                 }
+                else if(!btn.userInteractionEnabled)
+                {
+                    for (NSObject *view in btn.subviews)
+                    {
+                        if([view isKindOfClass:[UIImageView class]])
+                        {
+                            [(UIImageView *)view setImage:[UIImage imageNamed:@"Public_sexcant.png"]];
+                        }
+                    }
+                }
                 else
                 {
                     for (NSObject *view in btn.subviews)
@@ -346,7 +366,6 @@
                         }
                     }
                 }
-                
             }
         }
         

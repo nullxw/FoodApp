@@ -309,7 +309,8 @@
                 [dictImage setObject:webView forKey:@"imageView"];
                 [dictImage setObject:url forKey:@"url"];
                 [dictImage setObject:[NSNumber numberWithBool:YES] forKey:@"gif"];
-                [NSThread detachNewThreadSelector:@selector(getImage:) toTarget:self withObject:dictImage];
+                [self getImage:dictImage];
+//                [NSThread detachNewThreadSelector:@selector(getImage:) toTarget:self withObject:dictImage];
                 [viewsArray addObject:webView];
             }
             else
@@ -321,7 +322,8 @@
                 [dictImage setObject:imageView forKey:@"imageView"];
                 [dictImage setObject:url forKey:@"url"];
                 [dictImage setObject:[NSNumber numberWithBool:NO] forKey:@"gif"];
-                [NSThread detachNewThreadSelector:@selector(getImage:) toTarget:self withObject:dictImage];
+                [self getImage:dictImage];
+//                [NSThread detachNewThreadSelector:@selector(getImage:) toTarget:self withObject:dictImage];
                 
                 [viewsArray addObject:imageView];
             }

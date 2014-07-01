@@ -11,6 +11,7 @@
 #import "selectTableViewController.h"
 #import "Chracter.h"
 #import "StoreMessage.h"
+#import "WebImageView.h"
 
 @interface showTableViewController ()
 
@@ -18,11 +19,17 @@
 
 @implementation showTableViewController
 {
-    UITableView                 *_tableView;
+    UITableView                 *_tableViewOtherType;
+    
     CGFloat                     VIEWSELFHEIGHT;
     NSMutableArray              *_dataArray;
     NSMutableArray              *_alphabetArray;//字母索引
     CVLocalizationSetting       *langSetting;
+    
+    UIView                      *_tableMessageView;
+    
+    NSMutableArray              *_dataButton;
+    NSMutableArray              *_dataImageView;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -129,6 +136,7 @@
 {
     //    门店显示数据格式
     _dataArray=[[NSMutableArray alloc]init];
+    
     _alphabetArray=[[NSMutableArray alloc]init];
     for (int i=0; i<[dataArray count]; i++)
     {
@@ -180,6 +188,8 @@
                 j--;
             }
         }
+//        台位排序
+       storei.storeTableArray=[[NSMutableArray alloc]initWithArray:[storei.storeTableArray sortedArrayUsingComparator:cmptr]];
     }
     
     //    如果存在改字母的则加入数据中，不存在则该字母不存在
@@ -190,24 +200,51 @@
         {
             if([[NSString stringWithFormat:@"%c",i]isEqualToString:((StoreMessage *)[dataArray objectAtIndex:j]).storeFirstAlp])
             {
-                [alphabetArray addObject:[dataArray objectAtIndex:j]];
+                NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
+                [dict setObject:[dataArray objectAtIndex:j] forKey:@"store"];
+                [dict  setObject:[NSNumber numberWithBool:NO] forKey:@"isOpen"];
+                
+                WebImageView *imageView=[[WebImageView alloc]initWithImage:[UIImage imageNamed:@"Public_default.png"]];
+                imageView.frame=CGRectMake(10, 5, 90, 70);
+                [dict setObject:imageView forKey:((StoreMessage*)[dataArray objectAtIndex:j]).storeFirmid];
+                [self getImage:dict];
+//                [NSThread detachNewThreadSelector:@selector(getImage:) toTarget:self withObject:dict];
+                [_dataImageView addObject:imageView];
+                
+                [alphabetArray addObject:dict];
             }
         }
         if([alphabetArray count]>0)
         {
-            NSLog(@"%@",alphabetArray);
             NSMutableDictionary  *dict=[[NSMutableDictionary alloc]init];
-            [dict setObject: ((StoreMessage *)[alphabetArray objectAtIndex:0]).storeFirstAlp forKey:@"alphabet"];
+            [dict setObject: ((StoreMessage *)[[alphabetArray objectAtIndex:0]objectForKey:@"store"]).storeFirstAlp forKey:@"alphabet"];
             [dict  setObject:alphabetArray forKey:@"alphabetArray"];
-            [_dataArray addObject:dict];
-            [_alphabetArray addObject:((StoreMessage *)[alphabetArray objectAtIndex:0]).storeFirstAlp];
+            for (NSMutableDictionary *value in alphabetArray)
+            {
+                [_dataArray addObject:value];
+            }
+            [_alphabetArray addObject:((StoreMessage *)[[alphabetArray objectAtIndex:0]objectForKey:@"store"]).storeFirstAlp];
         }
     }
-    bs_dispatch_sync_on_main_thread(^{
-        [_tableView reloadData];
-    });
-    
+
+        [_tableViewOtherType reloadData];
 }
+
+//对台为按照台位人数多少进行排序
+NSComparator cmptr = ^(id obj1, id obj2){
+    
+//    降序
+    if ([[obj1 objectForKey:@"tablePax"] integerValue] > [[obj2 objectForKey:@"tablePax"] integerValue]) {
+        return (NSComparisonResult)NSOrderedDescending;
+    }
+//    升序
+    if ([[obj1 objectForKey:@"tablePax"] integerValue] < [[obj2 objectForKey:@"tablePax"] integerValue]) {
+        return (NSComparisonResult)NSOrderedAscending;
+    }
+//    相同
+    return (NSComparisonResult)NSOrderedSame;
+};
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -223,16 +260,18 @@
         VIEWSELFHEIGHT=44.0;
     }
     
+    _dataButton=[[NSMutableArray alloc]init];
+    _dataImageView=[[NSMutableArray alloc]init];
     _alphabetArray=[[NSMutableArray alloc]initWithObjects:@"#",@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z", nil];
     navigationBarView *nvc=[[navigationBarView alloc]initWithFrame:CGRectMake(0, 0, SUPERVIEWWIDTH, VIEWSELFHEIGHT) andTitle:[langSetting localizedString:@"Stores to choose"]];
     nvc.delegate=self;
     [self.view addSubview:nvc];
     
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, VIEWSELFHEIGHT, SUPERVIEWWIDTH, SUPERVIEWHEIGHT-VIEWSELFHEIGHT) style:UITableViewStylePlain];
-    _tableView.delegate=self;
-    _tableView.dataSource=self;
-    _tableView.separatorColor=[UIColor orangeColor];
-    [self.view addSubview:_tableView];
+    _tableViewOtherType=[[UITableView alloc]initWithFrame:CGRectMake(0, VIEWSELFHEIGHT, SUPERVIEWWIDTH, SUPERVIEWHEIGHT-VIEWSELFHEIGHT-10) style:UITableViewStylePlain];
+    _tableViewOtherType.delegate=self;
+    _tableViewOtherType.dataSource=self;
+    _tableViewOtherType.separatorStyle=UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:_tableViewOtherType];
     
     
 }
@@ -242,66 +281,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    
-    
-    StoreMessage *store=[[[_dataArray objectAtIndex:indexPath.section] objectForKey:@"alphabetArray"]objectAtIndex:indexPath.row];
-    //此处传的不是字典，是storeMessage对象
-    
-    //将选择的门店信息复制给单利
-    
-    DataProvider *dp =  [DataProvider sharedInstance];
-    dp.storeMessage=store;
-    
-    //    将是被开始结束时间赋值给单利
-    if([dp.selectCanCi isEqualToString:@"午市"])
-    {
-        dp.StartTime=store.lunchstart;
-        dp.EndTime=store.lunchendtime;
-    }
-    else
-    {
-        dp.StartTime=store.dinnerstart;
-        dp.EndTime=store.dinnerendtime;
-    }
-    
-    
-    NSLog(@"%@",dp.selectTime);
-    if([self nowTime:[NSString stringWithFormat:@"%@ %@",dp.selectTime,dp.EndTime]])
-    {
-        selectTableViewController *selectTable=[[selectTableViewController alloc]initWithMessageDict:store];
-        [self.navigationController pushViewController:selectTable animated:YES];
-    }
-    else
-    {
-        bs_dispatch_sync_on_main_thread(^{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[langSetting localizedString:@"Prompt"] message:@"你选择的门店\n最晚可预点时间早于当前时间\n请选择其他门店\n或重新选择餐次" delegate:nil cancelButtonTitle:[langSetting localizedString:@"OK"] otherButtonTitles:nil];
-            [alert show];
-        });
-    }
-    
 }
 
-//计算选择的时间是否超过当前时间 没超过返回YES
--(BOOL)nowTime:(NSString *)timeStr
-{
-    NSString *GLOBAL_TIMEFORMAT = @"yyyy-MM-dd HH:mm";
-    NSTimeZone* GTMzone = [NSTimeZone timeZoneForSecondsFromGMT:0];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:GLOBAL_TIMEFORMAT];
-    [dateFormatter setTimeZone:GTMzone];
-    NSDate *bdate = [dateFormatter dateFromString:timeStr];
-    
-    NSDate *firstDate = [NSDate dateWithTimeInterval:-3600*8 sinceDate:bdate];
-    
-    NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
-    NSTimeInterval _fitstDate = [firstDate timeIntervalSince1970]*1;
-    NSTimeInterval _secondDate = [datenow timeIntervalSince1970]*1;
-    
-    if (_fitstDate - _secondDate > 0) {
-        return YES;
-    }
-    return NO;
-}
 
 
 -(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
@@ -318,18 +299,6 @@
     //    return indexList ;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if([((StoreMessage *)[[[_dataArray objectAtIndex:indexPath.section]objectForKey:@"alphabetArray"]objectAtIndex:indexPath.row]).storeRoomArray count]>0)
-    {
-        return ([((StoreMessage *)[[[_dataArray objectAtIndex:indexPath.section]objectForKey:@"alphabetArray"]objectAtIndex:indexPath.row]).storeTableArray count]+3)*25;
-    }
-    else
-    {
-        return ([((StoreMessage *)[[[_dataArray objectAtIndex:indexPath.section]objectForKey:@"alphabetArray"]objectAtIndex:indexPath.row]).storeTableArray count]+2)*25;
-    }
-    
-}
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [_dataArray count];
@@ -337,13 +306,22 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[[_dataArray objectAtIndex:section]objectForKey:@"alphabetArray"]count];
+    if([[[_dataArray objectAtIndex:section]objectForKey:@"isOpen"]boolValue])
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellName=@"cell";
     showTableCell *cell=[tableView dequeueReusableCellWithIdentifier:cellName];
+    
+    
     if(cell==nil)
     {
         cell=[[showTableCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellName];
@@ -352,31 +330,127 @@
     {
         [view removeFromSuperview];
     }
-    [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    [cell setMessageByDict:[[_dataArray objectAtIndex:indexPath.section]objectForKey:@"store"]];
     
-    [cell setMessageByDict:[[[_dataArray objectAtIndex:indexPath.section]objectForKey:@"alphabetArray"]objectAtIndex:indexPath.row]];
     return cell;
+    
 }
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return [[_dataArray objectAtIndex:section]objectForKey:@"alphabet"];
+    return 80;
 }
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    StoreMessage *store=[[_dataArray objectAtIndex:indexPath.section]objectForKey:@"store"];
+    if([[[_dataArray objectAtIndex:indexPath.section]objectForKey:@"isOpen"]boolValue])
+    {
+        if([store.storeRoomArray count]>0)
+        {
+            return ([store.storeTableArray count]+2)*25+40;
+        }
+        else
+        {
+            return ([store.storeTableArray count]+1)*25+40;
+        }
+    }
+    else
+    {
+        return 0;
+    }
+    
+}
+
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SUPERVIEWWIDTH, 25)];
-    view.backgroundColor=[UIColor clearColor];
-    UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(10,0 , SUPERVIEWWIDTH-10 , 25)];
+    UIView *backView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 80)];
+    backView.backgroundColor=[UIColor whiteColor];
+    
+    UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
+    [button setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+    button.frame=CGRectMake(5, 2, ScreenWidth-21, 78);
+    [button setBackgroundColor:[UIColor clearColor]];
+    [button addTarget:self action:@selector(buttonSectionClick:) forControlEvents:UIControlEventTouchUpInside];
+    button.tag=section;
+    
+    WebImageView *imageView=(WebImageView *)[[_dataArray objectAtIndex:section]objectForKey:((StoreMessage *)[[_dataArray objectAtIndex:section]objectForKey:@"store"]).storeFirmid];
+    [button addSubview:imageView];
+    
+    UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(120,0 , SUPERVIEWWIDTH-170 , 80)];
     lbl.backgroundColor=[UIColor clearColor];
     lbl.textAlignment=NSTextAlignmentLeft;
     lbl.font=[UIFont systemFontOfSize:15];
-    lbl.text=[[_dataArray objectAtIndex:section]objectForKey:@"alphabet"];
-    lbl.textColor=[UIColor grayColor];
-    [view addSubview:lbl];
-    return view;
+    lbl.text=((StoreMessage *)[[_dataArray objectAtIndex:section]objectForKey:@"store"]).storeFirmdes;
+    lbl.textColor=selfbackgroundColor;
+    
+    [button addSubview:lbl];
+    button.layer.borderWidth=0.5;
+    button.layer.borderColor=selfborderColor.CGColor;
+    button.layer.cornerRadius=5;
+    [_dataButton addObject:button];
+    
+    [backView addSubview:button];
+    
+    return backView;
 }
+
+
+//获取图片路径
+-(void)getImage:(NSMutableDictionary *)dict
+{
+//    @autoreleasepool {
+        WebImageView *imageView=[dict objectForKey:((StoreMessage *)[dict objectForKey:@"store"]).storeFirmid];
+       NSString *url=[NSString stringWithFormat:@"%@%@",[[DataProvider getIpPlist]objectForKey:@"storesPicURL"],((StoreMessage *)[dict objectForKey:@"store"]).storeWbigPic];
+        if([DataProvider imageCache:url])
+        {
+            [imageView setImage:[UIImage imageWithData:[DataProvider imageCache:url]]];
+            NSLog(@"--->>本地");
+        }
+        else
+        {
+            [imageView setImageURL:[NSURL URLWithString:url]];
+             NSLog(@"===>>请求");
+        }
+//    }
+}
+-(void)buttonSectionClick:(UIButton *)button
+{
+    if([[[_dataArray objectAtIndex:button.tag] objectForKey:@"isOpen"]boolValue])
+    {
+        [[_dataArray objectAtIndex:button.tag] setObject:[NSNumber numberWithBool:NO] forKey:@"isOpen"];
+    }
+    else
+    {
+        for (UIButton *btn in _dataButton)
+        {
+            NSMutableDictionary *dict=[_dataArray objectAtIndex:btn.tag];
+            if(btn==button)
+            {
+                [dict setObject:[NSNumber numberWithBool:YES] forKey:@"isOpen"];
+            }
+            else
+            {
+                [dict setObject:[NSNumber numberWithBool:NO] forKey:@"isOpen"];
+            }
+            
+        }
+        
+    }
+    [_tableViewOtherType reloadData];
+}
+
+//取消图片请求
+-(void)cancelRequest{
+    for (WebImageView *webImg in _dataImageView) {
+        [webImg cancelRequest];
+    }
+}
+
 -(void)navigationBarViewbackClick
 {
-    [self.navigationController popViewControllerAnimated:YES];
+       [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning

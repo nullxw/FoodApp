@@ -107,7 +107,8 @@
     if (dic){
         //加载子菜品
         [NSThread detachNewThreadSelector:@selector(getPackItem:) toTarget:self withObject:dic];
-        [NSThread detachNewThreadSelector:@selector(getImage:) toTarget:self withObject:[dic objectForKey:@"smallUrl"]];
+        [self getImage:[dic objectForKey:@"smallUrl"]];
+//        [NSThread detachNewThreadSelector:@selector(getImage:) toTarget:self withObject:[dic objectForKey:@"smallUrl"]];
     }
 }
 

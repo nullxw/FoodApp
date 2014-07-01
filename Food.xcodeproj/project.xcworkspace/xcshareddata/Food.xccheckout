@@ -5,41 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>1915CA41-07BB-4165-997F-FB43849A122F</string>
+	<string>41DBA34F-82AD-4DDD-85A5-A5D04A0194A2</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Food</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>D7D71053-9BB3-465D-8A97-F745242AC10D</key>
-		<string>https://192.168.0.245/svn/ios/Food</string>
+		<key>0915186B-813F-4362-BCCA-F3389CD4A61E</key>
+		<string>https://github.com/sundaoran/FoodApp.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Food.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>D7D71053-9BB3-465D-8A97-F745242AC10D</key>
+		<key>0915186B-813F-4362-BCCA-F3389CD4A61E</key>
 		<string>../..</string>
 	</dict>
-	<key>IDESourceControlProjectRepositoryRootDictionary</key>
-	<dict>
-		<key>D7D71053-9BB3-465D-8A97-F745242AC10D</key>
-		<string>https://192.168.0.245/svn/ios</string>
-	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://192.168.0.245/svn/ios/Food/Food.xcodeproj</string>
+	<string>https://github.com/sundaoran/FoodApp.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>D7D71053-9BB3-465D-8A97-F745242AC10D</string>
+	<string>0915186B-813F-4362-BCCA-F3389CD4A61E</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.subversion</string>
+			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>D7D71053-9BB3-465D-8A97-F745242AC10D</string>
+			<string>0915186B-813F-4362-BCCA-F3389CD4A61E</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Food</string>
+			<string>FoodApp</string>
 		</dict>
 	</array>
 </dict>

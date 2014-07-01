@@ -185,6 +185,8 @@
 		706F6C2B1921A409007B2EEE /* Public_balance@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 706F6C291921A409007B2EEE /* Public_balance@2x.png */; };
 		706F6C2C1921A409007B2EEE /* Public_integral@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 706F6C2A1921A409007B2EEE /* Public_integral@2x.png */; };
 		7077D23D18F3D561006641C3 /* changeCity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7077D23C18F3D561006641C3 /* changeCity.m */; };
+		707DB2051962949C009C818C /* Public_sexcant@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 707DB2041962949C009C818C /* Public_sexcant@2x.png */; };
+		707DB2071962A30E009C818C /* Public_sexcant.png in Resources */ = {isa = PBXBuildFile; fileRef = 707DB2061962A30E009C818C /* Public_sexcant.png */; };
 		7088A75F1918D44C0038281F /* Map_AnnNomal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7088A7541918D44C0038281F /* Map_AnnNomal.png */; };
 		7088A7601918D44C0038281F /* Map_BusNomal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7088A7551918D44C0038281F /* Map_BusNomal.png */; };
 		7088A7611918D44C0038281F /* Map_BusSelect.png in Resources */ = {isa = PBXBuildFile; fileRef = 7088A7561918D44C0038281F /* Map_BusSelect.png */; };
@@ -671,6 +673,8 @@
 		706F6C2A1921A409007B2EEE /* Public_integral@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Public_integral@2x.png"; sourceTree = "<group>"; };
 		7077D23B18F3D561006641C3 /* changeCity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = changeCity.h; path = showTable/changeCity.h; sourceTree = "<group>"; };
 		7077D23C18F3D561006641C3 /* changeCity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = changeCity.m; path = showTable/changeCity.m; sourceTree = "<group>"; };
+		707DB2041962949C009C818C /* Public_sexcant@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Public_sexcant@2x.png"; sourceTree = "<group>"; };
+		707DB2061962A30E009C818C /* Public_sexcant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Public_sexcant.png; sourceTree = "<group>"; };
 		7088A7541918D44C0038281F /* Map_AnnNomal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Map_AnnNomal.png; sourceTree = "<group>"; };
 		7088A7551918D44C0038281F /* Map_BusNomal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Map_BusNomal.png; sourceTree = "<group>"; };
 		7088A7561918D44C0038281F /* Map_BusSelect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Map_BusSelect.png; sourceTree = "<group>"; };
@@ -1247,6 +1251,7 @@
 		7027962A190A0CEA003EA6B8 /* public */ = {
 			isa = PBXGroup;
 			children = (
+				707DB2061962A30E009C818C /* Public_sexcant.png */,
 				7005E12D1925B16500CF36CC /* Public_forgetPass.png.png */,
 				7005E12E1925B16500CF36CC /* Public_relexPass.png.png */,
 				7005E12F1925B16500CF36CC /* Public_settingPass.png.png */,
@@ -1689,6 +1694,7 @@
 		70AC2C071907B0C20000634A /* public@2x */ = {
 			isa = PBXGroup;
 			children = (
+				707DB2041962949C009C818C /* Public_sexcant@2x.png */,
 				7005E1271925AFA700CF36CC /* Public_forgetPass@2x.png */,
 				7005E1281925AFA700CF36CC /* Public_relexPass@2x.png */,
 				7005E1291925AFA700CF36CC /* Public_settingPass@2x.png */,
@@ -2009,6 +2015,7 @@
 				709745EC1924B73700798EC6 /* Public_tableyellow@2x.png in Resources */,
 				70AC2C651907B0C20000634A /* Menu_menuNomal6@2x.png in Resources */,
 				1BCCD7F418FD320500B81965 /* blueArrow@2x.png in Resources */,
+				707DB2071962A30E009C818C /* Public_sexcant.png in Resources */,
 				70279675190A0CF6003EA6B8 /* Public_shop.png in Resources */,
 				7088A7651918D44C0038281F /* Map_changeStyleSelect.png in Resources */,
 				1BA8E73F1908E34000F54E6B /* Order_bgPick@2x.png in Resources */,
@@ -2100,6 +2107,7 @@
 				700B04391929EF8F00FE889F /* num_5.png in Resources */,
 				1BE22822191729E20043274B /* yhxx.png in Resources */,
 				7047E2B419387EE6002C4ED1 /* Author_main.jpg in Resources */,
+				707DB2051962949C009C818C /* Public_sexcant@2x.png in Resources */,
 				70279677190A0CF6003EA6B8 /* Public_specific.png in Resources */,
 				1BE22823191729E20043274B /* yhxxx.png in Resources */,
 				7088A7661918D44C0038281F /* Map_localNomal.png in Resources */,

@@ -332,12 +332,14 @@
         [self presentViewController:nvc animated:YES completion:^{
             
         }];
+        
         typeView.selectBrank=^(NSMutableDictionary *BrankName)
         {
             _lblchangeBrand.text=[BrankName objectForKey:@"name"];
             _selectBrank=[BrankName objectForKey:@"name"];
             [DataProvider sharedInstance].selectBrank=[BrankName objectForKey:@"code"];
         };
+      
     }
     else
     {
