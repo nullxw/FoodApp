@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "MenuViewController.h"
- 
+#import "NewMenuViewController.h"
 
 @implementation AppDelegate
 {
@@ -30,7 +30,8 @@
     UINavigationController *loginnvc;
     if([[[NSUserDefaults standardUserDefaults]objectForKey:@"userPhone"]boolValue])
     {
-        MenuViewController *login = [[MenuViewController alloc] init];
+//        MenuViewController *login = [[MenuViewController alloc] init];
+        NewMenuViewController *login = [[NewMenuViewController alloc] init];
         loginnvc=[[UINavigationController alloc]initWithRootViewController:login];
     }
     else

@@ -413,7 +413,7 @@
         DataProvider *dp=[DataProvider sharedInstance];
         NSMutableDictionary *info=[[NSMutableDictionary alloc]init];
         [info setObject:dp.selectTime forKey:@"dat"];
-        if([dp.selectCanCi isEqualToString:@"午市"])
+        if([dp.selectCanCi isEqualToString:@"午餐"])
         {
             [info setObject:@"1" forKey:@"sft"];
         }

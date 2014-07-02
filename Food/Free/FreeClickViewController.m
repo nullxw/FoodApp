@@ -223,7 +223,7 @@
         if(!isShiBie)
         {
             bs_dispatch_sync_on_main_thread(^{
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[langSetting localizedString:@"Prompt"] message:@"请选择市别" delegate:self cancelButtonTitle:[langSetting localizedString:@"OK"] otherButtonTitles:nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[langSetting localizedString:@"Prompt"] message:@"请选择餐别" delegate:self cancelButtonTitle:[langSetting localizedString:@"OK"] otherButtonTitles:nil];
                 [alert show];
             });
             
@@ -426,7 +426,7 @@
     {
         strShiBie = [_dataSession objectAtIndex:row];
     }else if (flag == 4){
-        if ([strShiBie isEqualToString:@"午市"]) {
+        if ([strShiBie isEqualToString:@"午餐"]) {
             strShijian = [aryWuDate objectAtIndex:row];
         }else{
             strShijian = [aryYeDate objectAtIndex:row];
@@ -461,7 +461,7 @@
     {
         return [_dataSession count];
     }else if (flag == 4){
-        if ([strShiBie isEqualToString:@"午市"]) {
+        if ([strShiBie isEqualToString:@"午餐"]) {
             return [aryWuDate count];
         }else{
             return [aryYeDate count];
@@ -545,7 +545,7 @@
     {
         return [_dataSession objectAtIndex:row];
     }else if (flag == 4){
-        if ([strShiBie isEqualToString:@"午市"]) {
+        if ([strShiBie isEqualToString:@"午餐"]) {
             return [aryWuDate objectAtIndex:row];
         }else{
             return [aryYeDate objectAtIndex:row];
@@ -600,7 +600,7 @@
 //    [SVProgressHUD showWithStatus:nil maskType:SSVProgressHUDMaskTypeBlack];
 //    [NSThread detachNewThreadSelector:@selector(getCity) toTarget:self withObject:nil];
     
-    _dataSession=[[NSMutableArray alloc]initWithObjects:[langSetting localizedString:@"Select Market"],@"午市",@"夜市", nil];
+    _dataSession=[[NSMutableArray alloc]initWithObjects:[langSetting localizedString:@"Select Market"],@"午餐",@"晚餐", nil];
     aryYeDate = [[NSMutableArray alloc] initWithObjects:[langSetting localizedString:@"Select Time"],@"16:00",@"16:15",@"16:30",@"16:45",@"17:00",@"17:15",@"17:30",@"17:45", nil];
     
     aryWuDate = [[NSMutableArray alloc] initWithObjects:[langSetting localizedString:@"Select Time"],@"13:30",@"13:45",@"14:00", nil];
@@ -646,13 +646,13 @@
         DataProvider *dp = [[DataProvider alloc] init];
         NSDictionary *dicCity = [dp getCity];
         if ([[dicCity objectForKey:@"Result"] boolValue]) {
+             [SVProgressHUD dismiss];
             NSArray *ary = [dicCity objectForKey:@"Message"];
             [_dataCity addObject:[langSetting localizedString:@"Select City"]];
             [_dataCityCode addObject:@""];
             for (NSDictionary *dic in ary) {
                 [_dataCity addObject:[dic objectForKey:@"des"]];
                 [_dataCityCode addObject:[dic objectForKey:@"sno"]];
-                [SVProgressHUD dismiss];
             }
         }else{
             [SVProgressHUD showErrorWithStatus:[dicCity objectForKey:@"Message"]];
@@ -714,7 +714,7 @@
     isShiBie=YES;
     
     NSLog(@"%@",dicStore);
-    if([dp.selectCanCi isEqualToString:@"午市"])
+    if([dp.selectCanCi isEqualToString:@"晚餐"])
     {
         dp.StartTime=[dicStore objectForKey:@"lunchstart"];
         dp.EndTime=[dicStore objectForKey:@"lunchendtime"];

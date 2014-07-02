@@ -9,7 +9,7 @@
 #import "registerViewController.h"
 #import "DataProvider.h"
 #import "MenuViewController.h"
-
+#import "NewMenuViewController.h"
 
 @interface registerViewController ()
 
@@ -534,7 +534,8 @@
                 }
                 else
                 {
-                    MenuViewController *menu=[[MenuViewController alloc]init];
+//                    MenuViewController *menu=[[MenuViewController alloc]init];
+                    NewMenuViewController *menu=[[NewMenuViewController alloc]init];
 //                    [self.navigationController pushViewController:menu animated:YES];
                     UINavigationController *nvc=[[UINavigationController alloc]initWithRootViewController:menu];
                     nvc.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
@@ -575,7 +576,8 @@
         }
         else
         {
-            MenuViewController *menu=[[MenuViewController alloc]init];
+//            MenuViewController *menu=[[MenuViewController alloc]init];
+            NewMenuViewController *menu=[[NewMenuViewController alloc]init];
             UINavigationController *nvc=[[UINavigationController alloc]initWithRootViewController:menu];
             nvc.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
             [self presentViewController:nvc animated:YES completion:^{

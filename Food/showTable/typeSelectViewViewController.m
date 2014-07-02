@@ -116,7 +116,7 @@
         title=[langSetting localizedString:@"Select Market"];
         //        @"选择市别";
         [self.view addSubview:_tableView];
-        _dataArray=[[NSMutableArray alloc]initWithObjects:@"午市",@"晚市", nil];
+        _dataArray=[[NSMutableArray alloc]initWithObjects:@"午餐",@"晚餐", nil];
     }
     else if (viewTypeStyle==viewSelectTime)
     {
@@ -346,6 +346,7 @@
     {
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellName];
     }
+    cell.textLabel.textAlignment=NSTextAlignmentCenter;
     cell.textLabel.text=@"";
     if(viewTypeStyle==viewSelectProvice)
     {

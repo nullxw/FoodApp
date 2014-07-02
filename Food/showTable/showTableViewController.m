@@ -66,7 +66,7 @@
         [dictValue setValue:dp.selectCity.selectproviceId forKey:@"area"];
         [dictValue setValue:dp.selectTime forKey:@"dat"];
         [dictValue setObject:dp.selectBrank forKey:@"brandcode"];
-        if([dp.selectCanCi isEqualToString:@"晚市"])
+        if([dp.selectCanCi isEqualToString:@"晚餐"])
         {
             [dictValue setValue:@"2" forKey:@"sft"];
         }

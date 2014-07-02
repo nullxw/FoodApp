@@ -11,6 +11,7 @@
 #import "registerViewController.h"
 #import "VipManageViewController.h"
 #import "MenuViewController.h"
+#import "NewMenuViewController.h"
 
 @interface LoginViewController ()
 
@@ -332,7 +333,9 @@
                         }
                         else
                         {
-                            MenuViewController *menu=[[MenuViewController alloc]init];
+//                            MenuViewController *menu=[[MenuViewController alloc]init];
+                            NewMenuViewController *menu=[[NewMenuViewController alloc]init];
+                            
                             //                    [self.navigationController pushViewController:menu animated:YES];
                             UINavigationController *nvc=[[UINavigationController alloc]initWithRootViewController:menu];
                             nvc.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;

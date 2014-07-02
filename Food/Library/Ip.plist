@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>APIURL</key>
-	<string>http://192.168.0.118:9090/</string>
+	<string>http://192.168.0.118:8080/</string>
 	<key>adPicURL</key>
 	<string>http://192.168.0.245:8060</string>
 	<key>storesPicURL</key>

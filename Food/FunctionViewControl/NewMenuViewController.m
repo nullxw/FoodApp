@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 com.choice.food. All rights reserved.
 //
 
-#import "MenuViewController.h"
+#import "NewMenuViewController.h"
 #import "WaitViewController.h"
 #import "YuDingViewController.h"
 #import "otherSetViewController.h"
@@ -21,9 +21,9 @@
 #import "WebImageView.h"
 #import "WebwebView.h"
 #import "CycleScrollView.h"
-#import "StarRatingViewController.h"
+#import "StarSelectCityViewController.h"
 
-@interface MenuViewController ()
+@interface NewMenuViewController ()
 
 @end
 
@@ -34,7 +34,7 @@
 
 
 
-@implementation MenuViewController
+@implementation NewMenuViewController
 {
     UIView *_background;
     CGFloat   VIEWHEIGHT;
@@ -43,7 +43,7 @@
     BMKSearch           *_search;
     
     CVLocalizationSetting   *langSetting;
-
+    
     CycleScrollView *mainScorllView;
     UIScrollView *OnePic;
     UIPageControl *pageControll;
@@ -57,7 +57,7 @@
     if (self) {
         // Custom initialization
         
-       
+        
     }
     return self;
 }
@@ -85,22 +85,22 @@
     langSetting=[CVLocalizationSetting sharedInstance];
     self.navigationController.navigationBar.hidden=YES;
     self.view.backgroundColor=[UIColor whiteColor];
-
+    
     CGFloat     buttonHeight;//底部俩个按键的y坐标
     if([[[UIDevice currentDevice]systemVersion]floatValue]>=7.0)
     {
-         self.edgesForExtendedLayout=UIRectEdgeNone;
+        self.edgesForExtendedLayout=UIRectEdgeNone;
         VIEWHEIGHT=64;
         buttonHeight=50;
         //    系统自带手势返回
-//        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+        //        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     }
     else
     {
         VIEWHEIGHT=44;
         buttonHeight=70;
     }
-
+    
     UIImageView *imageView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:TITIEIMAGEVIEW]];
     imageView.frame=self.view.bounds;
     imageView.userInteractionEnabled=YES;
@@ -130,45 +130,27 @@
     
     UIButton *MyYuding=[UIButton buttonWithType:UIButtonTypeCustom];
     MyYuding.tag=MyYudingButton;
-    MyYuding.frame=CGRectMake(0, _background.frame.size.height-buttonHeight, SELFVIEWWEATH/2, 50);
+    MyYuding.frame=CGRectMake(0, _background.frame.size.height-buttonHeight, SELFVIEWWEATH, 50);
     [MyYuding addTarget:self action:@selector(ViewButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [MyYuding setTitle:[langSetting localizedString:@"My reservation"] forState:UIControlStateNormal];
     MyYuding.titleLabel.font=[UIFont systemFontOfSize:13];
     [MyYuding setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [MyYuding setBackgroundColor:[UIColor colorWithRed:243/255.0f green:243/255.0f blue:243/255.0f alpha:1]];
-
+    
     MyYuding.layer.borderWidth=0.5;
     MyYuding.layer.borderColor=selfborderColor.CGColor;
     [_background addSubview:MyYuding];
     UIImageView *yudingLeft=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Menu_reserve.png"]];
-    yudingLeft.frame=CGRectMake(20, 15, 20, 20);
+    yudingLeft.frame=CGRectMake(MyYuding.center.x-50, 15, 20, 20);
     [MyYuding addSubview:yudingLeft];
     
-    
-    UIButton *MyWait=[UIButton buttonWithType:UIButtonTypeCustom];
-    MyWait.tag=MyWaitButton;
-    MyWait.frame=CGRectMake(SELFVIEWWEATH/2,  _background.frame.size.height-buttonHeight, SELFVIEWWEATH/2, 50);
-    [MyWait addTarget:self action:@selector(ViewButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [MyWait setTitle:[langSetting localizedString:@"My equipotential"] forState:UIControlStateNormal];
-     MyWait.titleLabel.font=[UIFont systemFontOfSize:13];
-    [MyWait setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    MyWait.layer.borderWidth=0.5;
-    MyWait.layer.borderColor=selfborderColor.CGColor;
-    [MyWait setBackgroundColor:[UIColor colorWithRed:243/255.0f green:243/255.0f blue:243/255.0f alpha:1]];
-    [_background addSubview:MyWait];
-    UIImageView *MyWaitLeft=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Menu_wait.png"]];
-    MyWaitLeft.frame=CGRectMake(20, 15, 20, 20);
-    [MyWait addSubview:MyWaitLeft];
-    
-    
-    for (int i=0; i<8; i++)
+    for (int i=0; i<6; i++)
     {
         UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame=CGRectMake(((SELFVIEWWEATH-100)/4+20)*(i%4)+20, (210-34)+(i/4)*((SELFVIEWWEATH-100)/4+40),(SELFVIEWWEATH-100)/4 ,(SELFVIEWWEATH-100)/4);
+        button.frame=CGRectMake(((SELFVIEWWEATH-150)/3+40)*(i%3)+35, (210-34)+(i/3)*((SELFVIEWWEATH-150)/3+40),(SELFVIEWWEATH-150)/3 ,(SELFVIEWWEATH-150)/3);
         button.tag=i+1000+1;
         [button addTarget:self action:@selector(MenuSelectClick:) forControlEvents:UIControlEventTouchUpInside];
-        [button setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"Menu_menuNomal%d.png",i+1]] forState:UIControlStateNormal];
-        [button setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"Menu_menuSelect%d.png",i+1]] forState:UIControlStateHighlighted];
+        [button setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"Menu_newmenu%d.png",i+1]] forState:UIControlStateNormal];
         [_background addSubview:button];
         
         UILabel *lbltitle=[[UILabel alloc]init];
@@ -183,24 +165,18 @@
                 lbltitle.text=[langSetting localizedString:@"Online booking"];//@"在线订位";
                 break;
             case 1:
-                lbltitle.text=[langSetting localizedString:@"Self order"];//@"自助点餐";
-                break;
-            case 2:
                 lbltitle.text=[langSetting localizedString:@"Preferential information"];//@"优惠信息";
                 break;
+            case 2:
+                lbltitle.text=[langSetting localizedString:@"Customer reviews"];//@"客户点评";
+                break;
             case 3:
-                lbltitle.text=[langSetting localizedString:@"Line up your turn"];//@"排队叫号";
-                break;
-            case 4:
-                lbltitle.text=[langSetting localizedString:@"Member management"];//@"会员管理";
-                break;
-            case 5:
                 lbltitle.text=[langSetting localizedString:@"Store the query"];//@"店铺查询";
                 break;
-            case 6:
+            case 4:
                 lbltitle.text=[langSetting localizedString:@"Look at the map"];//@"查看地图";
                 break;
-            case 7:
+            case 5:
                 lbltitle.text=[langSetting localizedString:@"Other Settings"];//@"其他设置";
                 break;
                 
@@ -267,7 +243,7 @@
         {
             NSDictionary *dict=[array objectAtIndex:i];
             NSString *imageType = [[[dict objectForKey:@"path"] componentsSeparatedByString:@"."]lastObject];
-
+            
             //        判断是否为gif格式的动画
             if([imageType isEqualToString:@"gif"])
             {
@@ -283,7 +259,7 @@
             }
             
         }
-
+        
     }
     else
     {
@@ -294,7 +270,7 @@
                 [_loadAdView removeFromSuperview];
                 _loadAdView=nil;
             }
-
+            
             NSString *url=[array objectAtIndex:i];
             NSString *imageType = [[url componentsSeparatedByString:@"."]lastObject];
             NSMutableDictionary *dictImage=[[NSMutableDictionary alloc]init];
@@ -311,20 +287,20 @@
                 [dictImage setObject:url forKey:@"url"];
                 [dictImage setObject:[NSNumber numberWithBool:YES] forKey:@"gif"];
                 [self getImage:dictImage];
-//                [NSThread detachNewThreadSelector:@selector(getImage:) toTarget:self withObject:dictImage];
+                //                [NSThread detachNewThreadSelector:@selector(getImage:) toTarget:self withObject:dictImage];
                 [viewsArray addObject:webView];
             }
             else
             {
                 WebImageView *imageView = [[WebImageView alloc] initWithImage:[UIImage imageNamed:@"ad_logoPng.png"]];
-//                WebImageView *imageView = [[WebImageView alloc] init];
+                //                WebImageView *imageView = [[WebImageView alloc] init];
                 
                 imageView.frame=CGRectMake(0, 0, ScreenWidth, 170);
                 [dictImage setObject:imageView forKey:@"imageView"];
                 [dictImage setObject:url forKey:@"url"];
                 [dictImage setObject:[NSNumber numberWithBool:NO] forKey:@"gif"];
                 [self getImage:dictImage];
-//                [NSThread detachNewThreadSelector:@selector(getImage:) toTarget:self withObject:dictImage];
+                //                [NSThread detachNewThreadSelector:@selector(getImage:) toTarget:self withObject:dictImage];
                 
                 [viewsArray addObject:imageView];
             }
@@ -403,9 +379,9 @@
 //获取图片路径
 -(void)getImage:(NSMutableDictionary *)dict
 {
-    @autoreleasepool {                         
+    @autoreleasepool {
         NSString *url=[NSString stringWithFormat:@"%@%@#ads",[[DataProvider getIpPlist]objectForKey:@"adPicURL"],[dict objectForKey:@"url"]];
-//        通过文件后缀含有ads判断缓存文件为广告文件，将广告文件单独缓存在一个文件夹下
+        //        通过文件后缀含有ads判断缓存文件为广告文件，将广告文件单独缓存在一个文件夹下
         if([[dict objectForKey:@"gif"]boolValue])
         {
             WebwebView *webView=[dict objectForKey:@"imageView"];
@@ -437,7 +413,7 @@
 -(NSData *)imageCache:(NSString *)url //判断缓存中是否存在文件
 {
     
-//    广告图片缓存在沙盒下的ads文件夹下
+    //    广告图片缓存在沙盒下的ads文件夹下
     NSString *localPath = [NSHomeDirectory()stringByAppendingPathComponent:@"Documents/ads"] ;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *filePathgif=[localPath stringByAppendingString:[NSString stringWithFormat:@"/%@.gif",[DataProvider md5:url]]];
@@ -451,7 +427,7 @@
     else if([fileManager fileExistsAtPath:filePathpng])
     {
         NSData *data=[fileManager contentsAtPath:filePathpng];
-       return data;
+        return data;
     }
     else
     {
@@ -529,12 +505,15 @@
     }
     else if(2==index)
     {
+        AreaViewController *favor=[[AreaViewController alloc]init];//优惠信息
+        [self.navigationController pushViewController:favor animated:YES];
+    }
+    else if(3==index)
+    {
         if([[[NSUserDefaults standardUserDefaults]objectForKey:@"userPhone"]boolValue ] && [[NSUserDefaults standardUserDefaults]objectForKey:@"userName"])
         {
-            FreeClickViewController *book=[[FreeClickViewController alloc]init];//自助点餐
-            [self.navigationController pushViewController:book animated:YES];
-            [DataProvider sharedInstance].isReserveis=NO;
-            [DataProvider sharedInstance].tableId=nil;
+            StarSelectCityViewController *strar=[[StarSelectCityViewController alloc]init];//用户点评
+            [self.navigationController pushViewController:strar animated:YES];
         }
         else
         {
@@ -542,75 +521,31 @@
             [SVProgressHUD showErrorWithStatus:[langSetting localizedString:@"Please first binding mobile phone number and improve the personal information"]];
         }
     }
-    else if(3==index)
-    {
-        AreaViewController *favor=[[AreaViewController alloc]init];//优惠信息
-        [self.navigationController pushViewController:favor animated:YES];
-        
-    }
     else if(4==index)
-    {
-        if(![[[NSUserDefaults standardUserDefaults]objectForKey:@"userPhone"]boolValue ])
-        {
-            //@"请先绑定手机号码"
-            [SVProgressHUD showErrorWithStatus:[langSetting localizedString:@"Please first binding mobile phone number"]];
-        }
-        else
-        {
-            queueViewController *queue=[[queueViewController alloc]init];//排队叫号
-            [self.navigationController pushViewController:queue animated:YES];
-        }
-        
-    }
-    else if(5==index)
-    {
-        if(![[[NSUserDefaults standardUserDefaults]objectForKey:@"userPhone"]boolValue ])
-        {
-            //@"请先绑定手机号码"
-            [SVProgressHUD showErrorWithStatus:[langSetting localizedString:@"Please first binding mobile phone number"]];
-        }
-        else
-        {
-            VipMainViewController *vip=[[VipMainViewController alloc]init];//会员管理
-            [self.navigationController pushViewController:vip animated:YES];
-        }
-        
-    }
-    else if(6==index)
     {
         shopViewController *shop=[[shopViewController alloc]init];//店铺查询
         [self.navigationController pushViewController:shop animated:YES];
     }
-    else if(7==index)
+    else if(5==index)
     {
         CheckMapViewController *check=[[CheckMapViewController alloc]init];//查看地图
         [self.navigationController pushViewController:check animated:YES];
     }
-    else if(8==index)
+    else if (6==index)
     {
         otherSetViewController *otherView=[[otherSetViewController alloc]init];//其他设置
         [self.navigationController pushViewController:otherView animated:YES];
     }
-    
+    else
+    {
+        NSLog(@"无此选项"); 
+    }
 }
 
 -(void)ViewButtonClick:(UIButton *)button
 {
-    if(button.tag==MyWaitButton)
-    {
-//        WaitViewController *wait=[[WaitViewController alloc]init];
-        StarRatingViewController *wait=[[StarRatingViewController alloc]init];
-        [self.navigationController pushViewController:wait animated:YES];
-    }
-    else if (button.tag==MyYudingButton)
-    {
-        YuDingViewController *yuding=[[YuDingViewController alloc]init];
-        [self.navigationController pushViewController:yuding animated:YES];
-    }
-    else
-    {
-        NSLog(@"无此按键");
-    }
+    YuDingViewController *yuding=[[YuDingViewController alloc]init];
+    [self.navigationController pushViewController:yuding animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

@@ -251,4 +251,12 @@
 //获取品牌
 -(NSDictionary *)getBrands;
 
+//获取评分栏目
+-(NSDictionary *)getEvalColumn;
+
+
+//提交评价信息
+-(NSDictionary *)saveEvaluation:(NSDictionary *)Info;
+
+
 @end

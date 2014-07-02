@@ -207,7 +207,7 @@ static  DataProvider *_dataProvide = nil;
     //key  dat   dat    //日期
     //key  sft   sft    //餐次
     
-    //    晚市2  午市1
+    //    晚餐2  午餐1
     
     //    dinnerend      晚餐结束时间
     //    dinnerendtime  晚餐自提结束时间
@@ -1731,6 +1731,96 @@ static  DataProvider *_dataProvide = nil;
         return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",strNetwork,@"Message", nil];
     }    return nil;
     
+}
+
+//获取评分栏目
+-(NSDictionary *)getEvalColumn
+{
+    NSDictionary *dict = [self bsService:@"getEvalColumn" arg:nil arg2:@"CTF/webService/APPWebService/"];
+    //getCity
+    NSMutableArray  *aryResult=[[NSMutableArray alloc]init];
+    if (dict) {
+        NSString *result =[self getStringByfunctionName:@"getEvalColumn" andDict:dict];
+        NSDictionary *dictValue=[BSWebServiceAgent parseXmlResult:result];
+        NSMutableDictionary *dicResult;
+        if([result isEqualToString:@"false"])//后台报错
+        {
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台错误",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+        }
+        else
+        {
+            NSArray *array = [result componentsSeparatedByString:@"com.choice.webService.domain.app.EvalColumn"];
+            if([array count]<=2)
+            {
+                NSDictionary *dic2 = [[[dictValue objectForKey:@"listTele"] objectForKey:@"listEvalColumn"] objectForKey:@"com.choice.webService.domain.app.EvalColumn"];
+                if(dic2!=nil)
+                {
+                    [aryResult addObject:dic2];
+                }
+            }
+            else
+            {
+                aryResult = [[[dictValue objectForKey:@"listTele"] objectForKey:@"listEvalColumn"] objectForKey:@"com.choice.webService.domain.app.EvalColumn"];
+            }
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:aryResult,@"Message",[NSNumber numberWithBool:YES],@"Result", nil];
+        }
+        return dicResult;
+        
+    }else{
+        return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",strNetwork,@"Message", nil];
+    }    return nil;
+
+}
+
+//提交评价信息
+-(NSDictionary *)saveEvaluation:(NSDictionary *)Info
+{
+    NSString  *firmId=[Info objectForKey:@"firmId"];
+    NSString  *score=[Info objectForKey:@"score"];
+    NSString *content;
+    if([Info objectForKey:@"content"])
+    {
+        content=[Info objectForKey:@"content"];
+    }
+    else
+    {
+        content=@"无";
+    }
+    NSString *cardId=[Info objectForKey:@"cardId"];
+    NSString *account=[Info objectForKey:@"account"];
+    NSString *evaltyp =@"1";//默认值1，表示门店评价
+    NSString  *membTyp=@"普通会员";////默认值普通会员
+    NSString  *scoredtl=[Info objectForKey:@"scoredtl"];
+    
+    NSString *strParam = [NSString stringWithFormat:@"?firmId=%@&score=%@&content=%@&cardId=%@&account=%@&membTyp=%@&evaltyp=%@&scoredtl=%@",firmId,score,content,cardId,account,membTyp,evaltyp,scoredtl];
+    NSDictionary *dict = [self bsService:@"saveEvaluation" arg:strParam arg2:@"CTF/webService/APPWebService/"];
+    
+    if (dict) {
+        NSString *result =[self getStringByfunctionName:@"saveEvaluation" andDict:dict];
+        NSMutableDictionary *dicResult;
+        if([result isEqualToString:@"true"])//修改成功
+        {
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"修改成功",@"Message",[NSNumber numberWithBool:YES],@"Result", nil];
+        }
+        else if ([result isEqualToString:@"false"])//后台报错了
+        {
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台报错",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+        }
+        else if ([result isEqualToString:@"fail"])//后台报错了
+        {
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"提交评价信息失败",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+        }
+        else
+        {
+            NSLog(@"无此判断类型");
+        }
+        return dicResult;
+        
+    }else{
+        return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",strNetwork,@"Message", nil];
+    }
+    return nil;
+
 }
 
 @end

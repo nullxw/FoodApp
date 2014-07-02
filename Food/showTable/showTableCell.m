@@ -129,7 +129,7 @@
     dp.storeMessage=_stroe;
     
     //    将是被开始结束时间赋值给单利
-    if([dp.selectCanCi isEqualToString:@"午市"])
+    if([dp.selectCanCi isEqualToString:@"午餐"])
     {
         dp.StartTime=_stroe.lunchstart;
         dp.EndTime=_stroe.lunchendtime;
