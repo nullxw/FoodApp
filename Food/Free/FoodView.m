@@ -88,7 +88,6 @@
         NSString *PU = [NSString stringWithFormat:@"%@元/%@",price,unit];
         lblName.text = [info objectForKey:@"pdes"];
         lblPrice.text = PU;
-        [webImg setImageURL:[NSURL URLWithString:[info objectForKey:@"url"]]];
         lblInfro.text = [info objectForKey:@"discription"];
     }
     
@@ -97,26 +96,30 @@
 }
 
 - (void)show{
-    self.alpha = 0;
-    UIWindow *w = (UIWindow *)[(AppDelegate *)[UIApplication sharedApplication].delegate window];
-    [w addSubview:self];
+    bs_dispatch_sync_on_main_thread(^{
+        self.alpha = 0;
+        UIWindow *w = (UIWindow *)[(AppDelegate *)[UIApplication sharedApplication].delegate window];
+        [w addSubview:self];
+        
+        [UIView animateWithDuration:.3 animations:^{
+            self.alpha = 1;
+        }];
+    });
     
-    [UIView animateWithDuration:.3 animations:^{
-        self.alpha = 1;
-    }];
 }
 
 //获取图片路径
 -(void)getImage:(NSString *)url
 {
     @autoreleasepool {
+        url=[NSString stringWithFormat:@"%@%@",[[DataProvider getIpPlist]objectForKey:@"foodPic"],url];
         if([DataProvider imageCache:url])
         {
             [webImg setImage:[UIImage imageWithData:[DataProvider imageCache:url]]];
         }
         else
         {
-            [webImg setImageURL:[NSURL URLWithString:url]];
+            [webImg setImageURL:[NSURL URLWithString:url] andImageBoundName:@"defaultPack.png"];
         }
     }
     
@@ -124,10 +127,14 @@
 }
 
 - (void)dismissAdditions{
-    [UIView animateWithDuration:.3 animations:^{
-        self.alpha = 0;
-    }completion:^(BOOL finished) {
-        [self removeFromSuperview];
-    }];
+    bs_dispatch_sync_on_main_thread(^{
+        [UIView animateWithDuration:.3 animations:^{
+            self.alpha = 0;
+        }completion:^(BOOL finished) {
+            [self removeFromSuperview];
+            [webImg cancelRequest];
+        }];
+    });
+    
 }
 @end

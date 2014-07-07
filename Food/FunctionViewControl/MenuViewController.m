@@ -427,7 +427,7 @@
             }
             else
             {
-                [imageView setImageURL:[NSURL URLWithString:url]];
+                [imageView setImageURL:[NSURL URLWithString:url] andImageBoundName:@""];
             }
         }
     }

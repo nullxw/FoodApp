@@ -410,7 +410,7 @@ NSComparator cmptr = ^(id obj1, id obj2){
         }
         else
         {
-            [imageView setImageURL:[NSURL URLWithString:url]];
+            [imageView setImageURL:[NSURL URLWithString:url] andImageBoundName:@"Public_default.png"];
              NSLog(@"===>>请求");
         }
 //    }
@@ -450,7 +450,11 @@ NSComparator cmptr = ^(id obj1, id obj2){
 
 -(void)navigationBarViewbackClick
 {
+//    bs_dispatch_sync_on_main_thread(^{
+        [self cancelRequest];
        [self.navigationController popViewControllerAnimated:YES];
+//    });
+    
 }
 
 - (void)didReceiveMemoryWarning

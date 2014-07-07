@@ -41,6 +41,7 @@
 @property (nonatomic,assign) UIViewController<BSBookCellDelegate> *delegate;
 @property (nonatomic,strong) WebImageView *recommendImage;
 
+@property  (nonatomic,strong)  void(^cellImageClick)(NSDictionary *dict);
 
 - (void)changeFood:(NSMutableDictionary *)foodInfo byCount:(NSString *)count;
 

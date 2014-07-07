@@ -114,6 +114,9 @@
 //获取地址plist
 +(NSDictionary *)getIpPlist;
 
+//计算选择的时间是否超过当前时间 没超过返回YES
++(BOOL)compareNowTime:(NSString *)timeStr;
+
 //获取手机验证码
 -(NSDictionary *)getPhoneAuthCode:(NSString *)phone;
 
@@ -258,5 +261,14 @@
 //提交评价信息
 -(NSDictionary *)saveEvaluation:(NSDictionary *)Info;
 
+
+//根据返回标示确认是否需要调用升级客户端。
+-(void)isTypUpdateWebService:(NSString *)version andXml:(NSString *)xmlStr;
+
+//根据返回值展示更新内容
+-(void)getTypUpdateCont:(NSString *)version andxmlStr:(NSString *)xmlStr;
+
+//	获取更地址
+-(void)findVersionPADWebService:(NSString *)version andxmlStr:(NSString *)xmlStr;
 
 @end

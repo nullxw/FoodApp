@@ -227,18 +227,18 @@ static bool boolSearch = NO;
     if([DataProvider sharedInstance].isReserveis)
     {
         [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:[self.navigationController.viewControllers count]-6] animated:YES];
-//        [self cancelRequest];//取消图片请求
+        [self cancelRequest];//取消图片请求
     }
     else
     {
     [self.navigationController popViewControllerAnimated:YES];
-//    [self cancelRequest];//取消图片请求
+    [self cancelRequest];//取消图片请求
     }
 }
 
 -(void)dealloc
 {
-    [self cancelRequest];//取消图片请求
+//    [self cancelRequest];//取消图片请求
 }
 
 //键盘显示 布局改变
@@ -373,11 +373,14 @@ static bool boolSearch = NO;
 
 //已点菜品事件
 - (void)showOrdered{
-    OrderDetailViewController *vcOrder = [[OrderDetailViewController alloc] init];
-    vcOrder.dicInfo = dicInfo;
-    [self.navigationController pushViewController:vcOrder animated:YES];
+    bs_dispatch_sync_on_main_thread(^{
+        OrderDetailViewController *vcOrder = [[OrderDetailViewController alloc] init];
+        vcOrder.dicInfo = dicInfo;
+        [self.navigationController pushViewController:vcOrder animated:YES];
+        
+        [self cancelRequest];//取消图片请求
+    });
     
-//    [self cancelRequest];//取消图片请求
 }
 
 //点击搜索按钮事件
@@ -445,8 +448,8 @@ static bool boolSearch = NO;
     }else{
         [self.searchBar becomeFirstResponder];
     }
-    [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"pad%@.png",str]] forState:UIControlStateNormal];
-    [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"pad%@sel.png",str]] forState:UIControlStateHighlighted];
+    [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"Order_pad%@.png",str]] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"Order_pad%@sel.png",str]] forState:UIControlStateHighlighted];
     
     [self.searchBar resignFirstResponder];
 }
@@ -459,7 +462,7 @@ static bool boolSearch = NO;
     for (NSDictionary *dicOrder in aryMutOrder) {
         int total = [[dicOrder objectForKey:@"total"] intValue];
         float price = 0;
-        price = [[dicOrder objectForKey:@"price"] floatValue];
+        price = [[dicOrder objectForKey:@"price2"] floatValue];
         
         float add = price * total;
         allPrice = allPrice + add;
@@ -514,6 +517,13 @@ static bool boolSearch = NO;
             }
         }
         cell.dicInfo = [aryCount objectAtIndex:indexPath.row];
+        cell.cellImageClick=^(NSDictionary *dict)
+        {
+            PackageViewController *pack = [[PackageViewController alloc] init];
+            [pack setDicInfo:dict];
+            [self.navigationController pushViewController:pack animated:YES];
+
+        };
         return cell;
     }
     cell.dicInfo = [searchByResult objectAtIndex:indexPath.row];

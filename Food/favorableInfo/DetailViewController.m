@@ -68,7 +68,11 @@
 //返回
 -(void)navigationBarViewbackClick
 {
-    [self.navigationController popViewControllerAnimated:YES];
+//    bs_dispatch_sync_on_main_thread(^{
+        [imgTop cancelRequest]; //离开该页时取消图片的异步请求
+            [self.navigationController popViewControllerAnimated:YES];
+//    });
+
 }
 
 - (void)setDicInfo:(NSDictionary *)dic{
@@ -95,14 +99,14 @@
     }
     else
     {
-        [imgTop setImageURL:[NSURL URLWithString:[info objectForKey:@"wurl"]]];
+        [imgTop setImageURL:[NSURL URLWithString:[info objectForKey:@"wurl"]] andImageBoundName:@"yhxx.png"];
     }
     
 }
 
 -(void)dealloc
 {
-    [imgTop cancelRequest]; //离开该页时取消图片的异步请求
+//    [imgTop cancelRequest]; //离开该页时取消图片的异步请求
 }
 - (void)didReceiveMemoryWarning
 {

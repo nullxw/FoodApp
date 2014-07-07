@@ -21,6 +21,7 @@
     UITableView         *_tableView;
     CVLocalizationSetting *langSetting;
     UILabel *lbl;
+    NSString *app_Version;
 }
 
 
@@ -114,7 +115,7 @@
             cell.textLabel.text=@"检查更新";
            UILabel *lbl_Version=[[UILabel alloc]initWithFrame:CGRectMake(cell.contentView.frame.size.width-100, 0, 100,cell.contentView.frame.size.height)];
             NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-            NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+            app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
             lbl_Version.text=[NSString stringWithFormat:@"v%@", app_Version];
             lbl_Version.textAlignment=NSTextAlignmentCenter;
             lbl_Version.font=[UIFont systemFontOfSize:14];
@@ -189,11 +190,18 @@
     }
     else if (indexPath.row==4)
     {
+        [self checkUpdata:app_Version];
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"当前版本为最新版本" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
     }
 }
 
+
+//查询是否需要升级
+-(void)checkUpdata:(NSString *)version
+{
+    [[DataProvider sharedInstance]isTypUpdateWebService:version andXml:@"123"];
+}
 
 //清除缓存
 -(void)cancleCache

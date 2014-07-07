@@ -115,6 +115,29 @@ static  DataProvider *_dataProvide = nil;
     return dict;
 }
 
+
+//计算选择的时间是否超过当前时间 没超过返回YES
++(BOOL)compareNowTime:(NSString *)timeStr
+{
+    NSString *GLOBAL_TIMEFORMAT = @"yyyy-MM-dd HH:mm";
+    NSTimeZone* GTMzone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:GLOBAL_TIMEFORMAT];
+    [dateFormatter setTimeZone:GTMzone];
+    NSDate *bdate = [dateFormatter dateFromString:timeStr];
+    
+    NSDate *firstDate = [NSDate dateWithTimeInterval:-3600*8 sinceDate:bdate];
+    
+    NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+    NSTimeInterval _fitstDate = [firstDate timeIntervalSince1970]*1;
+    NSTimeInterval _secondDate = [datenow timeIntervalSince1970]*1;
+    
+    if (_fitstDate - _secondDate > 0) {
+        return YES;
+    }
+    return NO;
+}
+
 - (NSDictionary *)bsService:(NSString *)api arg:(NSString *)arg arg2:(NSString *)arg2{
     BSWebServiceAgent *agent = [[BSWebServiceAgent alloc] init];
     NSDictionary *dict = [agent GetData:api arg:arg arg2:arg2];
@@ -1677,9 +1700,9 @@ static  DataProvider *_dataProvide = nil;
         {
             dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台报错了",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
-        else if ([result isEqualToString:@"fail"])//填写信息错误
+        else if ([result isEqualToString:@"nodata"])//填写信息错误
         {
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"取消失败",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"没有数据",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
         else
         {
@@ -1821,6 +1844,28 @@ static  DataProvider *_dataProvide = nil;
     }
     return nil;
 
+}
+
+//根据返回标示确认是否需要调用升级客户端。
+-(void)isTypUpdateWebService:(NSString *)version andXml:(NSString *)xmlStr
+{
+    xmlStr=[NSString stringWithFormat:@"FoodAppchoicesoft%@.001",version];
+    NSMutableArray  *aryResult=[[NSMutableArray alloc]init];
+    NSString *strParam = [NSString stringWithFormat:@"?version=%@&code=10000&typ=IPAD&xmlStr=%@",version,[DataProvider md5:xmlStr]];
+    NSDictionary *dict = [self bsService:@"isTypUpdateWebService" arg:strParam arg2:@""];
+}
+
+
+//根据返回值展示更新内容
+-(void)getTypUpdateCont:(NSString *)version andxmlStr:(NSString *)xmlStr
+{
+    
+}
+
+//	获取更地址
+-(void)findVersionPADWebService:(NSString *)version andxmlStr:(NSString *)xmlStr
+{
+    
 }
 
 @end

@@ -91,8 +91,7 @@
 }
 -(void)cancelRequest
 {
-    [self loadData:nil MIMEType:nil textEncodingName:nil baseURL:nil];
-    [self.operation pause];
+//    [self.operation cancel];
 }
 
 @end

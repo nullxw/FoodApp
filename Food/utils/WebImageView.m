@@ -24,7 +24,7 @@
     return self;
 }
 
-- (void)setImageURL:(NSURL *)url{
+- (void)setImageURL:(NSURL *)url andImageBoundName:(NSString *)imageName{
     //同步请求
 //    [self synchronous:url];
     
@@ -36,12 +36,13 @@
         strurl=[array firstObject];
     }
     _url=[NSString stringWithFormat:@"%@",strurl];
-    [self aSynchronous2:strurl];
+    [self aSynchronous2:strurl andImageName:imageName];
 }
 
 
--(void)aSynchronous2:(NSString *)url
+-(void)aSynchronous2:(NSString *)url andImageName:(NSString *)imageName
 {
+    NSLog(@"======>>网络");
     WebImageView *__block imageSelf=self;
     NSURLRequest* requestAft = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     self.operation = [[AFHTTPRequestOperation alloc] initWithRequest:requestAft];
@@ -81,15 +82,14 @@
         [imageSelf setImage:[UIImage imageWithData:data]];
         
     }failure:^(AFHTTPRequestOperation* operation, NSError* error){
-        NSLog( @"Server timeout!" );
-        
+        [imageSelf setImage:[UIImage imageNamed:imageName]];
     }];
     //开始下载
     [self.operation start];
 }
 -(void)cancelRequest
 {
-    [self.operation pause];
+//    [self.operation cancel];
 }
 
 @end

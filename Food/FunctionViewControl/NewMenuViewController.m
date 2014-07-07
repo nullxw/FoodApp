@@ -403,7 +403,7 @@
             }
             else
             {
-                [imageView setImageURL:[NSURL URLWithString:url]];
+                [imageView setImageURL:[NSURL URLWithString:url] andImageBoundName:@"ad_logoPng.png"];
             }
         }
     }

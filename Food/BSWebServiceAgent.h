@@ -23,5 +23,5 @@
 
 - (NSDictionary *)GetData:(NSString *)api arg:(NSString *)arg arg2:(NSString *)arg2;
 +(NSDictionary *)parseXmlResult:(NSString *)result;
-
+-(NSString *)serviceUrlUpdata:(NSString *)api arg:(NSString *)arg ;
 @end

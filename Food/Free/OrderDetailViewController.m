@@ -228,7 +228,7 @@
     for (NSDictionary *dicOrder in aryMutOrder) {
         int total = [[dicOrder objectForKey:@"total"] intValue];
         float price = 0;
-        price = [[dicOrder objectForKey:@"price"] floatValue];
+        price = [[dicOrder objectForKey:@"price2"] floatValue];
         
         float add = price * total;
         allPrice = allPrice + add;

@@ -103,7 +103,26 @@
             NSDictionary *dict=[dp getOrderMenus:Info];
             if([[dict objectForKey:@"Result"]boolValue])
             {
-                _dataArray=[[NSMutableArray alloc]initWithArray:[dict objectForKey:@"Message"]];
+                NSArray *dataArray=[[NSArray alloc]initWithArray:[dict objectForKey:@"Message"]];
+                _dataArray=[[NSMutableArray alloc]init];
+                for (NSDictionary *dict in dataArray)
+                {
+                    NSString *orderTime=[NSString stringWithFormat:@"%@ %@",[dict objectForKey:@"dat"],[dict objectForKey:@"datmins"]];
+                    
+                    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                    //设定时间格式,这里可以设置成自己需要的格式
+                    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+                    NSDate *date=[[NSDate alloc]init];
+                    date=[[dateFormatter dateFromString:orderTime] dateByAddingTimeInterval:15*60];
+                    orderTime=[dateFormatter stringFromDate:date];
+                    
+                    if([DataProvider compareNowTime:orderTime])
+                    {
+                        [_dataArray addObject:dict];
+                    }
+                }
+                
+                
                 [_tableView reloadData];
                 [SVProgressHUD dismiss];
                 if([_dataArray count]==0)
@@ -124,6 +143,29 @@
     }
 }
 
+
+-(NSString *)nowTime
+{
+    NSString *nowtime=@"2014-04-01";
+    NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+    NSTimeZone *zone = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];
+    NSInteger interval = [zone secondsFromGMTForDate:datenow]+60*24;
+    NSDate *localeDate = [datenow  dateByAddingTimeInterval: interval];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //设定时间格式,这里可以设置成自己需要的格式
+    [dateFormatter setDateFormat:@"yyyy"];
+    //用[NSDate date]可以获取系统当前时间
+    NSString *yy = [dateFormatter stringFromDate:localeDate];
+    [dateFormatter setDateFormat:@"MM"];
+    //用[NSDate date]可以获取系统当前时间
+    NSString *MM = [dateFormatter stringFromDate:localeDate];
+    [dateFormatter setDateFormat:@"dd"];
+    //用[NSDate date]可以获取系统当前时间
+    NSString *dd = [dateFormatter stringFromDate:localeDate];
+    nowtime=[NSString stringWithFormat:@"%@-%@-%@",yy,MM,dd];
+    
+    return nowtime;
+}
 
 #pragma mark  uitableViewDelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

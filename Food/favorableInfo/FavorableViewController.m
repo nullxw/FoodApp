@@ -64,7 +64,11 @@
 //返回
 -(void)navigationBarViewbackClick
 {
-    [self.navigationController popViewControllerAnimated:YES];
+//    bs_dispatch_sync_on_main_thread(^{
+        [self cancelRequest];
+        [self.navigationController popViewControllerAnimated:YES];
+//    });
+    
 }
 //获取优惠
 -(void)getFavorableByAreaList:(NSString *)firmid{
@@ -127,12 +131,19 @@
     });
 }
 
--(void)dealloc
-{
+//取消图片请求
+-(void)cancelRequest{
     for (FavorableCell *cell in aryCell) {
         WebImageView *webImg = cell.imgTop;
         [webImg cancelRequest];
     }
+}
+-(void)dealloc
+{
+//    for (FavorableCell *cell in aryCell) {
+//        WebImageView *webImg = cell.imgTop;
+//        [webImg cancelRequest];
+//    }
 }
 
 - (void)didReceiveMemoryWarning

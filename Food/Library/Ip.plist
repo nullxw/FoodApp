@@ -5,8 +5,12 @@
 	<key>APIURL</key>
 	<string>http://192.168.0.118:8080/</string>
 	<key>adPicURL</key>
-	<string>http://192.168.0.245:8060</string>
+	<string>http://www.quanjude.com.cn</string>
 	<key>storesPicURL</key>
 	<string>http://www.quanjude.com.cn</string>
+	<key>foodPic</key>
+	<string>http://www.quanjude.com.cn</string>
+	<key>checkUpadta</key>
+	<string>http://192.168.0.118:9090/</string>
 </dict>
 </plist>

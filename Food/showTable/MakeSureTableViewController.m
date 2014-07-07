@@ -365,7 +365,7 @@
         {
           [SVProgressHUD showErrorWithStatus:@"请输入正确的验证码"];
         }
-        else if (![self nowTime:[NSString stringWithFormat:@"%@ %@",[DataProvider sharedInstance].selectTime,_btSelectTime.titleLabel.text]])
+        else if (![DataProvider compareNowTime:[NSString stringWithFormat:@"%@ %@",[DataProvider sharedInstance].selectTime,_btSelectTime.titleLabel.text]])
         {
             bs_dispatch_sync_on_main_thread(^{
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[langSetting localizedString:@"Prompt"] message:@"你选择的门店\n最晚可预点时间早于当前时间\n请选择其他门店\n或重新选择餐次" delegate:nil cancelButtonTitle:[langSetting localizedString:@"OK"] otherButtonTitles:nil];
@@ -380,28 +380,6 @@
         }
     }
     
-}
-
-//计算选择的时间是否超过当前时间 没超过返回YES
--(BOOL)nowTime:(NSString *)timeStr
-{
-    NSString *GLOBAL_TIMEFORMAT = @"yyyy-MM-dd HH:mm";
-    NSTimeZone* GTMzone = [NSTimeZone timeZoneForSecondsFromGMT:0];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:GLOBAL_TIMEFORMAT];
-    [dateFormatter setTimeZone:GTMzone];
-    NSDate *bdate = [dateFormatter dateFromString:timeStr];
-    
-    NSDate *firstDate = [NSDate dateWithTimeInterval:-3600*8 sinceDate:bdate];
-    
-    NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
-    NSTimeInterval _fitstDate = [firstDate timeIntervalSince1970]*1;
-    NSTimeInterval _secondDate = [datenow timeIntervalSince1970]*1;
-    
-    if (_fitstDate - _secondDate > 0) {
-        return YES;
-    }
-    return NO;
 }
 
 
@@ -449,6 +427,7 @@
 //            订单成功\n是否点餐
             bs_dispatch_sync_on_main_thread(^{
                 UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"%@\n%@",[langSetting localizedString:@"Successful order"],[langSetting localizedString:@"Whether to order a meal"]] delegate:self cancelButtonTitle:[langSetting localizedString:@"No"] otherButtonTitles:[langSetting localizedString:@"Sure"], nil];
+                alert.tag=1001;
                 [alert show];
             });
             
@@ -623,31 +602,42 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex==1)
+    if(1001==alertView.tag)
     {
-        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-        DataProvider *dp=[DataProvider sharedInstance];
-        [dic setObject:((changeCity *)dp.selectCity).selectproviceId forKey:@"city"];
-        NSMutableDictionary *valueStore=[[NSMutableDictionary alloc]init];
-        [valueStore setObject:dp.storeMessage.storeFirmid forKey:@"firmid"];
-        [valueStore setObject:dp.storeMessage.storeFirmdes forKey:@"firmdes"];
-        [valueStore setObject:dp.storeMessage.storeInit forKey:@"init"];
-        [valueStore setObject:dp.storeMessage.storeTele forKey:@"tele"];
-        [valueStore setObject:dp.storeMessage.storeWbigPic forKey:@"wbigpic"];
-        [valueStore setObject:dp.storeMessage.storeArea forKey:@"area"];
-        
-        [dic setObject:valueStore forKey:@"Store"];
-        [dic setObject:_btSelectTime.titleLabel.text forKey:@"Date"];
-        [dic setObject:dp.selectCanCi forKey:@"shiBie"];
-        [dic setObject:dp.selectTime forKey:@"targetDate"];
-        
-        NSLog(@"%@",dic);
-        BSBookViewController *book = [[BSBookViewController alloc] init];
-        book.dicInfo = dic;
-        [self.navigationController pushViewController:book animated:YES];
-//        [self textchange:_textView];
+        if (buttonIndex==1)
+        {
+            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+            DataProvider *dp=[DataProvider sharedInstance];
+            [dic setObject:((changeCity *)dp.selectCity).selectproviceId forKey:@"city"];
+            NSMutableDictionary *valueStore=[[NSMutableDictionary alloc]init];
+            
+            [valueStore setObject:dp.storeMessage.storeFirmid forKey:@"firmid"];
+            [valueStore setObject:dp.storeMessage.storeFirmdes forKey:@"firmdes"];
+            [valueStore setObject:dp.storeMessage.storeInit forKey:@"init"];
+            [valueStore setObject:dp.storeMessage.storeTele forKey:@"tele"];
+            [valueStore setObject:dp.storeMessage.storeArea forKey:@"area"];
+            
+            [dic setObject:valueStore forKey:@"Store"];
+            [dic setObject:_btSelectTime.titleLabel.text forKey:@"Date"];
+            [dic setObject:dp.selectCanCi forKey:@"shiBie"];
+            [dic setObject:dp.selectTime forKey:@"targetDate"];
+            
+            NSLog(@"%@",dic);
+            BSBookViewController *book = [[BSBookViewController alloc] init];
+            book.dicInfo = dic;
+            [self.navigationController pushViewController:book animated:YES];
+            //        [self textchange:_textView];
+        }
+        else
+        {
+            bs_dispatch_sync_on_main_thread(^{
+                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"订单过期延长15分钟,超时作废\n请合理安排就餐时间" delegate:self cancelButtonTitle:[langSetting localizedString:@"Sure"] otherButtonTitles:nil];
+                alert.tag=1002;
+                [alert show];
+            });
+        }
     }
-    else
+    else if(1002==alertView.tag)
     {
         [self.navigationController popToRootViewControllerAnimated:YES];
     }

@@ -12,6 +12,9 @@
 #import "FoodView.h"
 
 @implementation hotCell
+{
+    UIView *_lineView;
+}
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -35,39 +38,38 @@
     _foodLable.numberOfLines = 3;
     _foodLable.font = [UIFont systemFontOfSize:13.0];
     [self.contentView addSubview:_foodLable];
+
     
+    _priceLable = [[RTLabel alloc] initWithFrame:CGRectZero];
+    _priceLable.frame = CGRectMake(90, 30, 0, 0);//CGRectMake(90, 30, 80, 20);
+    _priceLable.backgroundColor = [UIColor clearColor];
+    _priceLable.textColor = [UIColor grayColor];
+    _priceLable.font = [UIFont systemFontOfSize:10.0];
+    [self.contentView addSubview:_priceLable];
     
+    _lineView=[[UIView alloc]initWithFrame:CGRectMake(80, 36, 0, 0)];
+    _lineView.backgroundColor=[UIColor grayColor];
+    [self.contentView addSubview:_lineView];
     
     //App价格
     _priceLableApp = [[RTLabel alloc] initWithFrame:CGRectZero];
-    _priceLableApp.frame = CGRectMake(90, 30, 70, 18);
+    _priceLableApp.frame = CGRectMake(90, 50, 0, 0);//CGRectMake(90, 50, 70, 18);
     _priceLableApp.backgroundColor = [UIColor clearColor];
-    _priceLableApp.textColor = [UIColor grayColor];
+    _priceLableApp.textColor = [UIColor redColor];
     _priceLableApp.font = [UIFont systemFontOfSize:10.0];
     [self.contentView addSubview:_priceLableApp];
-    
-    UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(80, 36, 60, 1)];
-    lineView.backgroundColor=[UIColor grayColor];
-    [self.contentView addSubview:lineView];
-    
-    _priceLable = [[RTLabel alloc] initWithFrame:CGRectZero];
-    _priceLable.frame = CGRectMake(90, 50, 80, 20);
-    _priceLable.backgroundColor = [UIColor clearColor];
-    _priceLable.textColor = [UIColor redColor];
-    _priceLable.font = [UIFont systemFontOfSize:10.0];
-    [self.contentView addSubview:_priceLable];
     
     _plusBut = [[UIButton alloc] initWithFrame:CGRectZero];
     _plusBut.backgroundColor = [UIColor clearColor];
     [_plusBut setBackgroundImage:[UIImage imageNamed:@"Order_plus.png"] forState:UIControlStateNormal];
     [_plusBut addTarget:self action:@selector(plusClick) forControlEvents:UIControlEventTouchUpInside];
-    _plusBut.frame = CGRectMake(ScreenWidth-30, 40, 28, 28);
+    _plusBut.frame = CGRectMake(ScreenWidth-30-10, 40, 28, 28);
     [self.contentView addSubview:_plusBut];
     
     _countBut = [[UIButton alloc] initWithFrame:CGRectZero];
     _countBut.backgroundColor = [UIColor clearColor];
     [_countBut setBackgroundImage:[UIImage imageNamed:@"Order_Num.png"] forState:UIControlStateNormal];
-    _countBut.frame = CGRectMake(ScreenWidth-27*2, 43, 23, 23);
+    _countBut.frame = CGRectMake(ScreenWidth-27*2-10, 43, 23, 23);
     [self.contentView addSubview:_countBut];
     
     _tfcount = [[UITextField alloc] initWithFrame:CGRectZero];
@@ -84,7 +86,7 @@
     _minusBut.backgroundColor = [UIColor clearColor];
     [_minusBut setBackgroundImage:[UIImage imageNamed:@"Order_minus.png"] forState:UIControlStateNormal];
     [_minusBut addTarget:self action:@selector(minusClick) forControlEvents:UIControlEventTouchUpInside];
-    _minusBut.frame = CGRectMake(ScreenWidth-28*3, 40, 28, 28);
+    _minusBut.frame = CGRectMake(ScreenWidth-28*3-10, 40, 28, 28);
     [self.contentView addSubview:_minusBut];
     
 }
@@ -116,9 +118,31 @@
         _tfcount.text = count;
         
         _foodLable.text = [info objectForKey:@"des"];
-        NSString *priceStr = [NSString stringWithFormat:@"￥%@元/%@",[info objectForKey:@"price"],@"套"];
+        NSString *priceStr = [NSString stringWithFormat:@"￥%@元/%@",[info objectForKey:@"price3"],@"套"];
+         NSString *priceStrApp = [NSString stringWithFormat:@"￥%@元/%@",[info objectForKey:@"price2"],@"套"];
+        
+        //        文字自适配
+        UIFont *sizefont=[UIFont fontWithName:@"Arial" size:10.0];
+        CGSize size=CGSizeMake(ScreenWidth, 2000);
+        CGSize labelSize=[priceStr sizeWithFont:sizefont constrainedToSize:size lineBreakMode:NSLineBreakByCharWrapping];
+        _priceLable.frame=CGRectMake(80, 30, labelSize.width, labelSize.height);
+        _priceLable.font=sizefont;
         _priceLable.text = priceStr;
-        _priceLableApp.text = priceStr;
+        
+        
+        _lineView.frame=CGRectMake(80, 36, labelSize.width, 1);
+        if([info objectForKey:@"price3"]==nil)
+        {
+            [_lineView removeFromSuperview];
+            [_priceLable removeFromSuperview];
+        }
+        
+        
+        labelSize=[priceStrApp sizeWithFont:sizefont constrainedToSize:size lineBreakMode:NSLineBreakByCharWrapping];
+        _priceLableApp.frame=CGRectMake(80, 50, labelSize.width, labelSize.height);
+        _priceLableApp.font=sizefont;
+        _priceLableApp.text=priceStrApp;
+        
         _numberLable.text = [info objectForKey:@"pitcode"];
         [_recommendImage setImage:[UIImage imageNamed:@"defaultFood.png"]];
         [self setImagegrpStr:info];
@@ -152,9 +176,30 @@
         NSString *count = [NSString stringWithFormat:@"%d",countFood];
         _tfcount.text = count;
         _foodLable.text = [info objectForKey:@"pdes"];
-        NSString *priceStr = [NSString stringWithFormat:@"￥%@元/%@",[info objectForKey:@"price"],[info objectForKey:@"unit"]];
+        NSString *priceStr = [NSString stringWithFormat:@"￥%@元/%@",[info objectForKey:@"price3"],[info objectForKey:@"unit"]];
+        NSString *priceStrApp = [NSString stringWithFormat:@"￥%@元/%@",[info objectForKey:@"price2"],[info objectForKey:@"unit"]];
+        
+        //        文字自适配
+        UIFont *sizefont=[UIFont fontWithName:@"Arial" size:10.0];
+        CGSize size=CGSizeMake(ScreenWidth, 2000);
+        CGSize labelSize=[priceStr sizeWithFont:sizefont constrainedToSize:size lineBreakMode:NSLineBreakByCharWrapping];
+        _priceLable.frame=CGRectMake(80, 30, labelSize.width, labelSize.height);
+        _priceLable.font=sizefont;
         _priceLable.text = priceStr;
-        _priceLableApp.text = priceStr;
+        
+        
+        _lineView.frame=CGRectMake(80, 36, labelSize.width, 1);
+        if([info objectForKey:@"price3"]==nil)
+        {
+            [_lineView removeFromSuperview];
+            [_priceLable removeFromSuperview];
+        }
+        
+        
+        labelSize=[priceStrApp sizeWithFont:sizefont constrainedToSize:size lineBreakMode:NSLineBreakByCharWrapping];
+        _priceLableApp.frame=CGRectMake(80, 50, labelSize.width, labelSize.height);
+        _priceLableApp.font=sizefont;
+        _priceLableApp.text=priceStrApp;
         _numberLable.text = [info objectForKey:@"pitcode"];
         [_recommendImage setImage:[UIImage imageNamed:@"defaultFood.png"]];
         [self setSmallImage:info];
@@ -311,26 +356,28 @@
 //缓存文件处理
 -(void)setSmallImage:(NSDictionary *)info
 {
-    if([DataProvider imageCache:[info objectForKey:@"smallUrl"]])
+    NSString *url=[NSString stringWithFormat:@"%@%@",[[DataProvider getIpPlist]objectForKey:@"foodPic"],[info objectForKey:@"smallUrl"]];
+    if([DataProvider imageCache:url])
     {
-        [_recommendImage setImage:[UIImage imageWithData:[DataProvider imageCache:[info objectForKey:@"smallUrl"]]]];
+        [_recommendImage setImage:[UIImage imageWithData:[DataProvider imageCache:url]]];
     }
     else
     {
-        [_recommendImage setImageURL:[NSURL URLWithString:[info objectForKey:@"smallUrl"]]];
+        [_recommendImage setImageURL:[NSURL URLWithString:url] andImageBoundName:@"defaultFood.png"];
     }
     
 }
 
 -(void)setImagegrpStr:(NSDictionary *)info
 {
-    if([DataProvider imageCache:[info objectForKey:@"grpStr"]])
+    NSString *url=[NSString stringWithFormat:@"%@%@",[[DataProvider getIpPlist]objectForKey:@"foodPic"],[info objectForKey:@"grpStr"]];
+    if([DataProvider imageCache:url])
     {
-        [_recommendImage setImage:[UIImage imageWithData:[DataProvider imageCache:[info objectForKey:@"grpStr"]]]];
+        [_recommendImage setImage:[UIImage imageWithData:[DataProvider imageCache:url]]];
     }
     else
     {
-        [_recommendImage setImageURL:[NSURL URLWithString:[info objectForKey:@"grpStr"]]];
+        [_recommendImage setImageURL:[NSURL URLWithString:url] andImageBoundName:@"defaultFood.png"];
     }
 }
 

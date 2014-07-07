@@ -38,8 +38,11 @@
 //返回事件
 -(void)navigationBarViewbackClick
 {
-    [self.navigationController popViewControllerAnimated:YES];
-    [imgView cancelRequest]; //离开该页时取消图片的异步请求
+//    bs_dispatch_sync_on_main_thread(^{
+        [self.navigationController popViewControllerAnimated:YES];
+        [imgView cancelRequest]; //离开该页时取消图片的异步请求
+//    });
+    
 }
 
 - (void)viewDidLoad
@@ -91,8 +94,10 @@
     }
     if (dic){
         //加载子菜品
+         [self getImage:[dic objectForKey:@"picsrc"]];
+        
+         [SVProgressHUD showProgress:-1 status:[langSetting localizedString:@"load..."] maskType:SVProgressHUDMaskTypeBlack];
         [NSThread detachNewThreadSelector:@selector(getPackItem:) toTarget:self withObject:dic];
-        [self getImage:[dic objectForKey:@"picsrc"]];
 //        [NSThread detachNewThreadSelector:@selector(getImage:) toTarget:self withObject:[dic objectForKey:@"picsrc"]];
     }
 }
@@ -106,8 +111,9 @@
     }
     if (dic){
         //加载子菜品
+         [self getImage:[dic objectForKey:@"imageUrl"]];
+        [SVProgressHUD showProgress:-1 status:[langSetting localizedString:@"load..."] maskType:SVProgressHUDMaskTypeBlack];
         [NSThread detachNewThreadSelector:@selector(getPackItem:) toTarget:self withObject:dic];
-        [self getImage:[dic objectForKey:@"smallUrl"]];
 //        [NSThread detachNewThreadSelector:@selector(getImage:) toTarget:self withObject:[dic objectForKey:@"smallUrl"]];
     }
 }
@@ -116,14 +122,14 @@
 -(void)getImage:(NSString *)url
 {
     @autoreleasepool {
+        url=[NSString stringWithFormat:@"%@%@",[[DataProvider getIpPlist]objectForKey:@"foodPic"],url];
         if([DataProvider imageCache:url])
         {
             [imgView setImage:[UIImage imageWithData:[DataProvider imageCache:url]]];
-            
         }
         else
         {
-            [imgView setImageURL:[NSURL URLWithString:url]];
+            [imgView setImageURL:[NSURL URLWithString:url] andImageBoundName:@"defaultPack.png"];
         }
     }
     

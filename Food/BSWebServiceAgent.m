@@ -78,7 +78,15 @@ static NSDictionary *DICT_API_InterfazAdd = nil;
     
 //    NSString *str = @"http://192.168.0.168:8081/CTF/webService/BOHWebService";
 //    NSString *str = @"http://192.168.0.197:8081/";
-    NSString *str = [[DataProvider getIpPlist]objectForKey:@"APIURL"];
+    NSString *str;
+    if([arg2 isEqualToString:@""])
+    {
+        str = [[DataProvider getIpPlist]objectForKey:@"checkUpadta"];
+    }
+    else
+    {
+        str = [[DataProvider getIpPlist]objectForKey:@"APIURL"];
+    }
     if (arg == nil) {
         return [NSString stringWithFormat:@"%@%@%@",str,arg2,api];
     }

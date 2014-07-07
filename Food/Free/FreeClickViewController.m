@@ -287,7 +287,7 @@
     
     
     NSString *timeStr = [NSString stringWithFormat:@"%@ %@",strYuDingRiQi,strShijian];
-    if ([self nowTime:timeStr]) {
+    if ([DataProvider compareNowTime:timeStr]) {
         NSMutableDictionary *dic = [NSMutableDictionary dictionary];
         [dic setObject:lblCity.text forKey:@"city"];
         [dic setObject:dicStore forKey:@"Store"];
@@ -571,27 +571,6 @@
 }
 
 
-//计算选择的时间是否超过当前时间 没超过返回YES
--(BOOL)nowTime:(NSString *)timeStr
-{
-    NSString *GLOBAL_TIMEFORMAT = @"yyyy-MM-dd HH:mm";
-    NSTimeZone* GTMzone = [NSTimeZone timeZoneForSecondsFromGMT:0];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:GLOBAL_TIMEFORMAT];
-    [dateFormatter setTimeZone:GTMzone];
-    NSDate *bdate = [dateFormatter dateFromString:timeStr];
-    
-    NSDate *firstDate = [NSDate dateWithTimeInterval:-3600*8 sinceDate:bdate];
-    
-    NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
-    NSTimeInterval _fitstDate = [firstDate timeIntervalSince1970]*1;
-    NSTimeInterval _secondDate = [datenow timeIntervalSince1970]*1;
-    
-    if (_fitstDate - _secondDate > 0) {
-        return YES;
-    }
-    return NO;
-}
 
 -(void)initArray
 {

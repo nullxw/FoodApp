@@ -171,7 +171,7 @@
 }
 
 
-//将所有的会员卡可查看选项添加在section上而不是cell上
+//将所有的会员卡可查看选项添加在section上而不是row上
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
 //    获取选择会员卡单利

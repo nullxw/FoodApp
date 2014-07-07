@@ -168,14 +168,13 @@
 {
     @autoreleasepool {
         url=[NSString stringWithFormat:@"%@%@",[[DataProvider getIpPlist]objectForKey:@"storesPicURL"],url];
-        
         if([DataProvider imageCache:url])
         {
             [_imageView setImage:[UIImage imageWithData:[DataProvider imageCache:url]]];
         }
         else
         {
-            [_imageView setImageURL:[NSURL URLWithString:url]];
+            [_imageView setImageURL:[NSURL URLWithString:url] andImageBoundName:@"Public_default.png"];
         }
     }
     
@@ -380,8 +379,12 @@
 //    是否已经选择台位判断
     if(isSelectTabel)
     {
-        MakeSureTableViewController *makeSure=[[MakeSureTableViewController alloc]init];
-        [self.navigationController pushViewController:makeSure animated:YES];
+//        bs_dispatch_sync_on_main_thread(^{
+           [_imageView cancelRequest];
+            MakeSureTableViewController *makeSure=[[MakeSureTableViewController alloc]init];
+            [self.navigationController pushViewController:makeSure animated:YES];
+//        });
+        
     }
     else
     {
@@ -391,7 +394,7 @@
 
 -(void)dealloc
 {
-    [_imageView cancelRequest];
+//    [_imageView cancelRequest];
 }
 -(void)navigationBarViewbackClick
 {

@@ -195,7 +195,7 @@
         [SVProgressHUD dismiss];
         bs_dispatch_sync_on_main_thread(^{
         
-            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"发送成功\n是否返回主界面" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"发送成功\n订单过期延迟15分钟\n超时作废请合理安排就餐时间\n是否返回主界面" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
             [alert show];
         });
         
@@ -213,7 +213,7 @@
     for (NSDictionary *dicOrder in aryMutOrder) {
         int total = [[dicOrder objectForKey:@"total"] intValue];
         float price = 0;
-        price = [[dicOrder objectForKey:@"price"] floatValue];
+        price = [[dicOrder objectForKey:@"price2"] floatValue];
         
         float add = price * total;
         allPrice = allPrice + add;

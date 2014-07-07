@@ -72,7 +72,7 @@
     }
     else
     {
-        [imgTop setImageURL:[NSURL URLWithString:[info objectForKey:@"wurl"]]];
+        [imgTop setImageURL:[NSURL URLWithString:[info objectForKey:@"wurl"]] andImageBoundName:@"yhxxx.png"];
     }
     
 }
