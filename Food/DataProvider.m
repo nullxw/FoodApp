@@ -1847,25 +1847,54 @@ static  DataProvider *_dataProvide = nil;
 }
 
 //根据返回标示确认是否需要调用升级客户端。
--(void)isTypUpdateWebService:(NSString *)version andXml:(NSString *)xmlStr
+-(NSDictionary *)isTypUpdateWebService:(NSString *)version andXml:(NSString *)xmlStr
 {
     xmlStr=[NSString stringWithFormat:@"FoodAppchoicesoft%@.001",version];
-    NSMutableArray  *aryResult=[[NSMutableArray alloc]init];
     NSString *strParam = [NSString stringWithFormat:@"?version=%@&code=10000&typ=IPAD&xmlStr=%@",version,[DataProvider md5:xmlStr]];
     NSDictionary *dict = [self bsService:@"isTypUpdateWebService" arg:strParam arg2:@""];
+    if(dict)
+    {
+        return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"Result",[[[[[dict objectForKey:@"soap:Envelope"] objectForKey:@"soap:Body"] objectForKey:@"ns1:isTypUpdateWebServiceResponse"] objectForKey:@"return"]objectForKey:@"text"],@"Message", nil];
+    }
+    else
+    {
+       return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",strNetwork,@"Message", nil];
+    }
 }
 
 
 //根据返回值展示更新内容
--(void)getTypUpdateCont:(NSString *)version andxmlStr:(NSString *)xmlStr
+-(NSDictionary *)getTypUpdateCont:(NSString *)version andxmlStr:(NSString *)xmlStr
 {
-    
+    xmlStr=[NSString stringWithFormat:@"FoodAppchoicesoft%@.001",version];
+    NSString *strParam = [NSString stringWithFormat:@"?version=%@&code=10000&typ=IPAD&xmlStr=%@",version,[DataProvider md5:xmlStr]];
+    NSDictionary *dict = [self bsService:@"getTypUpdateCont" arg:strParam arg2:@""];
+    if(dict)
+    {
+        return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"Result",[[[[[dict objectForKey:@"soap:Envelope"] objectForKey:@"soap:Body"] objectForKey:@"ns1:getTypUpdateContResponse"] objectForKey:@"return"]objectForKey:@"text"],@"Message", nil];
+    }
+    else
+    {
+        return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",strNetwork,@"Message", nil];
+    }
+
 }
 
 //	获取更地址
--(void)findVersionPADWebService:(NSString *)version andxmlStr:(NSString *)xmlStr
+-(NSDictionary *)findVersionPADWebService:(NSString *)version andxmlStr:(NSString *)xmlStr
 {
-    
+    xmlStr=[NSString stringWithFormat:@"FoodAppchoicesoft%@.001",version];
+    NSString *strParam = [NSString stringWithFormat:@"?version=%@&code=10000&typ=IPAD&xmlStr=%@",version,[DataProvider md5:xmlStr]];
+    NSDictionary *dict = [self bsService:@"findVersionPADWebService" arg:strParam arg2:@""];
+    if(dict)
+    {
+        return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"Result",[[[[[dict objectForKey:@"soap:Envelope"] objectForKey:@"soap:Body"] objectForKey:@"ns1:findVersionPADWebServiceResponse"] objectForKey:@"return"]objectForKey:@"text"],@"Message", nil];
+    }
+    else
+    {
+        return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",strNetwork,@"Message", nil];
+    }
+
 }
 
 @end

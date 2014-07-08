@@ -263,12 +263,12 @@
 
 
 //根据返回标示确认是否需要调用升级客户端。
--(void)isTypUpdateWebService:(NSString *)version andXml:(NSString *)xmlStr;
+-(NSDictionary *)isTypUpdateWebService:(NSString *)version andXml:(NSString *)xmlStr;
 
 //根据返回值展示更新内容
--(void)getTypUpdateCont:(NSString *)version andxmlStr:(NSString *)xmlStr;
+-(NSDictionary *)getTypUpdateCont:(NSString *)version andxmlStr:(NSString *)xmlStr;
 
 //	获取更地址
--(void)findVersionPADWebService:(NSString *)version andxmlStr:(NSString *)xmlStr;
+-(NSDictionary *)findVersionPADWebService:(NSString *)version andxmlStr:(NSString *)xmlStr;
 
 @end

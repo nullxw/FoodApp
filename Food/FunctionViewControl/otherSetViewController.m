@@ -191,8 +191,6 @@
     else if (indexPath.row==4)
     {
         [self checkUpdata:app_Version];
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"当前版本为最新版本" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        [alert show];
     }
 }
 
@@ -200,7 +198,112 @@
 //查询是否需要升级
 -(void)checkUpdata:(NSString *)version
 {
-    [[DataProvider sharedInstance]isTypUpdateWebService:version andXml:@"123"];
+    [SVProgressHUD showProgress:-1 status:@"版本检测中..." maskType:SVProgressHUDMaskTypeClear];
+    [NSThread detachNewThreadSelector:@selector(chcekVersion:) toTarget:self withObject:version];
+}
+
+
+-(void)chcekVersion:(NSString *)version
+{
+    @autoreleasepool
+    {
+        NSDictionary *dict=[[DataProvider sharedInstance]isTypUpdateWebService:version andXml:@""];
+        if([dict objectForKey:@"Result"])
+        {
+            [SVProgressHUD dismiss];
+            if([[dict objectForKey:@"Message"]isEqualToString:@"1"])
+            {
+                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"发现新版本是否更新" delegate:self cancelButtonTitle:@"下次再说" otherButtonTitles:@"更新", nil];
+                alert.tag=101;
+                [alert show];
+            }
+            else
+            {
+                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"当前版本为最新版本" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alert show];
+            }
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:[dict objectForKey:@"Message"]];
+        }
+    }
+}
+
+
+-(void)getUpdataMessage:(NSString *)Version
+{
+    @autoreleasepool
+    {
+        NSDictionary *dict=[[DataProvider sharedInstance]getTypUpdateCont:Version andxmlStr:@""];
+        if([dict objectForKey:@"Result"])
+        {
+            [SVProgressHUD dismiss];
+            if(![[dict objectForKey:@"Messgae"]isEqualToString:@"0"]||![[dict objectForKey:@"Messgae"]isEqualToString:@"-1"])
+            {
+                bs_dispatch_sync_on_main_thread(^{
+                    
+                    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width*0.6, self.view.frame.size.height*0.6)];
+                    view.center=self.view.center;
+                    view.backgroundColor=[UIColor grayColor];
+                    UIWebView *web=[[UIWebView alloc]init];
+                    web.frame=CGRectMake(5, 5, view.frame.size.width-10, view.frame.size.height-70);
+                    [web loadHTMLString:[dict objectForKey:@"Message"] baseURL:nil];
+                    [view addSubview:web];
+                    
+                    UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
+                    [button setTitle:@"下载更新" forState:UIControlStateNormal];
+                    
+                    button.frame=CGRectMake(5, web.frame.size.height+web.frame.origin.y+10, web.frame.size.width, 40);
+                    [button addTarget:self action:@selector(buttonUpadta) forControlEvents:UIControlEventTouchUpInside];
+                    [button setBackgroundImage:[UIImage imageNamed:@"Public_nextButtonNomal.png"] forState:UIControlStateNormal];
+                    [button setBackgroundImage:[UIImage imageNamed:@"Public_nextButtonSelect.png"] forState:UIControlStateHighlighted];
+                    
+                    [view addSubview:button];
+                    [self.view addSubview:view];
+                });
+            }
+            else
+            {
+                [SVProgressHUD showErrorWithStatus:@"未知错误"];
+            }
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:[dict objectForKey:@"Message"]];
+        }
+    }
+  
+}
+-(void)buttonUpadta
+{
+    [SVProgressHUD showProgress:-1 status:@"获取下载地址..." maskType:SVProgressHUDMaskTypeClear];
+    [NSThread detachNewThreadSelector:@selector(getUpdataIp:) toTarget:self withObject:app_Version];
+}
+
+-(void)getUpdataIp:(NSString *)version
+{
+    NSDictionary *dict=[[DataProvider sharedInstance]findVersionPADWebService:version andxmlStr:@""];
+    if([dict objectForKey:@"Result"])
+    {
+        [SVProgressHUD dismiss];
+        if(![[dict objectForKey:@"Messgae"]isEqualToString:@"0"]||![[dict objectForKey:@"Messgae"]isEqualToString:@"-1"])
+        {
+            bs_dispatch_sync_on_main_thread(^{
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[dict objectForKey:@"Message"]]]];
+                exit(0);
+            });
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:@"未知错误"];
+        }
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:[dict objectForKey:@"Message"]];
+    }
+
 }
 
 //清除缓存
@@ -244,20 +347,31 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(buttonIndex==1)
+    if(101==alertView.tag)
     {
-        [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"userName"];
-        [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"userPhone"];
-        [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"userId"];
-        
-        [[NSUserDefaults standardUserDefaults]synchronize];
-        if(![[NSUserDefaults standardUserDefaults]objectForKey:@"userName"] && ![[NSUserDefaults standardUserDefaults]objectForKey:@"userPhone"])
+        if(buttonIndex==1)
         {
-            [SVProgressHUD showSuccessWithStatus:[langSetting localizedString:@"Logout success"]];
+            [SVProgressHUD showProgress:-1 status:@"获取更新内容..." maskType:SVProgressHUDMaskTypeClear];
+            [NSThread detachNewThreadSelector:@selector(getUpdataMessage:) toTarget:self withObject:app_Version];
         }
-        else
+    }
+    else
+    {
+        if(buttonIndex==1)
         {
-            [SVProgressHUD showErrorWithStatus:[langSetting localizedString:@"Logout failed"]];
+            [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"userName"];
+            [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"userPhone"];
+            [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"userId"];
+            
+            [[NSUserDefaults standardUserDefaults]synchronize];
+            if(![[NSUserDefaults standardUserDefaults]objectForKey:@"userName"] && ![[NSUserDefaults standardUserDefaults]objectForKey:@"userPhone"])
+            {
+                [SVProgressHUD showSuccessWithStatus:[langSetting localizedString:@"Logout success"]];
+            }
+            else
+            {
+                [SVProgressHUD showErrorWithStatus:[langSetting localizedString:@"Logout failed"]];
+            }
         }
     }
 }
