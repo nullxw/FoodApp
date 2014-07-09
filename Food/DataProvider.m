@@ -36,6 +36,7 @@ static NSMutableArray *aryOrders = nil;
 @synthesize phoneNum=_phoneNum;
 
 @synthesize isClearColor=_isClearColor;
+@synthesize isShop=_isShop;
 
 
 //选择市别后判断开始结束时间
@@ -240,7 +241,7 @@ static  DataProvider *_dataProvide = nil;
     //    lunchendtime   午餐自提结束时间
     //    lunchstart      午餐自提开始时间
     NSString *strParam;
-    if(![dicCityCode objectForKey:@"dat"])
+    if(self.isShop)
     {
         if([dicCityCode objectForKey:@"type"])
         {
@@ -959,11 +960,17 @@ static  DataProvider *_dataProvide = nil;
         NSDictionary *dic = [BSWebServiceAgent parseXmlResult:result];
         
         NSMutableArray *aryResult = [[[dic objectForKey:@"listTele"] objectForKey:@"listFavorArea"] objectForKey:@"com.choice.webService.domain.FavorArea"];
-        
-        if ([aryResult count] > 0) {
+        if([result isEqualToString:@"false"])
+        {
+             return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"获取信息失败",@"Message", nil];
+        }
+        else if ([aryResult count] > 0) {
             return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"Result",aryResult,@"Message", nil];
-        }else
-            return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"失败",@"Message", nil];
+        }
+        else
+        {
+            return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"暂无优惠信息",@"Message", nil];
+        }
     }else{
         return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",strNetwork,@"Message", nil];
     }
@@ -982,10 +989,15 @@ static  DataProvider *_dataProvide = nil;
         
         NSMutableArray *aryResult = [[dic objectForKey:@"list"] objectForKey:@"com.choice.webService.domain.WebMsg"];
         
-        if ([aryResult count] > 0) {
+        if([result isEqualToString:@"false"])
+        {
+            return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"获取信息失败",@"Message", nil];
+        }
+        else if ([aryResult count] > 0) {
             return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"Result",aryResult,@"Message", nil];
-        }else
-            return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",aryResult,@"Message", nil];
+        }
+        else
+            return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"该地区暂无优惠信息",@"Message", nil];
     }else{
         return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",strNetwork,@"Message", nil];
     }

@@ -81,7 +81,7 @@
              [SVProgressHUD dismiss];
         }else{
             //获取信息失败
-            [SVProgressHUD showErrorWithStatus:[langSetting localizedString:@"Failed to get information"]];
+            [SVProgressHUD showErrorWithStatus:[dic objectForKey:@"Message"]];//[langSetting localizedString:@"Failed to get information"]
         }
     }
 }

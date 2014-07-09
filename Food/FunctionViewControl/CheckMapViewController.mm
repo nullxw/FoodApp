@@ -418,6 +418,7 @@
         [dictValue setValue:dp.localCity forKey:@"area"];
         [dictValue setValue:@"1" forKey:@"type"];
         //        NSDictionary *dictStore=[[NSDictionary alloc]initWithDictionary:[dp getStoreByArea:dp.selectCity.selectproviceId]];
+        dp.isShop=YES;
         NSDictionary *dictStore=[[NSDictionary alloc]initWithDictionary:[dp getStoreByArea:dictValue]];
         
         if ([[dictStore objectForKey:@"Result"] boolValue])

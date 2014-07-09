@@ -78,7 +78,7 @@
             [tvArea reloadData];
             [SVProgressHUD dismiss];
         }else{
-            [SVProgressHUD showErrorWithStatus:[langSetting localizedString:@"Failed to get information"]];
+            [SVProgressHUD showErrorWithStatus:[dic objectForKey:@"Message"]];//[langSetting localizedString:@"Failed to get information"]
         }
     }
 }
@@ -86,12 +86,14 @@
 #pragma mark -  UITableView Delegate & Data Source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identifier = @"favorResultCell";
-    AreaCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell){
-        cell = [[AreaCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
-//    cell.dicInfo = [aryResult objectAtIndex:indexPath.row];
+    cell.textLabel.text=@"";
+     cell.textLabel.textAlignment=NSTextAlignmentCenter;
     cell.textLabel.text = [[aryResult objectAtIndex:indexPath.row] objectForKey:@"area"];
+   
     return cell;
 }
 
@@ -100,7 +102,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 40;
+    return 60;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

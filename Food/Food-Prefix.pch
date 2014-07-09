@@ -20,7 +20,6 @@
 #endif
 
 
-
 static void bs_dispatch_sync_on_main_thread(dispatch_block_t block) {
     if ([NSThread isMainThread]) {
         block();

@@ -53,6 +53,8 @@
     //    导航条的北京是否为1透明色
     BOOL            _isClearColor;
     
+    BOOL            _isShop;//判断门店查询方式
+    
     
     //    获取餐次和餐次对应的时间
     NSString        *_dinnerendtime; //        晚餐自提结束时间
@@ -90,6 +92,7 @@
 @property(nonatomic,strong)    StoreMessage   *storeMessage;
 @property(nonatomic)           BOOL           isRoom;
 @property(nonatomic)           BOOL           isFirst;
+@property(nonatomic)           BOOL           isShop;
 
 //用于在线预点菜品提交的单利信息
 @property(nonatomic)           BOOL           isReserveis;

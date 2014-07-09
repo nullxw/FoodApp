@@ -45,12 +45,10 @@
     imgTop.backgroundColor = [UIColor clearColor];
     [v addSubview:imgTop];
     
-    bs_dispatch_sync_on_main_thread(^{
-        web = [[UIWebView alloc] init];
-        web.scrollView.bounces=NO;
-        web.frame = CGRectMake(0, 185, v.frame.size.width, v.frame.size.height-185);
-        [v addSubview:web];
-    });
+    web = [[UIWebView alloc] init];
+    web.scrollView.bounces=NO;
+    web.frame = CGRectMake(0, 185, v.frame.size.width, v.frame.size.height-185);
+    [v addSubview:web];
     
     //头部导航条
     navigationBarView *nvc;
@@ -86,10 +84,10 @@
 }
 
 - (void)showInfo:(NSDictionary *)info{
-//    [imgTop setImageURL:[NSURL URLWithString:[info objectForKey:@"wurl"]]];
     [self setImagewurl:info];
-//    [NSThread detachNewThreadSelector:@selector(setImage:) toTarget:self withObject:info];
-    [web loadHTMLString:[info objectForKey:@"wcontent"] baseURL:nil];
+    bs_dispatch_sync_on_main_thread(^{
+        [web loadHTMLString:[info objectForKey:@"wcontent"] baseURL:nil];
+    });
 }
 -(void)setImagewurl:(NSDictionary *)info
 {

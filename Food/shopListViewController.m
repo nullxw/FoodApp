@@ -129,7 +129,7 @@
         }
         [dictValue setValue:dp.selectTime forKey:@"dat"];
         [dictValue setValue:dp.selectCanCi forKey:@"sft"];
-        //        NSDictionary *dictStore=[[NSDictionary alloc]initWithDictionary:[dp getStoreByArea:dp.selectCity.selectproviceId]];
+        dp.isShop=YES;
         NSDictionary *dictStore=[[NSDictionary alloc]initWithDictionary:[dp getStoreByArea:dictValue]];
         
         if ([[dictStore objectForKey:@"Result"] boolValue])

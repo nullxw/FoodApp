@@ -97,7 +97,7 @@
     CGFloat height=0.0;
     for (int i=0; i<[array count]+1; i++)
     {
-        UILabel *lblLeftTitle=[[UILabel alloc]initWithFrame:CGRectMake(50, i*50+20,80, 50)];
+        UILabel *lblLeftTitle=[[UILabel alloc]initWithFrame:CGRectMake(30, i*50+20,60, 50)];
         NSMutableDictionary *dict;
         if(i!=[array count])
         {
@@ -119,19 +119,28 @@
         [_backGround addSubview:lblLeftTitle];
         
         
-        RatingView *rat=[[RatingView alloc]initWithFrame:CGRectMake(lblLeftTitle.frame.origin.x+lblLeftTitle.frame.size.width, lblLeftTitle.frame.origin.y+10, 220-lblLeftTitle.frame.size.width,lblLeftTitle.frame.size.height)];
+        RatingView *rat=[[RatingView alloc]initWithFrame:CGRectMake(lblLeftTitle.frame.origin.x+lblLeftTitle.frame.size.width, lblLeftTitle.frame.origin.y+10, 220-lblLeftTitle.frame.size.width-60,lblLeftTitle.frame.size.height)];
         [rat setImagesDeselected:@"Public_starNomal.png" partlySelected:nil fullSelected:@"Public_starFull.png" andDelegate:self];
         [rat displayRating:5.0];
         rat.backgroundColor=[UIColor clearColor];
         
         [dict setObject:rat forKey:@"view"];
         [dict setObject:[NSNumber numberWithFloat:5.0] forKey:@"score"];
+        
+        UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(rat.frame.origin.x+rat.frame.size.width+10, lblLeftTitle.frame.origin.y, 75, lblLeftTitle.frame.size.height)];
+        lbl.text=@"非常满意";
+        lbl.textAlignment=NSTextAlignmentCenter;
+        lbl.font=[UIFont systemFontOfSize:17];
+        lbl.textColor=selfbackgroundColor;
+        [_backGround addSubview:lbl];
+        
+         [dict setObject:lbl forKey:@"titleView"];
+        
         if(i==[array count])
         {
             [dict setObject:@"总分" forKey:@"name"];
             [dict setObject:@"score" forKey:@"id"];
         }
-        
         [_ratingViewArray addObject:dict];
         [_backGround addSubview:rat];
         
@@ -226,6 +235,34 @@
         if ([dict objectForKey:@"view"]==ratingView)
         {
             [dict setObject:[NSNumber numberWithFloat:newRating] forKey:@"score"];
+            switch ([[NSNumber numberWithFloat:newRating]intValue]) {
+                case 1:
+                    ((UILabel *)[dict objectForKey:@"titleView"]).text=@"非常糟糕";
+                    ((UILabel *)[dict objectForKey:@"titleView"]).textColor=[UIColor grayColor];
+                    break;
+                    
+                case 2:
+                    ((UILabel *)[dict objectForKey:@"titleView"]).text=@"糟糕";
+                    ((UILabel *)[dict objectForKey:@"titleView"]).textColor=[UIColor grayColor];
+                    break;
+                    
+                case 3:
+                    ((UILabel *)[dict objectForKey:@"titleView"]).text=@"一般";
+                    ((UILabel *)[dict objectForKey:@"titleView"]).textColor=[UIColor orangeColor];
+                    break;
+                    
+                case 4:
+                    ((UILabel *)[dict objectForKey:@"titleView"]).text=@"满意";
+                    ((UILabel *)[dict objectForKey:@"titleView"]).textColor=selfbackgroundColor;
+                    break;
+                    
+                case 5:
+                    ((UILabel *)[dict objectForKey:@"titleView"]).text=@"非常满意";
+                    ((UILabel *)[dict objectForKey:@"titleView"]).textColor=selfbackgroundColor;
+                    break;
+                default:
+                    break;
+            }
         }
     }
     

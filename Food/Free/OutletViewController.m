@@ -67,6 +67,7 @@
     @autoreleasepool {
         DataProvider *dp = [[DataProvider alloc] init];
         NSDictionary *dict=[[NSDictionary alloc]initWithObjectsAndKeys:cityCode,@"area", nil];
+        dp.isShop=YES;
         NSDictionary *dic = [dp getStoreByArea:dict];
         if ([[dic objectForKey:@"Result"] boolValue]) {
             aryOutlet = [dic objectForKey:@"Message"];

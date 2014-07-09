@@ -57,7 +57,7 @@
 }
 
 //获取门店数据
--(void)getStore
+-(void)getStore//
 {
     @autoreleasepool {
         DataProvider *dp=[DataProvider sharedInstance];
@@ -74,8 +74,7 @@
         {
             [dictValue setValue:@"1" forKey:@"sft"];
         }
-        
-        //        NSDictionary *dictStore=[[NSDictionary alloc]initWithDictionary:[dp getStoreByArea:dp.selectCity.selectproviceId]];
+        dp.isShop=NO;
         NSDictionary *dictStore=[[NSDictionary alloc]initWithDictionary:[dp getStoreByArea:dictValue]];
         
         if ([[dictStore objectForKey:@"Result"] boolValue])
