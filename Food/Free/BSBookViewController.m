@@ -627,7 +627,7 @@ static bool boolSearch = NO;
 //查询所有菜品
 - (void )getTypeFoodList:(NSString *)strClass{
     if ([strClass isEqualToString:@"-1"]) { //首次加载执行
-        [SVProgressHUD showWithStatus:nil];
+        [SVProgressHUD showProgress:-1 status:@"" maskType:SVProgressHUDMaskTypeClear];
         [NSThread detachNewThreadSelector:@selector(getFoodList) toTarget:self withObject:nil];
     }else{//点击类别执行
         if ([self.searchBar.text length] <= 0) {

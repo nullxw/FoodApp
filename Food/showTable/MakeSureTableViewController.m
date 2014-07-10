@@ -375,6 +375,7 @@
         }
         else
         {
+            [SVProgressHUD showProgress:-1 status:[langSetting localizedString:@"load..."] maskType:SVProgressHUDMaskTypeBlack];
             [NSThread detachNewThreadSelector:@selector(sendTableMessage) toTarget:self withObject:nil];
             
         }
@@ -421,9 +422,9 @@
         NSDictionary *dict=[dp sendTableMessage:info];
         if ([[dict objectForKey:@"Result"] boolValue])
         {
+            [SVProgressHUD dismiss];
             dp.phoneNum=_tfPhoneNum.text;
             dp.tableId=[dict objectForKey:@"Message"];
-            
 //            订单成功\n是否点餐
             bs_dispatch_sync_on_main_thread(^{
                 UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"%@\n%@",[langSetting localizedString:@"Successful order"],[langSetting localizedString:@"Whether to order a meal"]] delegate:self cancelButtonTitle:[langSetting localizedString:@"No"] otherButtonTitles:[langSetting localizedString:@"Sure"], nil];

@@ -155,7 +155,7 @@
             [tvPackItem reloadData];
             [SVProgressHUD dismiss];
         }else{
-            [SVProgressHUD showErrorWithStatus:@"加载失败"];
+            [SVProgressHUD showErrorWithStatus:[dic objectForKey:@"Message"]];
         }
     }
 }

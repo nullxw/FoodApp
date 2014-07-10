@@ -248,7 +248,7 @@ static  DataProvider *_dataProvide = nil;
 #pragma worring     ---area
             //           strParam = [NSString stringWithFormat:@"?area=%@&type=1",[dicCityCode objectForKey:@"area"]];
             //            北京
-            strParam = [NSString stringWithFormat:@"?area=%@&type=1",@"北京"];
+            strParam = [NSString stringWithFormat:@"?area=%@&type=1",[dicCityCode objectForKey:@"area"]];
         }
         else
         {
@@ -272,12 +272,18 @@ static  DataProvider *_dataProvide = nil;
         
         //        判断返回的数据为空
         NSMutableArray *aryResult = [[NSMutableArray alloc] init];
+        NSString *key=[[[[dic objectForKey:@"listTele"] objectForKey:@"listFirm"]allKeys] firstObject];
         if([[[[[dic objectForKey:@"listTele"]objectForKey:@"listFirm"]allKeys]firstObject]isEqualToString:@"text"])
         {
             return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"Result",aryResult,@"Message", nil];
         }
         //如果门店的个数返回的是一个的时候，得到的是字典不是数组，此处做个判断，判断如果是一个门店的时候转换一下
-        if ([ary count] <= 2) {
+        else if([result isEqualToString:@"listTele"]||[key isEqualToString:@"text"])
+        {
+            return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"暂无门店数据",@"Message", nil];
+        }
+
+        else if ([ary count] <= 2) {
             NSDictionary *dic2 = [[[dic objectForKey:@"listTele"] objectForKey:@"listFirm"] objectForKey:@"com.choice.webService.domain.Firm"];
             if(dic2!=nil)
             {
@@ -461,7 +467,7 @@ static  DataProvider *_dataProvide = nil;
             return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"Result",aryResult,@"Message", nil];
         }
         //如果个数返回的是一个的时候，得到的是字典不是数组，此处做个判断，判断如果是一个门店的时候转换一下
-        if ([ary count] <= 2) {
+        else if ([ary count] <= 2) {
             NSDictionary *dic2 = [[[dic objectForKey:@"listTele"] objectForKey:@"listProject"] objectForKey:@"com.choice.webService.domain.Project"];
             if(dic2!=nil)
             {
@@ -497,8 +503,20 @@ static  DataProvider *_dataProvide = nil;
         NSDictionary *dic = [BSWebServiceAgent parseXmlResult:result];
         
         NSMutableArray *aryResult = [[[dic objectForKey:@"listTele"] objectForKey:@"listItemPrgpackAgedtl"] objectForKey:@"com.choice.webService.domain.ItemPrgpackAgedtl"];
-        
-        if ([aryResult count] > 0) {
+        NSString *key=[[[[dic objectForKey:@"listTele"] objectForKey:@"listItemPrgpackAgedtl"]allKeys] lastObject];
+        if ([result isEqualToString:@"listTele"])
+        {
+            return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"暂无数套餐数据",@"Message", nil];
+        }
+        else if ([key isEqualToString:@"text"])
+        {
+            return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"暂无数套餐数据",@"Message", nil];
+        }
+        else if ([result isEqualToString:@"false"])
+        {
+            return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"后台错误",@"Message", nil];
+        }
+        else if ([aryResult count] > 0) {
             return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"Result",aryResult,@"Message", nil];
         }else
             return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",aryResult,@"Message", nil];
@@ -913,7 +931,7 @@ static  DataProvider *_dataProvide = nil;
         NSMutableArray *aryResult=[[NSMutableArray alloc]init];
         
         NSString *key=[[[[dic objectForKey:@"listTele"] objectForKey:@"listCard"]allKeys] firstObject];
-        if([key isEqualToString:@"text"])
+        if([key isEqualToString:@"text"]|| [result isEqualToString:@"listTele"])
         {
             aryResult=[[[dic objectForKey:@"listTele"] objectForKey:@"listCard"] objectForKey:@"text"];
             return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"Result",aryResult,@"Message",[NSNumber numberWithBool:YES],@"isNULL", nil];
@@ -964,12 +982,16 @@ static  DataProvider *_dataProvide = nil;
         {
              return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"获取信息失败",@"Message", nil];
         }
+        else if ([result isEqualToString:@"listTele"])
+        {
+            return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"暂无地区信息",@"Message", nil];
+        }
         else if ([aryResult count] > 0) {
             return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"Result",aryResult,@"Message", nil];
         }
         else
         {
-            return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"暂无优惠信息",@"Message", nil];
+            return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"未知错误",@"Message", nil];
         }
     }else{
         return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",strNetwork,@"Message", nil];
@@ -993,11 +1015,15 @@ static  DataProvider *_dataProvide = nil;
         {
             return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"获取信息失败",@"Message", nil];
         }
+        else if ([result isEqualToString:@"list"])
+        {
+            return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"该地区暂无优惠信息",@"Message", nil];
+        }
         else if ([aryResult count] > 0) {
             return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"Result",aryResult,@"Message", nil];
         }
         else
-            return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"该地区暂无优惠信息",@"Message", nil];
+            return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"未知错误",@"Message", nil];
     }else{
         return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",strNetwork,@"Message", nil];
     }

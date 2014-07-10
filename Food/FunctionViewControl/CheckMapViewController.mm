@@ -371,19 +371,18 @@
 	}
     if(!isPost)//定位随时都在改变，如果数组有数据则不在调用查询门店的接口
     {
-    CLLocationCoordinate2D pt = (CLLocationCoordinate2D){0, 0};
-	if (userLocation.location.coordinate.latitude && userLocation.location.coordinate.longitude) {
-		pt = (CLLocationCoordinate2D){userLocation.location.coordinate.latitude, userLocation.location.coordinate.longitude};
-	}
-	BOOL flag = [_search reverseGeocode:pt];
-	if (flag) {
-		NSLog(@"ReverseGeocode search success.");
-        //        定位成功后通知定位
-         [SVProgressHUD showProgress:-1 status:[langSetting localizedString:@"load..."] maskType:SVProgressHUDMaskTypeBlack];
-	}
-    else{
-        NSLog(@"ReverseGeocode search failed!");
-    }
+        CLLocationCoordinate2D pt = (CLLocationCoordinate2D){0, 0};
+        if (userLocation.location.coordinate.latitude && userLocation.location.coordinate.longitude) {
+            pt = (CLLocationCoordinate2D){userLocation.location.coordinate.latitude, userLocation.location.coordinate.longitude};
+        }
+        BOOL flag = [_search reverseGeocode:pt];
+        if (flag) {
+            NSLog(@"ReverseGeocode search success.");
+            //        定位成功后通知定位
+        }
+        else{
+            NSLog(@"ReverseGeocode search failed!");
+        }
     }
 }
 //定位编码返回结果通知方法
@@ -396,7 +395,9 @@
         item.subtitle=result.strAddr;
         [DataProvider sharedInstance].localCity= [NSString stringWithFormat:@"%@",item.title];
         [DataProvider sharedInstance].localAddr=[NSString stringWithFormat:@"%@",result.strAddr];
+        NSLog(@"定位成功===>%@",[DataProvider sharedInstance].localCity);
         [[NSNotificationCenter defaultCenter]postNotificationName:@"refushLocal" object:nil];
+           [SVProgressHUD showProgress:-1 status:[langSetting localizedString:@"load..."] maskType:SVProgressHUDMaskTypeBlack];
             [NSThread detachNewThreadSelector:@selector(getStore) toTarget:self withObject:nil];
 	}
 }
@@ -417,13 +418,12 @@
         }
         [dictValue setValue:dp.localCity forKey:@"area"];
         [dictValue setValue:@"1" forKey:@"type"];
-        //        NSDictionary *dictStore=[[NSDictionary alloc]initWithDictionary:[dp getStoreByArea:dp.selectCity.selectproviceId]];
         dp.isShop=YES;
         NSDictionary *dictStore=[[NSDictionary alloc]initWithDictionary:[dp getStoreByArea:dictValue]];
         
         if ([[dictStore objectForKey:@"Result"] boolValue])
         {
-            [SVProgressHUD dismiss];
+             [SVProgressHUD dismiss];
             if([_PointAnnotationArray count])//每次加载图标前移除所有的图标，防止重复添加
             {
                 for (BMKPointAnnotation *point in _PointAnnotationArray) {
@@ -434,7 +434,7 @@
             _dataArray=[[NSMutableArray alloc]init];
             _PointAnnotationArray=[[NSMutableArray alloc]init];
             _phoneArray=[[NSMutableArray alloc]init];
-            float i=0.01;
+//            float i=0.01;
             for (NSDictionary *dic in ary)
             {
                 StoreMessage  *store=[[StoreMessage alloc]init];
@@ -450,13 +450,13 @@
                 store.dinnerstart=[dic objectForKey:@"dinnerstart"];
                 store.dinnerendtime=[dic objectForKey:@"dinnerendtime"];
                 
-//                store.storelongitude=[[[[dic objectForKey:@"position"]componentsSeparatedByString:@","]firstObject]doubleValue ];
-//                store.storelatitude=[[[[dic objectForKey:@"position"]componentsSeparatedByString:@","]lastObject]doubleValue ];
+                store.storelongitude=[[[[dic objectForKey:@"position"]componentsSeparatedByString:@","]firstObject]doubleValue ];
+                store.storelatitude=[[[[dic objectForKey:@"position"]componentsSeparatedByString:@","]lastObject]doubleValue ];
                 
 //               坐标经纬度
-                store.storelongitude=116.404+i;
-                i+=0.01;
-                store.storelatitude=39.915;
+//                store.storelongitude=116.404+i;
+//                i+=0.01;
+//                store.storelatitude=39.915;
                 [_dataArray addObject:store];
                 [_mapView addAnnotation:[self addPointAnnotation:store]];
                 [_PointAnnotationArray addObject:[self addPointAnnotation:store]];
