@@ -1887,7 +1887,7 @@ static  DataProvider *_dataProvide = nil;
 //根据返回标示确认是否需要调用升级客户端。
 -(NSDictionary *)isTypUpdateWebService:(NSString *)version andXml:(NSString *)xmlStr
 {
-    xmlStr=[NSString stringWithFormat:@"FoodAppchoicesoft%@.001",version];
+    xmlStr=[NSString stringWithFormat:@"IPADchoicesoft%@.001",version];
     NSString *strParam = [NSString stringWithFormat:@"?version=%@&code=10000&typ=IPAD&xmlStr=%@",version,[DataProvider md5:xmlStr]];
     NSDictionary *dict = [self bsService:@"isTypUpdateWebService" arg:strParam arg2:@""];
     if(dict)
@@ -1904,7 +1904,7 @@ static  DataProvider *_dataProvide = nil;
 //根据返回值展示更新内容
 -(NSDictionary *)getTypUpdateCont:(NSString *)version andxmlStr:(NSString *)xmlStr
 {
-    xmlStr=[NSString stringWithFormat:@"FoodAppchoicesoft%@.001",version];
+    xmlStr=[NSString stringWithFormat:@"IPADchoicesoft%@.001",version];
     NSString *strParam = [NSString stringWithFormat:@"?version=%@&code=10000&typ=IPAD&xmlStr=%@",version,[DataProvider md5:xmlStr]];
     NSDictionary *dict = [self bsService:@"getTypUpdateCont" arg:strParam arg2:@""];
     if(dict)
@@ -1921,7 +1921,7 @@ static  DataProvider *_dataProvide = nil;
 //	获取更地址
 -(NSDictionary *)findVersionPADWebService:(NSString *)version andxmlStr:(NSString *)xmlStr
 {
-    xmlStr=[NSString stringWithFormat:@"FoodAppchoicesoft%@.001",version];
+    xmlStr=[NSString stringWithFormat:@"IPADchoicesoft%@.001",version];
     NSString *strParam = [NSString stringWithFormat:@"?version=%@&code=10000&typ=IPAD&xmlStr=%@",version,[DataProvider md5:xmlStr]];
     NSDictionary *dict = [self bsService:@"findVersionPADWebService" arg:strParam arg2:@""];
     if(dict)

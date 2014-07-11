@@ -81,7 +81,7 @@ static NSDictionary *DICT_API_InterfazAdd = nil;
     NSString *str;
     if([arg2 isEqualToString:@""])
     {
-        str = [NSString stringWithFormat:@"%@/autoUpdateService/webService/autoService/%@?%@",[[DataProvider getIpPlist]objectForKey:@"checkUpadta"],api,arg];
+        str = [NSString stringWithFormat:@"%@/autoUpdateService/webService/autoService/%@%@",[[DataProvider getIpPlist]objectForKey:@"checkUpadta"],api,arg];
     }
     else
     {

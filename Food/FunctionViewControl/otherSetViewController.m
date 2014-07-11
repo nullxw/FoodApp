@@ -289,10 +289,10 @@
         [SVProgressHUD dismiss];
         if(![[dict objectForKey:@"Messgae"]isEqualToString:@"0"]||![[dict objectForKey:@"Messgae"]isEqualToString:@"-1"])
         {
-            bs_dispatch_sync_on_main_thread(^{
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[dict objectForKey:@"Message"]]]];
+//            bs_dispatch_sync_on_main_thread(^{
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[dict objectForKey:@"Message"] substringToIndex:[[dict objectForKey:@"Message"] length]-1]]];
                 exit(0);
-            });
+//            });
         }
         else
         {

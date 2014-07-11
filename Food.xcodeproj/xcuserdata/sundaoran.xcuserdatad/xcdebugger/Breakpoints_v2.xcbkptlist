@@ -49,6 +49,36 @@
             endingLineNumber = "134"
             landmarkName = "-showInfo:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[hotCell showInfo:]"
+                  moduleName = "Food"
+                  urlString = "file:///Users/sundaoran/Desktop/FoodApp/Food/Free/hotCell.m"
+                  timestampString = "426757599.194074"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "134"
+                  endingLineNumber = "134"
+                  offsetFromSymbolStart = "2648">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[hotCell showInfo:]"
+                  moduleName = "Food"
+                  urlString = "file:///Users/sundaoran/Desktop/FoodApp/Food/Free/hotCell.m"
+                  timestampString = "426757600.869292"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "134"
+                  endingLineNumber = "134"
+                  offsetFromSymbolStart = "2644">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

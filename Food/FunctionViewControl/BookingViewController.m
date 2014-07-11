@@ -437,18 +437,18 @@
         [vPicker removeFromSuperview];
         vPicker = nil;
     }];
-    NSString *stingDay=[NSString stringWithFormat:@"%d",selectDay];
+    NSString *stingDay=[NSString stringWithFormat:@"%ld",(long)selectDay];
     if(selectDay<10)
     {
-        stingDay=[NSString stringWithFormat:@"0%d",selectDay];
+        stingDay=[NSString stringWithFormat:@"0%ld",(long)selectDay];
     }
-    NSString *stingMoon=[NSString stringWithFormat:@"%d",selectMoon];
+    NSString *stingMoon=[NSString stringWithFormat:@"%ld",(long)selectMoon];
     if(selectMoon<10)
     {
-        stingMoon=[NSString stringWithFormat:@"0%d",selectMoon];
+        stingMoon=[NSString stringWithFormat:@"0%ld",(long)selectMoon];
     }
     
-    _lblchangeTime.text=[NSString stringWithFormat:@"%d-%@-%@",selectYear,stingMoon,stingDay];
+    _lblchangeTime.text=[NSString stringWithFormat:@"%ld-%@-%@",(long)selectYear,stingMoon,stingDay];
     
     [DataProvider sharedInstance].selectTime=_lblchangeTime.text;
 }
