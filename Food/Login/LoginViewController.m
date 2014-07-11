@@ -26,6 +26,8 @@
      CVLocalizationSetting *langSetting;
     BOOL                    _isAuthor;//是否已经点击获取验证码
     
+    NSString                *_authorPhoneNum;
+    
     int                 minCount;//获取验证码倒计时
     NSTimer *minCountTimer;//计时器
 
@@ -47,6 +49,7 @@
     [super viewWillDisappear:animated];
     [minCountTimer invalidate];
     [DataProvider sharedInstance].isClearColor=NO;//导航条有色;
+    _authorPhoneNum=nil;
 }
 
 
@@ -210,6 +213,7 @@
         if(!_isAuthor)
         {
             _isAuthor=YES;
+            _authorPhoneNum=tfPhone.text;
             minCountTimer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(canGetAuthor) userInfo:nil repeats:YES];
             [butHuoqu setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
             [butHuoqu setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateHighlighted];
@@ -236,6 +240,10 @@
     else if([tfYanZ.text length]!=6)
     {
         title=[langSetting localizedString:@"Please enter the verification code"];
+    }
+    else if(_authorPhoneNum==nil || ![_authorPhoneNum isEqualToString:tfPhone.text] )
+    {
+         title=@"手机号码不匹配";
     }
     else
     {
@@ -269,6 +277,7 @@
 //                AuthouNum=@"111111";
             }else
             {
+                _authorPhoneNum=nil;
                 [SVProgressHUD showErrorWithStatus:[langSetting localizedString:@"Failed to get information"]];
                 minCount=60;
                 [self canGetAuthor];

@@ -121,8 +121,6 @@
                         [_dataArray addObject:dict];
                     }
                 }
-                
-                
                 [_tableView reloadData];
                 [SVProgressHUD dismiss];
                 if([_dataArray count]==0)
@@ -188,8 +186,8 @@
     cell.textLabel.text=@"";
     cell.detailTextLabel.text=@"";
     NSDictionary *dict=[_dataArray objectAtIndex:indexPath.row];
-    cell.textLabel.text=[dict objectForKey:@"firmdes"];
-    cell.detailTextLabel.text=[dict objectForKey:@"dat"];
+    cell.textLabel.text=[NSString stringWithFormat:@"%d、%@",indexPath.row+1,[dict objectForKey:@"firmdes"]];
+    cell.detailTextLabel.text=[NSString stringWithFormat:@"%@ %@",[dict objectForKey:@"dat"],[dict objectForKey:@"datmins"]];
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
