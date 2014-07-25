@@ -168,7 +168,7 @@
                 lbltitle.text=[langSetting localizedString:@"Preferential information"];//@"优惠信息";
                 break;
             case 2:
-                lbltitle.text=[langSetting localizedString:@"Customer reviews"];//@"客户点评";
+                lbltitle.text=[langSetting localizedString:@"Customer reviews"];//@"顾客点评";
                 break;
             case 3:
                 lbltitle.text=[langSetting localizedString:@"Store the query"];//@"店铺查询";
