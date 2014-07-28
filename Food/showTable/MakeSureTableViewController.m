@@ -144,12 +144,24 @@
     lblTime.font=[UIFont systemFontOfSize:17];
     [_backgroundView addSubview:lblTime];
     
+    
     _btSelectTime=[UIButton buttonWithType:UIButtonTypeCustom];
     _btSelectTime.layer.borderWidth=0.5;
     _btSelectTime.layer.cornerRadius=5;
     _btSelectTime.layer.borderColor=selfborderColor.CGColor;
     _btSelectTime.frame=CGRectMake(messagelblx, 20+2*(lblHeight+10), lblMessageWidth-70, lblHeight);
     [_btSelectTime setTitle:[DataProvider sharedInstance].StartTime forState:UIControlStateNormal];
+    
+    
+    UILabel *lblPop=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, 20+2*(lblHeight+10)+lblHeight, _backgroundView.frame.size.width-messagelblx, 20)];
+    lblPop.text=@"预约桌位将为您保留15分钟";
+    lblPop.textAlignment=NSTextAlignmentLeft;
+    lblPop.font=[UIFont systemFontOfSize:12];
+    lblPop.textColor=[UIColor grayColor];
+    lblPop.backgroundColor=[UIColor clearColor];
+    lblPop.numberOfLines=0;
+    lblPop.lineBreakMode=NSLineBreakByWordWrapping;
+    [_backgroundView addSubview:lblPop];
     
     UIImageView *right=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Public_arrows.png"]];
     right.frame=CGRectMake(_btSelectTime.frame.size.width-20, (lblHeight-20)/2, 20, 20);
@@ -162,7 +174,7 @@
     [_backgroundView addSubview:_btSelectTime];
     
     
-    UILabel  *lblPeopleNum=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, 20+3*(lblHeight+10), labeltitleWidth, lblHeight)];
+    UILabel  *lblPeopleNum=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, 30+3*(lblHeight+10), labeltitleWidth, lblHeight)];
 //    人数
     lblPeopleNum.text=[NSString stringWithFormat:@"%@:",[langSetting localizedString:@"People"]];
     lblPeopleNum.textColor=[UIColor blackColor];
@@ -170,7 +182,7 @@
     lblPeopleNum.font=[UIFont systemFontOfSize:17];
     [_backgroundView addSubview:lblPeopleNum];
     
-    _tfPeopleNum=[[UITextField alloc]initWithFrame:CGRectMake(messagelblx, 20+3*(lblHeight+10), lblMessageWidth, lblHeight)];
+    _tfPeopleNum=[[UITextField alloc]initWithFrame:CGRectMake(messagelblx, 30+3*(lblHeight+10), lblMessageWidth, lblHeight)];
     _tfPeopleNum.delegate=self;
     _tfPeopleNum.borderStyle=UITextBorderStyleRoundedRect;
     _tfPeopleNum.keyboardType=UIKeyboardTypeNumberPad;
@@ -180,7 +192,7 @@
     [_backgroundView addSubview:_tfPeopleNum];
     
     
-    UILabel  *lblPhone=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, 20+4*(lblHeight+10), labeltitleWidth, lblHeight)];
+    UILabel  *lblPhone=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, 30+4*(lblHeight+10), labeltitleWidth, lblHeight)];
 //    手机
     lblPhone.text=[NSString stringWithFormat:@"%@:",[langSetting localizedString:@"Phone number"]];
     lblPhone.textColor=[UIColor blackColor];
@@ -188,7 +200,7 @@
     lblPhone.font=[UIFont systemFontOfSize:17];
     [_backgroundView addSubview:lblPhone];
     
-    _tfPhoneNum=[[UITextField alloc]initWithFrame:CGRectMake(messagelblx, 20+4*(lblHeight+10), lblMessageWidth, lblHeight)];
+    _tfPhoneNum=[[UITextField alloc]initWithFrame:CGRectMake(messagelblx, 30+4*(lblHeight+10), lblMessageWidth, lblHeight)];
     _tfPhoneNum.delegate=self;
     _tfPhoneNum.borderStyle=UITextBorderStyleRoundedRect;
     _tfPhoneNum.keyboardType=UIKeyboardTypeNumberPad;
@@ -196,7 +208,7 @@
     _tfPhoneNum.placeholder=[langSetting localizedString:@"Please enter the phone number"];
     [_backgroundView addSubview:_tfPhoneNum];
     
-    UILabel  *lblverify=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, 20+5*(lblHeight+10), labeltitleWidth, lblHeight)];
+    UILabel  *lblverify=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, 30+5*(lblHeight+10), labeltitleWidth, lblHeight)];
     lblverify.text=[NSString stringWithFormat:@"%@:",[langSetting localizedString:@"Verification code"]];
     lblverify.textColor=[UIColor blackColor];
     lblverify.backgroundColor=[UIColor whiteColor];
@@ -204,7 +216,7 @@
     [_backgroundView addSubview:lblverify];
     
     
-    _tfverify=[[UITextField alloc]initWithFrame:CGRectMake(messagelblx, 20+5*(lblHeight+10), lblMessageWidth/2, lblHeight)];
+    _tfverify=[[UITextField alloc]initWithFrame:CGRectMake(messagelblx, 30+5*(lblHeight+10), lblMessageWidth/2, lblHeight)];
     _tfverify.delegate=self;
     _tfverify.borderStyle=UITextBorderStyleRoundedRect;
     _tfverify.keyboardType=UIKeyboardTypeNumberPad;
@@ -213,7 +225,7 @@
     [_backgroundView addSubview:_tfverify];
     
     btnverify=[UIButton buttonWithType:UIButtonTypeCustom];
-    btnverify.frame=CGRectMake(messagelblx+lblMessageWidth/2+10, 20+5*(lblHeight+10), lblMessageWidth/2, lblHeight);
+    btnverify.frame=CGRectMake(messagelblx+lblMessageWidth/2+10, 30+5*(lblHeight+10), lblMessageWidth/2, lblHeight);
     [btnverify setTitle:[langSetting localizedString:@"Get verification code"] forState:UIControlStateNormal];
     [btnverify setBackgroundImage:[UIImage imageNamed:@"Public_AuthorNomal.png"] forState:UIControlStateNormal];
     [btnverify setBackgroundImage:[UIImage imageNamed:@"Public_AuthorSelect.png"] forState:UIControlStateHighlighted];
@@ -224,14 +236,14 @@
     [_backgroundView addSubview:btnverify];
     
     
-    UILabel  *lblAddr=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, 30+6*(lblHeight+10), labeltitleWidth, lblHeight)];
+    UILabel  *lblAddr=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, 40+6*(lblHeight+10), labeltitleWidth, lblHeight)];
     lblAddr.text=[NSString stringWithFormat:@"%@:",[langSetting localizedString:@"Address"]];
     lblAddr.textColor=[UIColor blackColor];
     lblAddr.backgroundColor=[UIColor whiteColor];
     lblAddr.font=[UIFont systemFontOfSize:17];
     [_backgroundView addSubview:lblAddr];
     
-    UILabel  *lblStoreAddr=[[UILabel alloc]initWithFrame:CGRectMake(messagelblx, 20+6*(lblHeight+10), lblMessageWidth, lblHeight+20)];
+    UILabel  *lblStoreAddr=[[UILabel alloc]initWithFrame:CGRectMake(messagelblx, 30+6*(lblHeight+10), lblMessageWidth, lblHeight+20)];
     lblStoreAddr.text=storeMessage.storeAddr;
     lblStoreAddr.numberOfLines=2;
     lblStoreAddr.lineBreakMode=NSLineBreakByWordWrapping;
@@ -241,14 +253,14 @@
     [_backgroundView addSubview:lblStoreAddr];
     
     
-    UILabel  *lbltele=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, 40+7*(lblHeight+10), labeltitleWidth, lblHeight)];
+    UILabel  *lbltele=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, 50+7*(lblHeight+10), labeltitleWidth, lblHeight)];
     lbltele.text=[NSString stringWithFormat:@"%@:",[langSetting localizedString:@"Telephone"]];
     lbltele.textColor=[UIColor blackColor];
     lbltele.backgroundColor=[UIColor whiteColor];
     lbltele.font=[UIFont systemFontOfSize:17];
     [_backgroundView addSubview:lbltele];
     
-    _lblStoretele=[[UILabel alloc]initWithFrame:CGRectMake(messagelblx, 40+7*(lblHeight+10), lblMessageWidth-30, lblHeight)];
+    _lblStoretele=[[UILabel alloc]initWithFrame:CGRectMake(messagelblx, 50+7*(lblHeight+10), lblMessageWidth-30, lblHeight)];
     _lblStoretele.text=storeMessage.storeTele;
     _lblStoretele.textColor=[UIColor blackColor];
     _lblStoretele.backgroundColor=[UIColor whiteColor];
@@ -256,7 +268,7 @@
     [_backgroundView addSubview:_lblStoretele];
     
     UIButton *btCallNum=[UIButton buttonWithType:UIButtonTypeCustom];
-    btCallNum.frame=CGRectMake(messagelblx+165, 40+7*(lblHeight+10), 30, lblHeight-8);
+    btCallNum.frame=CGRectMake(messagelblx+165, 50+7*(lblHeight+10), 30, lblHeight-8);
     [btCallNum setBackgroundImage:[UIImage imageNamed:@"Public_callphone.png"] forState:UIControlStateNormal];
     [btCallNum setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btCallNum addTarget:self action:@selector(ButtonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -278,7 +290,7 @@
     
     UIButton *nextButton=[UIButton buttonWithType:UIButtonTypeCustom];
                                         //60
-    nextButton.frame=CGRectMake(titlelblx, 10+9*(lblHeight+10), SUPERVIEWWIDTH-titlelblx*2, lblHeight);
+    nextButton.frame=CGRectMake(titlelblx, 20+9*(lblHeight+10), SUPERVIEWWIDTH-titlelblx*2, lblHeight);
     [nextButton setTitle:[langSetting localizedString:@"Next step"] forState:UIControlStateNormal];
     nextButton.titleLabel.font=[UIFont systemFontOfSize:17];
     [nextButton setBackgroundImage:[UIImage imageNamed:@"Public_nextButtonNomal.png"] forState:UIControlStateNormal];
@@ -632,7 +644,7 @@
         else
         {
             bs_dispatch_sync_on_main_thread(^{
-                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"订单过期延长15分钟,超时作废\n请合理安排就餐时间" delegate:self cancelButtonTitle:[langSetting localizedString:@"Sure"] otherButtonTitles:nil];
+                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"订单可为您预留15分钟，超时作废\n请合理安排就餐时间" delegate:self cancelButtonTitle:[langSetting localizedString:@"Sure"] otherButtonTitles:nil];
                 alert.tag=1002;
                 [alert show];
             });

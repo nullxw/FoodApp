@@ -195,7 +195,7 @@
         [SVProgressHUD dismiss];
         bs_dispatch_sync_on_main_thread(^{
         
-            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"发送成功\n订单过期延迟15分钟\n超时作废请合理安排就餐时间\n是否返回主界面" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"发送成功\n订单可为您预留15分钟\n超时作废\n请合理安排就餐时间" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
             [alert show];
         });
         
@@ -230,10 +230,8 @@
 #pragma mark -uialertDelegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(buttonIndex==1)
-    {
         [self.navigationController popToRootViewControllerAnimated:YES];
-    }
+
 }
 
 #pragma mark -  UITableView Delegate & Data Source

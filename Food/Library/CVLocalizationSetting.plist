@@ -356,7 +356,7 @@
 		<key>Enter the order number</key>
 		<string>请输入订餐人数</string>
 		<key>Successful order</key>
-		<string>订单成功</string>
+		<string>订单已生成</string>
 		<key>Whether to order a meal</key>
 		<string>是否订餐</string>
 		<key>Please enter the order People</key>

@@ -214,8 +214,7 @@
         if ([[dicCity objectForKey:@"Result"] boolValue])
         {
             [SVProgressHUD dismiss];
-            NSLog(@"success");
-            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"评价成功" message:@"感谢您的支持与参与" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
             alert.tag=101;
             [alert show];
         }
