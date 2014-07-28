@@ -153,11 +153,11 @@
     [_btSelectTime setTitle:[DataProvider sharedInstance].StartTime forState:UIControlStateNormal];
     
     
-    UILabel *lblPop=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, 20+2*(lblHeight+10)+lblHeight, _backgroundView.frame.size.width-messagelblx, 20)];
-    lblPop.text=@"预约桌位将为您保留15分钟";
+    UILabel *lblPop=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, 20+2*(lblHeight+10)+lblHeight, _backgroundView.frame.size.width-messagelblx, 35)];
+    lblPop.text=@"友情提示：预约桌位将为您保留15分钟，请合理安排就餐时间";
     lblPop.textAlignment=NSTextAlignmentLeft;
     lblPop.font=[UIFont systemFontOfSize:12];
-    lblPop.textColor=[UIColor grayColor];
+    lblPop.textColor=selfbackgroundColor;
     lblPop.backgroundColor=[UIColor clearColor];
     lblPop.numberOfLines=0;
     lblPop.lineBreakMode=NSLineBreakByWordWrapping;
@@ -173,8 +173,9 @@
     _btSelectTime.tag=101;
     [_backgroundView addSubview:_btSelectTime];
     
+    float heightIndex=15.0f;
     
-    UILabel  *lblPeopleNum=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, 30+3*(lblHeight+10), labeltitleWidth, lblHeight)];
+    UILabel  *lblPeopleNum=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, heightIndex+30+3*(lblHeight+10), labeltitleWidth, lblHeight)];
 //    人数
     lblPeopleNum.text=[NSString stringWithFormat:@"%@:",[langSetting localizedString:@"People"]];
     lblPeopleNum.textColor=[UIColor blackColor];
@@ -182,7 +183,7 @@
     lblPeopleNum.font=[UIFont systemFontOfSize:17];
     [_backgroundView addSubview:lblPeopleNum];
     
-    _tfPeopleNum=[[UITextField alloc]initWithFrame:CGRectMake(messagelblx, 30+3*(lblHeight+10), lblMessageWidth, lblHeight)];
+    _tfPeopleNum=[[UITextField alloc]initWithFrame:CGRectMake(messagelblx, heightIndex+30+3*(lblHeight+10), lblMessageWidth, lblHeight)];
     _tfPeopleNum.delegate=self;
     _tfPeopleNum.borderStyle=UITextBorderStyleRoundedRect;
     _tfPeopleNum.keyboardType=UIKeyboardTypeNumberPad;
@@ -192,7 +193,7 @@
     [_backgroundView addSubview:_tfPeopleNum];
     
     
-    UILabel  *lblPhone=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, 30+4*(lblHeight+10), labeltitleWidth, lblHeight)];
+    UILabel  *lblPhone=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, heightIndex+30+4*(lblHeight+10), labeltitleWidth, lblHeight)];
 //    手机
     lblPhone.text=[NSString stringWithFormat:@"%@:",[langSetting localizedString:@"Phone number"]];
     lblPhone.textColor=[UIColor blackColor];
@@ -200,7 +201,7 @@
     lblPhone.font=[UIFont systemFontOfSize:17];
     [_backgroundView addSubview:lblPhone];
     
-    _tfPhoneNum=[[UITextField alloc]initWithFrame:CGRectMake(messagelblx, 30+4*(lblHeight+10), lblMessageWidth, lblHeight)];
+    _tfPhoneNum=[[UITextField alloc]initWithFrame:CGRectMake(messagelblx, heightIndex+30+4*(lblHeight+10), lblMessageWidth, lblHeight)];
     _tfPhoneNum.delegate=self;
     _tfPhoneNum.borderStyle=UITextBorderStyleRoundedRect;
     _tfPhoneNum.keyboardType=UIKeyboardTypeNumberPad;
@@ -208,7 +209,7 @@
     _tfPhoneNum.placeholder=[langSetting localizedString:@"Please enter the phone number"];
     [_backgroundView addSubview:_tfPhoneNum];
     
-    UILabel  *lblverify=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, 30+5*(lblHeight+10), labeltitleWidth, lblHeight)];
+    UILabel  *lblverify=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, heightIndex+30+5*(lblHeight+10), labeltitleWidth, lblHeight)];
     lblverify.text=[NSString stringWithFormat:@"%@:",[langSetting localizedString:@"Verification code"]];
     lblverify.textColor=[UIColor blackColor];
     lblverify.backgroundColor=[UIColor whiteColor];
@@ -216,7 +217,7 @@
     [_backgroundView addSubview:lblverify];
     
     
-    _tfverify=[[UITextField alloc]initWithFrame:CGRectMake(messagelblx, 30+5*(lblHeight+10), lblMessageWidth/2, lblHeight)];
+    _tfverify=[[UITextField alloc]initWithFrame:CGRectMake(messagelblx, heightIndex+30+5*(lblHeight+10), lblMessageWidth/2, lblHeight)];
     _tfverify.delegate=self;
     _tfverify.borderStyle=UITextBorderStyleRoundedRect;
     _tfverify.keyboardType=UIKeyboardTypeNumberPad;
@@ -225,7 +226,7 @@
     [_backgroundView addSubview:_tfverify];
     
     btnverify=[UIButton buttonWithType:UIButtonTypeCustom];
-    btnverify.frame=CGRectMake(messagelblx+lblMessageWidth/2+10, 30+5*(lblHeight+10), lblMessageWidth/2, lblHeight);
+    btnverify.frame=CGRectMake(messagelblx+lblMessageWidth/2+10, heightIndex+30+5*(lblHeight+10), lblMessageWidth/2, lblHeight);
     [btnverify setTitle:[langSetting localizedString:@"Get verification code"] forState:UIControlStateNormal];
     [btnverify setBackgroundImage:[UIImage imageNamed:@"Public_AuthorNomal.png"] forState:UIControlStateNormal];
     [btnverify setBackgroundImage:[UIImage imageNamed:@"Public_AuthorSelect.png"] forState:UIControlStateHighlighted];
@@ -236,14 +237,14 @@
     [_backgroundView addSubview:btnverify];
     
     
-    UILabel  *lblAddr=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, 40+6*(lblHeight+10), labeltitleWidth, lblHeight)];
+    UILabel  *lblAddr=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, heightIndex+40+6*(lblHeight+10), labeltitleWidth, lblHeight)];
     lblAddr.text=[NSString stringWithFormat:@"%@:",[langSetting localizedString:@"Address"]];
     lblAddr.textColor=[UIColor blackColor];
     lblAddr.backgroundColor=[UIColor whiteColor];
     lblAddr.font=[UIFont systemFontOfSize:17];
     [_backgroundView addSubview:lblAddr];
     
-    UILabel  *lblStoreAddr=[[UILabel alloc]initWithFrame:CGRectMake(messagelblx, 30+6*(lblHeight+10), lblMessageWidth, lblHeight+20)];
+    UILabel  *lblStoreAddr=[[UILabel alloc]initWithFrame:CGRectMake(messagelblx, heightIndex+30+6*(lblHeight+10), lblMessageWidth, lblHeight+20)];
     lblStoreAddr.text=storeMessage.storeAddr;
     lblStoreAddr.numberOfLines=2;
     lblStoreAddr.lineBreakMode=NSLineBreakByWordWrapping;
@@ -253,14 +254,14 @@
     [_backgroundView addSubview:lblStoreAddr];
     
     
-    UILabel  *lbltele=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, 50+7*(lblHeight+10), labeltitleWidth, lblHeight)];
+    UILabel  *lbltele=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, heightIndex+50+7*(lblHeight+10), labeltitleWidth, lblHeight)];
     lbltele.text=[NSString stringWithFormat:@"%@:",[langSetting localizedString:@"Telephone"]];
     lbltele.textColor=[UIColor blackColor];
     lbltele.backgroundColor=[UIColor whiteColor];
     lbltele.font=[UIFont systemFontOfSize:17];
     [_backgroundView addSubview:lbltele];
     
-    _lblStoretele=[[UILabel alloc]initWithFrame:CGRectMake(messagelblx, 50+7*(lblHeight+10), lblMessageWidth-30, lblHeight)];
+    _lblStoretele=[[UILabel alloc]initWithFrame:CGRectMake(messagelblx, heightIndex+50+7*(lblHeight+10), lblMessageWidth-30, lblHeight)];
     _lblStoretele.text=storeMessage.storeTele;
     _lblStoretele.textColor=[UIColor blackColor];
     _lblStoretele.backgroundColor=[UIColor whiteColor];
@@ -268,7 +269,7 @@
     [_backgroundView addSubview:_lblStoretele];
     
     UIButton *btCallNum=[UIButton buttonWithType:UIButtonTypeCustom];
-    btCallNum.frame=CGRectMake(messagelblx+165, 50+7*(lblHeight+10), 30, lblHeight-8);
+    btCallNum.frame=CGRectMake(messagelblx+165, heightIndex+50+7*(lblHeight+10), 30, lblHeight-8);
     [btCallNum setBackgroundImage:[UIImage imageNamed:@"Public_callphone.png"] forState:UIControlStateNormal];
     [btCallNum setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btCallNum addTarget:self action:@selector(ButtonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -290,7 +291,7 @@
     
     UIButton *nextButton=[UIButton buttonWithType:UIButtonTypeCustom];
                                         //60
-    nextButton.frame=CGRectMake(titlelblx, 20+9*(lblHeight+10), SUPERVIEWWIDTH-titlelblx*2, lblHeight);
+    nextButton.frame=CGRectMake(titlelblx, heightIndex+20+9*(lblHeight+10), SUPERVIEWWIDTH-titlelblx*2, lblHeight);
     [nextButton setTitle:[langSetting localizedString:@"Next step"] forState:UIControlStateNormal];
     nextButton.titleLabel.font=[UIFont systemFontOfSize:17];
     [nextButton setBackgroundImage:[UIImage imageNamed:@"Public_nextButtonNomal.png"] forState:UIControlStateNormal];

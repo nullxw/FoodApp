@@ -514,7 +514,7 @@ static  DataProvider *_dataProvide = nil;
         }
         else if ([result isEqualToString:@"false"])
         {
-            return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"后台错误",@"Message", nil];
+            return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"当前网络不稳定，请重试",@"Message", nil];
         }
         else if ([aryResult count] > 0) {
             return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"Result",aryResult,@"Message", nil];
@@ -549,7 +549,7 @@ static  DataProvider *_dataProvide = nil;
         NSDictionary *dicResult ;
         if([result isEqualToString:@"false"])
         {
-            dicResult =[[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"后台错误",@"Message", nil ];
+            dicResult =[[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"当前网络不稳定，请重试",@"Message", nil ];
             return  dicResult;
         }
         else if([result isEqualToString:@"true"])
@@ -671,11 +671,11 @@ static  DataProvider *_dataProvide = nil;
         NSString *result =[self getStringByfunctionName:@"queryCardMessage" andDict:dict];
         NSDictionary *dictValue=[BSWebServiceAgent parseXmlResult:result];
         NSMutableDictionary *dicResult;
-        if([result isEqualToString:@"false"])//后台报错
+        if([result isEqualToString:@"false"])//当前网络不稳定，请重试
         {
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台错误",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"当前网络不稳定，请重试",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
-        else if([[[[[dictValue objectForKey:@"listTele" ]objectForKey:@"listCard"]allKeys]firstObject] isEqualToString:@"text"])//后台报错
+        else if([[[[[dictValue objectForKey:@"listTele" ]objectForKey:@"listCard"]allKeys]firstObject] isEqualToString:@"text"])//当前网络不稳定，请重试
         {
             dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:[NSString stringWithFormat:@"卡号为%@的会员卡不存在",cardNum],@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
@@ -817,9 +817,9 @@ static  DataProvider *_dataProvide = nil;
         {
             dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"卡号已绑定",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
-        else if ([result isEqualToString:@"false"])//后台报错了
+        else if ([result isEqualToString:@"false"])//当前网络不稳定，请重试
         {
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台报错了",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"当前网络不稳定，请重试",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
         else if ([result isEqualToString:@"pwd"])//密码错误
         {
@@ -889,9 +889,9 @@ static  DataProvider *_dataProvide = nil;
         {
             dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"卡号已绑定",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
-        else if ([result isEqualToString:@"false"])//后台报错了
+        else if ([result isEqualToString:@"false"])//当前网络不稳定，请重试
         {
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台报错了",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"当前网络不稳定，请重试",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
         else if ([result isEqualToString:@"pwd"])//密码错误
         {
@@ -1108,9 +1108,9 @@ static  DataProvider *_dataProvide = nil;
         {
             dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"绑定成功",@"Message",[NSNumber numberWithBool:YES],@"Result", nil];
         }
-        else if ([result isEqualToString:@"false"])//后台报错了
+        else if ([result isEqualToString:@"false"])//当前网络不稳定，请重试
         {
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台报错了",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"当前网络不稳定，请重试",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
         else if ([result isEqualToString:@"fail"])//信息不完整
         {
@@ -1146,9 +1146,9 @@ static  DataProvider *_dataProvide = nil;
         {
             dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"修改成功",@"Message",[NSNumber numberWithBool:YES],@"Result", nil];
         }
-        else if ([result isEqualToString:@"false"])//后台报错了
+        else if ([result isEqualToString:@"false"])//当前网络不稳定，请重试
         {
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台报错了",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"当前网络不稳定，请重试",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
         else if ([result isEqualToString:@"fail"])//填写信息错误
         {
@@ -1188,9 +1188,9 @@ static  DataProvider *_dataProvide = nil;
         {
             dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"原密码错误",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
-        else if ([result isEqualToString:@"false"])//后台报错了
+        else if ([result isEqualToString:@"false"])//当前网络不稳定，请重试
         {
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台报错了",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"当前网络不稳定，请重试",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
         else if ([result isEqualToString:@"mobtel"])//手机号码错误
         {
@@ -1250,9 +1250,9 @@ static  DataProvider *_dataProvide = nil;
         NSString *result =[self getStringByfunctionName:@"queryChargeRecord" andDict:dict];
         NSDictionary *dictValue=[BSWebServiceAgent parseXmlResult:result];
         NSMutableDictionary *dicResult;
-        if([result isEqualToString:@"false"])//后台报错
+        if([result isEqualToString:@"false"])//当前网络不稳定，请重试
         {
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台错误",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"当前网络不稳定，请重试",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
         else if([[[[[dictValue objectForKey:@"listTele"] objectForKey:@"listChargeRecord"]allKeys] firstObject]isEqualToString:@"text"])
         {
@@ -1296,9 +1296,9 @@ static  DataProvider *_dataProvide = nil;
         NSString *result =[self getStringByfunctionName:@"queryConsumeRecord" andDict:dict];
         NSDictionary *dictValue=[BSWebServiceAgent parseXmlResult:result];
         NSMutableDictionary *dicResult;
-        if([result isEqualToString:@"false"])//后台报错
+        if([result isEqualToString:@"false"])//当前网络不稳定，请重试
         {
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台错误",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"当前网络不稳定，请重试",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
         else if([[[[[dictValue objectForKey:@"listTele"] objectForKey:@"listConsumeRecord"]allKeys] firstObject]isEqualToString:@"text"])
         {
@@ -1342,9 +1342,9 @@ static  DataProvider *_dataProvide = nil;
         NSString *result =[self getStringByfunctionName:@"queryVoucher" andDict:dict];
         NSDictionary *dictValue=[BSWebServiceAgent parseXmlResult:result];
         NSMutableDictionary *dicResult;
-        if([result isEqualToString:@"false"])//后台报错
+        if([result isEqualToString:@"false"])//当前网络不稳定，请重试
         {
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台错误",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"当前网络不稳定，请重试",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
         else if([[[[[dictValue objectForKey:@"listTele"] objectForKey:@"listVoucher"]allKeys] firstObject]isEqualToString:@"text"])
         {
@@ -1386,9 +1386,9 @@ static  DataProvider *_dataProvide = nil;
         NSString *result =[self getStringByfunctionName:@"getOrderByMobtel" andDict:dict];
         NSDictionary *dictValue=[BSWebServiceAgent parseXmlResult:result];
         NSMutableDictionary *dicResult;
-        if([result isEqualToString:@"false"])//后台报错
+        if([result isEqualToString:@"false"])//当前网络不稳定，请重试
         {
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台错误",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"当前网络不稳定，请重试",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
         else
         {
@@ -1430,9 +1430,9 @@ static  DataProvider *_dataProvide = nil;
         {
             dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"修改成功",@"Message",[NSNumber numberWithBool:YES],@"Result", nil];
         }
-        else if ([result isEqualToString:@"false"])//后台报错了
+        else if ([result isEqualToString:@"false"])//当前网络不稳定，请重试
         {
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台报错了",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"当前网络不稳定，请重试",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
         else if ([result isEqualToString:@"fail"])//填写信息错误
         {
@@ -1462,9 +1462,9 @@ static  DataProvider *_dataProvide = nil;
         NSString *result =[self getStringByfunctionName:@"findMyWait" andDict:dict];
         NSDictionary *dictValue=[BSWebServiceAgent parseXmlResult:result];
         NSMutableDictionary *dicResult;
-        if([result isEqualToString:@"false"])//后台报错
+        if([result isEqualToString:@"false"])//当前网络不稳定，请重试
         {
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台错误",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"当前网络不稳定，请重试",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
         else
         {
@@ -1502,9 +1502,9 @@ static  DataProvider *_dataProvide = nil;
         NSString *result =[self getStringByfunctionName:@"getFirmLine" andDict:dict];
         NSDictionary *dictValue=[BSWebServiceAgent parseXmlResult:result];
         NSMutableDictionary *dicResult;
-        if([result isEqualToString:@"false"])//后台报错
+        if([result isEqualToString:@"false"])//当前网络不稳定，请重试
         {
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台错误",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"当前网络不稳定，请重试",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
         else
         {
@@ -1543,9 +1543,9 @@ static  DataProvider *_dataProvide = nil;
         NSString *result =[self getStringByfunctionName:@"findPaxByFirm" andDict:dict];
         NSDictionary *dictValue=[BSWebServiceAgent parseXmlResult:result];
         NSMutableDictionary *dicResult;
-        if([result isEqualToString:@"false"])//后台报错
+        if([result isEqualToString:@"false"])//当前网络不稳定，请重试
         {
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台错误",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"当前网络不稳定，请重试",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
         else
         {
@@ -1588,9 +1588,9 @@ static  DataProvider *_dataProvide = nil;
         {
             dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"验证  成功",@"Message",[NSNumber numberWithBool:YES],@"Result", nil];
         }
-        else if ([result isEqualToString:@"false"])//后台报错了
+        else if ([result isEqualToString:@"false"])//当前网络不稳定，请重试
         {
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台报错了",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"当前网络不稳定，请重试",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
         else if ([result isEqualToString:@"0"])//填写信息错误
         {
@@ -1622,9 +1622,9 @@ static  DataProvider *_dataProvide = nil;
         NSString *result =[self getStringByfunctionName:@"addLineno" andDict:dict];
         NSDictionary *dictValue=[BSWebServiceAgent parseXmlResult:result];
         NSMutableDictionary *dicResult;
-        if([result isEqualToString:@"false"])//后台报错
+        if([result isEqualToString:@"false"])//当前网络不稳定，请重试
         {
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台错误",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"当前网络不稳定，请重试",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
         else
         {
@@ -1665,9 +1665,9 @@ static  DataProvider *_dataProvide = nil;
         {
             dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"修改成功",@"Message",[NSNumber numberWithBool:YES],@"Result", nil];
         }
-        else if ([result isEqualToString:@"false"])//后台报错了
+        else if ([result isEqualToString:@"false"])//当前网络不稳定，请重试
         {
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台报错了",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"当前网络不稳定，请重试",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
         else if ([result isEqualToString:@"fail"])//填写信息错误
         {
@@ -1697,9 +1697,9 @@ static  DataProvider *_dataProvide = nil;
         NSString *result =[self getStringByfunctionName:@"getOrderDetail" andDict:dict];
         NSDictionary *dictValue=[BSWebServiceAgent parseXmlResult:result];
         NSMutableDictionary *dicResult;
-        if([result isEqualToString:@"false"])//后台报错
+        if([result isEqualToString:@"false"])//当前网络不稳定，请重试
         {
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台错误",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"当前网络不稳定，请重试",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
         else
         {
@@ -1734,9 +1734,9 @@ static  DataProvider *_dataProvide = nil;
     if (dict) {
         NSString *result =[self getStringByfunctionName:@"findPic" andDict:dict];
         NSMutableDictionary *dicResult;
-        if ([result isEqualToString:@"false"])//后台报错了
+        if ([result isEqualToString:@"false"])//当前网络不稳定，请重试
         {
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台报错了",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"当前网络不稳定，请重试",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
         else if ([result isEqualToString:@"nodata"])//填写信息错误
         {
@@ -1765,9 +1765,9 @@ static  DataProvider *_dataProvide = nil;
         NSString *result =[self getStringByfunctionName:@"getBrands" andDict:dict];
         NSDictionary *dictValue=[BSWebServiceAgent parseXmlResult:result];
         NSMutableDictionary *dicResult;
-        if([result isEqualToString:@"false"])//后台报错
+        if([result isEqualToString:@"false"])//当前网络不稳定，请重试
         {
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台错误",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"当前网络不稳定，请重试",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
         else
         {
@@ -1804,9 +1804,9 @@ static  DataProvider *_dataProvide = nil;
         NSString *result =[self getStringByfunctionName:@"getEvalColumn" andDict:dict];
         NSDictionary *dictValue=[BSWebServiceAgent parseXmlResult:result];
         NSMutableDictionary *dicResult;
-        if([result isEqualToString:@"false"])//后台报错
+        if([result isEqualToString:@"false"])//当前网络不稳定，请重试
         {
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台错误",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"当前网络不稳定，请重试",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
         else
         {
@@ -1863,11 +1863,11 @@ static  DataProvider *_dataProvide = nil;
         {
             dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"修改成功",@"Message",[NSNumber numberWithBool:YES],@"Result", nil];
         }
-        else if ([result isEqualToString:@"false"])//后台报错了
+        else if ([result isEqualToString:@"false"])//当前网络不稳定，请重试
         {
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"后台报错",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"当前网络不稳定，请重试",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
-        else if ([result isEqualToString:@"fail"])//后台报错了
+        else if ([result isEqualToString:@"fail"])//当前网络不稳定，请重试
         {
             dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"提交评价信息失败",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
