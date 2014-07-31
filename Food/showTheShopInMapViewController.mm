@@ -496,7 +496,10 @@
 - (BMKAnnotationView *)mapView:(BMKMapView *)view viewForAnnotation:(id <BMKAnnotation>)annotation
 {
 	if ([annotation isKindOfClass:[RouteAnnotation class]]) {
+  
+        ((BMKPinAnnotationView*)annotation).pinColor = BMKPinAnnotationColorPurple;
 		return [self getRouteAnnotationView:view viewForAnnotation:(RouteAnnotation*)annotation];
+
 	}
 	return nil;
 }

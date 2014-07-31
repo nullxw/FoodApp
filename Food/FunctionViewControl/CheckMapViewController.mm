@@ -506,7 +506,7 @@
     if (newAnnotation == nil) {
         newAnnotation = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationViewID];
         // 设置颜色
-		((BMKPinAnnotationView*)newAnnotation).pinColor = BMKPinAnnotationColorPurple;
+		((BMKPinAnnotationView*)newAnnotation).pinColor = BMKPinAnnotationColorRed;
         // 从天上掉下效果
 //		((BMKPinAnnotationView*)newAnnotation).animatesDrop = YES;
         UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
