@@ -301,6 +301,7 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
     [[NSNotificationCenter defaultCenter]postNotificationName:@"refushOrder" object:nil];
+    [SVProgressHUD dismiss];
 }
 
 //电话事件
@@ -312,6 +313,7 @@
 -(void)navigationBarViewbackClick
 {
     [self.navigationController popViewControllerAnimated:YES];
+    [SVProgressHUD dismiss];
 }
 
 - (void)didReceiveMemoryWarning

@@ -233,7 +233,9 @@ static bool boolSearch = NO;
     {
     [self.navigationController popViewControllerAnimated:YES];
     [self cancelRequest];//取消图片请求
+        
     }
+    [SVProgressHUD dismiss];
 }
 
 -(void)dealloc

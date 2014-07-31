@@ -200,6 +200,13 @@
 		70619104190F45A900913C7E /* addOtherPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70619103190F45A900913C7E /* addOtherPasswordViewController.m */; };
 		70619107190F45F800913C7E /* addOtherPersonMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70619106190F45F800913C7E /* addOtherPersonMessageViewController.m */; };
 		7061910A190F4A4F00913C7E /* addOtherCardMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70619109190F4A4F00913C7E /* addOtherCardMessageViewController.m */; };
+		7065414E1989EBC3001DFB74 /* Icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 706541471989EBC3001DFB74 /* Icon-120.png */; };
+		7065414F1989EBC3001DFB74 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 706541481989EBC3001DFB74 /* Icon-72.png */; };
+		706541501989EBC3001DFB74 /* Icon-80.png in Resources */ = {isa = PBXBuildFile; fileRef = 706541491989EBC3001DFB74 /* Icon-80.png */; };
+		706541511989EBC3001DFB74 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 7065414A1989EBC3001DFB74 /* Icon-Small.png */; };
+		706541521989EBC3001DFB74 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7065414B1989EBC3001DFB74 /* Icon-Small@2x.png */; };
+		706541531989EBC3001DFB74 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7065414C1989EBC3001DFB74 /* Icon.png */; };
+		706541541989EBC3001DFB74 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7065414D1989EBC3001DFB74 /* Icon@2x.png */; };
 		7069D52518FE2D0200FF611C /* StoreMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7069D52418FE2D0200FF611C /* StoreMessage.m */; };
 		706A25831932DCC8003961D6 /* LookequipotentialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 706A25821932DCC8003961D6 /* LookequipotentialViewController.m */; };
 		706F6C271921A3FA007B2EEE /* Public_balance.png in Resources */ = {isa = PBXBuildFile; fileRef = 706F6C251921A3FA007B2EEE /* Public_balance.png */; };
@@ -459,7 +466,7 @@
 		1B8A2AFA18FE215F00C4EBD9 /* SearchCore.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SearchCore.mm; sourceTree = "<group>"; };
 		1B8A2AFB18FE215F00C4EBD9 /* SearchCoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCoreManager.h; sourceTree = "<group>"; };
 		1B8A2AFC18FE215F00C4EBD9 /* SearchCoreManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SearchCoreManager.mm; sourceTree = "<group>"; };
-		1B8F79BB18DFCCBA00D024C8 /* Food.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Food.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B8F79BB18DFCCBA00D024C8 /* 全聚德App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "全聚德App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B8F79BE18DFCCBA00D024C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1B8F79C018DFCCBA00D024C8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		1B8F79C218DFCCBA00D024C8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -711,6 +718,13 @@
 		70619106190F45F800913C7E /* addOtherPersonMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addOtherPersonMessageViewController.m; sourceTree = "<group>"; };
 		70619108190F4A4F00913C7E /* addOtherCardMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addOtherCardMessageViewController.h; sourceTree = "<group>"; };
 		70619109190F4A4F00913C7E /* addOtherCardMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addOtherCardMessageViewController.m; sourceTree = "<group>"; };
+		706541471989EBC3001DFB74 /* Icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-120.png"; sourceTree = "<group>"; };
+		706541481989EBC3001DFB74 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		706541491989EBC3001DFB74 /* Icon-80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-80.png"; sourceTree = "<group>"; };
+		7065414A1989EBC3001DFB74 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		7065414B1989EBC3001DFB74 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		7065414C1989EBC3001DFB74 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		7065414D1989EBC3001DFB74 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		7069D52318FE2D0200FF611C /* StoreMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoreMessage.h; path = showTable/StoreMessage.h; sourceTree = "<group>"; };
 		7069D52418FE2D0200FF611C /* StoreMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoreMessage.m; path = showTable/StoreMessage.m; sourceTree = "<group>"; };
 		706A25811932DCC8003961D6 /* LookequipotentialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookequipotentialViewController.h; sourceTree = "<group>"; };
@@ -1044,7 +1058,7 @@
 		1B8F79BC18DFCCBA00D024C8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1B8F79BB18DFCCBA00D024C8 /* Food.app */,
+				1B8F79BB18DFCCBA00D024C8 /* 全聚德App.app */,
 				1B8F79D618DFCCBA00D024C8 /* FoodTests.xctest */,
 			);
 			name = Products;
@@ -1103,7 +1117,8 @@
 		1B8F79C518DFCCBA00D024C8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				7047E281193829E0002C4ED1 /* icons */,
+				706541461989EBC3001DFB74 /* icons */,
+				7047E281193829E0002C4ED1 /* icons2 */,
 				1B8F79C618DFCCBA00D024C8 /* Food-Info.plist */,
 				1B8F79C718DFCCBA00D024C8 /* InfoPlist.strings */,
 				1B8F79CA18DFCCBA00D024C8 /* main.m */,
@@ -1350,7 +1365,7 @@
 			path = public;
 			sourceTree = "<group>";
 		};
-		7047E281193829E0002C4ED1 /* icons */ = {
+		7047E281193829E0002C4ED1 /* icons2 */ = {
 			isa = PBXGroup;
 			children = (
 				70CE6D10193F160A00AFD7F7 /* Icon-80.png */,
@@ -1362,7 +1377,7 @@
 				70CE6D09193F15FF00AFD7F7 /* Icon@2x.png */,
 				7047E29B1938358D002C4ED1 /* iTunesArtwork.png */,
 			);
-			name = icons;
+			name = icons2;
 			sourceTree = "<group>";
 		};
 		704A2A471963935900DAA77F /* staRating */ = {
@@ -1415,6 +1430,20 @@
 				70619103190F45A900913C7E /* addOtherPasswordViewController.m */,
 			);
 			name = addOtherCard;
+			sourceTree = "<group>";
+		};
+		706541461989EBC3001DFB74 /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				706541471989EBC3001DFB74 /* Icon-120.png */,
+				706541481989EBC3001DFB74 /* Icon-72.png */,
+				706541491989EBC3001DFB74 /* Icon-80.png */,
+				7065414A1989EBC3001DFB74 /* Icon-Small.png */,
+				7065414B1989EBC3001DFB74 /* Icon-Small@2x.png */,
+				7065414C1989EBC3001DFB74 /* Icon.png */,
+				7065414D1989EBC3001DFB74 /* Icon@2x.png */,
+			);
+			path = icons;
 			sourceTree = "<group>";
 		};
 		706A25801932DC75003961D6 /* Wait */ = {
@@ -1996,7 +2025,7 @@
 			);
 			name = Food;
 			productName = Food;
-			productReference = 1B8F79BB18DFCCBA00D024C8 /* Food.app */;
+			productReference = 1B8F79BB18DFCCBA00D024C8 /* 全聚德App.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1B8F79D518DFCCBA00D024C8 /* FoodTests */ = {
@@ -2094,7 +2123,9 @@
 				1B8A2AF118FE213900C4EBD9 /* ListData.plist in Resources */,
 				70AC2CAE1907BDA60000634A /* card_messageNomal@2x.png in Resources */,
 				7088A75F1918D44C0038281F /* Map_AnnNomal.png in Resources */,
+				706541501989EBC3001DFB74 /* Icon-80.png in Resources */,
 				70AC2C8D1907B0C20000634A /* Public_cardline@2x.png in Resources */,
+				706541531989EBC3001DFB74 /* Icon.png in Resources */,
 				70279666190A0CF6003EA6B8 /* Public_disagree.png in Resources */,
 				7005E12A1925AFA700CF36CC /* Public_forgetPass@2x.png in Resources */,
 				700B04341929EF8F00FE889F /* num_0.png in Resources */,
@@ -2119,6 +2150,7 @@
 				1BCCD7F218FD320500B81965 /* blackArrow@2x.png in Resources */,
 				7025C5C21910F53E00E43DE6 /* card_vipCoupon@2x.png in Resources */,
 				70AC2C901907B0C20000634A /* Public_date@2x.png in Resources */,
+				706541541989EBC3001DFB74 /* Icon@2x.png in Resources */,
 				70AC2C621907B0C20000634A /* Menu_menuNomal3@2x.png in Resources */,
 				704A2A6A1964020D00DAA77F /* Menu_newmenu2.png in Resources */,
 				7005E1321925B16500CF36CC /* Public_settingPass.png.png in Resources */,
@@ -2154,6 +2186,7 @@
 				700B04501929EFA800FE889F /* num_6@2x.png in Resources */,
 				70AC2C981907B0C20000634A /* Public_sexSelect@2x.png in Resources */,
 				70279678190A0CF6003EA6B8 /* Public_tele.png in Resources */,
+				706541521989EBC3001DFB74 /* Icon-Small@2x.png in Resources */,
 				70DE2561195581750039F086 /* defaultPack@2x.png in Resources */,
 				700B044C1929EFA800FE889F /* num_2@2x.png in Resources */,
 				70279659190A0CF6003EA6B8 /* Public_arrows.png in Resources */,
@@ -2218,6 +2251,7 @@
 				70AC2C6F1907B0C20000634A /* Menu_menuSelect8@2x.png in Resources */,
 				70AC2C641907B0C20000634A /* Menu_menuNomal5@2x.png in Resources */,
 				709745EB1924B73700798EC6 /* Public_tablered@2x.png in Resources */,
+				7065414E1989EBC3001DFB74 /* Icon-120.png in Resources */,
 				7088A77B1918D47B0038281F /* Map_changeStyleSelect@2x.png in Resources */,
 				7006D9FD19483C8500D60076 /* ad_logoPng@2x.png in Resources */,
 				70AC2C631907B0C20000634A /* Menu_menuNomal4@2x.png in Resources */,
@@ -2282,8 +2316,10 @@
 				70279662190A0CF6003EA6B8 /* Public_cardphone.png in Resources */,
 				70279665190A0CF6003EA6B8 /* Public_default.png in Resources */,
 				70AC2C791907B0C20000634A /* Order_check_plus@2x.png in Resources */,
+				7065414F1989EBC3001DFB74 /* Icon-72.png in Resources */,
 				70AC2C751907B0C20000634A /* Order_addFood@2x.png in Resources */,
 				70AC2C7F1907B0C20000634A /* Order_order@2x.png in Resources */,
+				706541511989EBC3001DFB74 /* Icon-Small.png in Resources */,
 				70AC2C721907B0C20000634A /* Order_paddownsel@2x.png in Resources */,
 				70C448CB1935D0F60065D05F /* CVLocalizationSetting.plist in Resources */,
 				70AC2C2E1907B0C20000634A /* Menu_menuSelect4.png in Resources */,
@@ -2584,7 +2620,6 @@
 		1B8F79E818DFCCBB00D024C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2599,7 +2634,7 @@
 					"$(SDKROOT)/usr/lib/system",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_NAME = Food;
+				PRODUCT_NAME = "全聚德App";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2611,7 +2646,6 @@
 		1B8F79E918DFCCBB00D024C8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2625,7 +2659,7 @@
 					"$(PROJECT_DIR)/Food/Library",
 					"$(SDKROOT)/usr/lib/system",
 				);
-				PRODUCT_NAME = Food;
+				PRODUCT_NAME = "全聚德App";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;

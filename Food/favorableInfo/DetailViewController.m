@@ -41,7 +41,7 @@
     
     imgTop = [[WebImageView alloc] init];
     imgTop.frame = CGRectMake(0, 0, v.frame.size.width, 180);
-    [imgTop setImage:[UIImage imageNamed:@"yhxx.png"]];
+    [imgTop setImage:[UIImage imageNamed:@"defaultFood.png"]];
     imgTop.backgroundColor = [UIColor clearColor];
     [v addSubview:imgTop];
     
@@ -69,6 +69,7 @@
 //    bs_dispatch_sync_on_main_thread(^{
         [imgTop cancelRequest]; //离开该页时取消图片的异步请求
             [self.navigationController popViewControllerAnimated:YES];
+    [SVProgressHUD dismiss];
 //    });
 
 }
@@ -97,7 +98,7 @@
     }
     else
     {
-        [imgTop setImageURL:[NSURL URLWithString:[info objectForKey:@"wurl"]] andImageBoundName:@"yhxx.png"];
+        [imgTop setImageURL:[NSURL URLWithString:[info objectForKey:@"wurl"]] andImageBoundName:@"defaultFood.png"];
     }
     
 }

@@ -19,7 +19,23 @@
     
     BOOL                canPush;//是否定位成功可以跳转
     CVLocalizationSetting *    langSetting;
+    
+    BMKMapView          *_mapView;
+    BMKSearch           *_search;
 
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [_mapView viewWillAppear];
+    _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
+    _search.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [_mapView viewWillDisappear];
+    _mapView.delegate = nil; // 不用时，置nil
+    _search.delegate=nil;
 }
 
 
@@ -50,8 +66,8 @@
     nvc.delegate=self;
     [self.view addSubview:nvc];
     
+  
     
-        
     UIButton *btnCurrentCity=[UIButton buttonWithType:UIButtonTypeCustom];
     [btnCurrentCity setBackgroundColor:[UIColor whiteColor]];
     btnCurrentCity.frame=CGRectMake(10, 30, SUPERVIEWWIDTH-20, 60);
@@ -62,7 +78,7 @@
     [btnCurrentCity  addTarget:self action:@selector(changeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     UIImageView *imageViewLeft=[[UIImageView alloc]initWithFrame:CGRectMake(5, 20, 20, 20)];
-    [imageViewLeft setImage:[UIImage imageNamed:@"Public_meal.png"]];
+    [imageViewLeft setImage:[UIImage imageNamed:@"Public_City.png"]];
     [btnCurrentCity addSubview:imageViewLeft];
     
     UIImageView *imgJianTou=[[UIImageView alloc] initWithFrame:CGRectMake(btnCurrentCity.frame.size.width-20, 20, 20, 20)];
@@ -85,12 +101,19 @@
     {
         canPush=YES;
         title=[DataProvider sharedInstance].localCity;
+        //        获取城市
+        [NSThread detachNewThreadSelector:@selector(getOnlyCity) toTarget:self withObject:nil];
     }
     else
     {
         canPush=NO;
-        title=@"定位失败";
+        title=@"开始定位";
     }
+    
+    _mapView = [[BMKMapView alloc]init];
+    
+    //    用于地理编码和反编码
+    _search = [[BMKSearch alloc]init];
     
     _lblLocalCity=[[UILabel alloc]init];
     _lblLocalCity.frame=CGRectMake(0, 0, btnCurrentCity.frame.size.width-60, 60);
@@ -117,7 +140,7 @@
     
     
     imageViewLeft=[[UIImageView alloc]initWithFrame:CGRectMake(5, 20, 20, 20)];
-    [imageViewLeft setImage:[UIImage imageNamed:@"Public_meal.png"]];
+    [imageViewLeft setImage:[UIImage imageNamed:@"Public_City.png"]];
     [btnCurrentCity addSubview:imageViewLeft];
     
     imgJianTou=[[UIImageView alloc] initWithFrame:CGRectMake(btnCurrentCity.frame.size.width-20, 20, 20, 20)];
@@ -147,10 +170,94 @@
     [btnSelectCity addSubview:_lblchangeCity];
     [_backGround addSubview:btnSelectCity];
     
+    
 //   刷新定位城市的经纬度通知
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(refushlocal) name:@"refushLocal" object:nil];
     
 }
+
+
+//选择城市通过接口
+-(void)getOnlyCity
+{
+    @autoreleasepool {
+        DataProvider *dp = [[DataProvider alloc] init];
+        NSDictionary *dicCity = [dp getCity];
+        if ([[dicCity objectForKey:@"Result"] boolValue]) {
+            NSArray *ary = [dicCity objectForKey:@"Message"];
+            BOOL  isFound=NO;
+            for (NSDictionary *dic in ary)
+            {
+                if([[DataProvider sharedInstance].localCity rangeOfString:[dic objectForKey:@"des"]].location !=NSNotFound)
+                    isFound=YES;
+            }
+            if(!isFound)
+            {
+                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"你所在的城市中没有全聚德门店\n默认选择城市为北京" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alert show];
+                [DataProvider sharedInstance].localCity=@"北京市";
+                 [[NSNotificationCenter defaultCenter]postNotificationName:@"refushLocal" object:nil];
+            }
+            canPush=YES;
+            [SVProgressHUD dismiss];
+        }else{
+            canPush=NO;
+            [_lblLocalCity setText:@"开始定位"];
+            [SVProgressHUD showErrorWithStatus:[dicCity objectForKey:@"Message"]];
+        }
+    }
+}
+
+
+
+//位置发生改变时获取当前的经纬度
+- (void)mapView:(BMKMapView *)mapView didUpdateUserLocation:(BMKUserLocation *)userLocation
+{
+	if (userLocation != nil) {
+		NSLog(@"%f %f", userLocation.location.coordinate.latitude, userLocation.location.coordinate.longitude);
+        [DataProvider sharedInstance].latitude=userLocation.location.coordinate.latitude;
+        [DataProvider sharedInstance].longitude=userLocation.location.coordinate.longitude;
+	}
+    CLLocationCoordinate2D pt = (CLLocationCoordinate2D){0, 0};
+	if (userLocation.location.coordinate.latitude && userLocation.location.coordinate.longitude)
+    {
+		pt = (CLLocationCoordinate2D){userLocation.location.coordinate.latitude, userLocation.location.coordinate.longitude};
+	}
+	BOOL flag = [_search reverseGeocode:pt];
+	if (flag) {
+		NSLog(@"ReverseGeocode search success.");
+        //        定位成功后通知定位
+        _mapView.userTrackingMode = BMKUserTrackingModeNone;
+        _mapView.showsUserLocation = NO;
+	}
+    else{
+        NSLog(@"ReverseGeocode search failed!");
+    }
+}
+
+//定位编码返回结果通知方法
+- (void)onGetAddrResult:(BMKSearch*)searcher result:(BMKAddrInfo*)result errorCode:(int)error
+{
+    NSArray* array = [NSArray arrayWithArray:_mapView.annotations];
+	[_mapView removeAnnotations:array];
+	array = [NSArray arrayWithArray:_mapView.overlays];
+	[_mapView removeOverlays:array];
+	if (error == 0)
+    {
+		BMKPointAnnotation* item = [[BMKPointAnnotation alloc]init];
+		item.title = result.addressComponent.city;
+        item.subtitle=result.strAddr;
+        [DataProvider sharedInstance].localCity= [NSString stringWithFormat:@"%@",item.title];
+        [DataProvider sharedInstance].localAddr=[NSString stringWithFormat:@"%@",result.strAddr];
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"refushLocal" object:nil];
+        NSLog(@"定位成功====%@",[DataProvider sharedInstance].localCity);
+        
+//        获取城市
+        [NSThread detachNewThreadSelector:@selector(getOnlyCity) toTarget:self withObject:nil];
+	}
+}
+
+
 
 
 //100：定位成功直接调转   101：定位失败，选择城市后调转
@@ -178,11 +285,15 @@
        }
        else
         {
-            bs_dispatch_sync_on_main_thread(^{
-                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:[langSetting localizedString:@"Prompt"] message:[NSString stringWithFormat:@"%@\n%@",[langSetting localizedString:@"Locate failure"],[langSetting localizedString:@"Please select a city"]] delegate:self cancelButtonTitle:[langSetting localizedString:@"OK"] otherButtonTitles: nil];
-                alert.tag=10010;
-                [alert show];
-            });
+            [SVProgressHUD showWithStatus:@"城市定位中..." maskType:SVProgressHUDMaskTypeNone];
+            _mapView.userTrackingMode = BMKUserTrackingModeNone;
+            _mapView.showsUserLocation = YES;
+            
+//            bs_dispatch_sync_on_main_thread(^{
+//                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:[langSetting localizedString:@"Prompt"] message:[NSString stringWithFormat:@"%@\n%@",[langSetting localizedString:@"Locate failure"],[langSetting localizedString:@"Please select a city"]] delegate:self cancelButtonTitle:[langSetting localizedString:@"OK"] otherButtonTitles: nil];
+//                alert.tag=10010;
+//                [alert show];
+//            });
             
         }
     }
@@ -199,6 +310,8 @@
 
     }
 }
+
+
 
 #pragma mark typeSelectViewViewController代理
 
@@ -240,9 +353,12 @@
 {
     _lblLocalCity.text=[DataProvider sharedInstance].localCity;
 }
+
+
 -(void)navigationBarViewbackClick
 {
     [self.navigationController popViewControllerAnimated:YES];
+    [SVProgressHUD dismiss];
 }
 
 -(void)dealloc

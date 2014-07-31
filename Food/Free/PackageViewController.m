@@ -41,6 +41,7 @@
 //    bs_dispatch_sync_on_main_thread(^{
         [self.navigationController popViewControllerAnimated:YES];
         [imgView cancelRequest]; //离开该页时取消图片的异步请求
+    [SVProgressHUD dismiss];
 //    });
     
 }

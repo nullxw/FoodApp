@@ -127,38 +127,41 @@
     NSDictionary *dict=[_dataArray objectAtIndex:indexPath.row];
     if(dict)
     {
-//        菜品名称
-    UILabel *lblName=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, 130, cell.contentView.frame.size.height)];
-    lblName.text=[dict objectForKey:@"pdes"];
-    lblName.textAlignment=NSTextAlignmentLeft;
-    lblName.font=[UIFont systemFontOfSize:15];
-    lblName.textColor=[UIColor grayColor];
-    lblName.backgroundColor=[UIColor clearColor];
-    lblName.numberOfLines=2;
-    lblName.lineBreakMode=NSLineBreakByWordWrapping;
-    [cell.contentView addSubview:lblName];
+        //        菜品名称
+        UILabel *lblName=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, 130, cell.contentView.frame.size.height)];
+        lblName.text=[dict objectForKey:@"pdes"];
+        lblName.textAlignment=NSTextAlignmentLeft;
+        lblName.font=[UIFont systemFontOfSize:15];
+        lblName.textColor=[UIColor grayColor];
+        lblName.backgroundColor=[UIColor clearColor];
+        lblName.numberOfLines=2;
+        lblName.lineBreakMode=NSLineBreakByWordWrapping;
+        [cell.contentView addSubview:lblName];
+        
+        
+        //        菜品数量
+        UILabel *lblCount=[[UILabel alloc]initWithFrame:CGRectMake(150, 0, 50,  cell.contentView.frame.size.height)];
+        lblCount.text=[dict objectForKey:@"foodnum"];
+        lblCount.textAlignment=NSTextAlignmentRight;
+        lblCount.font=[UIFont systemFontOfSize:17];
+        lblCount.textColor=[UIColor grayColor];
+        lblCount.backgroundColor=[UIColor clearColor];
+        lblCount.numberOfLines=0;
+        lblCount.lineBreakMode=NSLineBreakByWordWrapping;
+        [cell.contentView addSubview:lblCount];
+        
+        
+        //菜品价格（总价格）
+        UILabel *lblPrice=[[UILabel alloc]initWithFrame:CGRectMake(220, 0, 90,  cell.contentView.frame.size.height)];
+        lblPrice.text=[NSString stringWithFormat:@"%.2f",[[dict objectForKey:@"price"]floatValue]];
+        lblPrice.textAlignment=NSTextAlignmentCenter;
+        lblPrice.font=[UIFont systemFontOfSize:17];
+        lblPrice.textColor=[UIColor grayColor];
+        lblPrice.backgroundColor=[UIColor clearColor];
+        lblPrice.numberOfLines=0;
+        lblPrice.lineBreakMode=NSLineBreakByWordWrapping;
+        [cell.contentView addSubview:lblPrice];
     
-//菜品价格（总价格）
-    UILabel *lblPrice=[[UILabel alloc]initWithFrame:CGRectMake(130, 0, 90,  cell.contentView.frame.size.height)];
-    lblPrice.text=[NSString stringWithFormat:@"%.2f",[[dict objectForKey:@"price"]floatValue]];
-    lblPrice.textAlignment=NSTextAlignmentRight;
-    lblPrice.font=[UIFont systemFontOfSize:17];
-    lblPrice.textColor=[UIColor grayColor];
-    lblPrice.backgroundColor=[UIColor clearColor];
-    lblPrice.numberOfLines=0;
-    lblPrice.lineBreakMode=NSLineBreakByWordWrapping;
-    [cell.contentView addSubview:lblPrice];
-    
-//        菜品数量
-    UILabel *lblCount=[[UILabel alloc]initWithFrame:CGRectMake(240, 0, 50,  cell.contentView.frame.size.height)];
-    lblCount.text=[dict objectForKey:@"foodnum"];
-    lblCount.textAlignment=NSTextAlignmentCenter;
-    lblCount.font=[UIFont systemFontOfSize:17];
-    lblCount.textColor=[UIColor grayColor];
-    lblCount.backgroundColor=[UIColor clearColor];
-    lblCount.numberOfLines=0;
-    lblCount.lineBreakMode=NSLineBreakByWordWrapping;
-    [cell.contentView addSubview:lblCount];
     }
     
     return cell;
@@ -195,17 +198,8 @@
     [view addSubview:lblName];
     
     
-    UILabel *lblPrice=[[UILabel alloc]initWithFrame:CGRectMake(150, lbl.frame.size.height, 70, view.frame.size.height/2)];
-    lblPrice.text=[NSString stringWithFormat:@"菜品金额"];
-    lblPrice.textAlignment=NSTextAlignmentLeft;
-    lblPrice.font=[UIFont systemFontOfSize:17];
-    lblPrice.textColor=[UIColor grayColor];
-    lblPrice.backgroundColor=[UIColor clearColor];
-    lblPrice.numberOfLines=0;
-    lblPrice.lineBreakMode=NSLineBreakByWordWrapping;
-    [view addSubview:lblPrice];
     
-    UILabel *lblCount=[[UILabel alloc]initWithFrame:CGRectMake(240, lbl.frame.size.height, 70, view.frame.size.height/2)];
+    UILabel *lblCount=[[UILabel alloc]initWithFrame:CGRectMake(150, lbl.frame.size.height, 70, view.frame.size.height/2)];
     lblCount.text=[NSString stringWithFormat:@"菜品数量"];
     lblCount.textAlignment=NSTextAlignmentLeft;
     lblCount.font=[UIFont systemFontOfSize:17];
@@ -214,6 +208,18 @@
     lblCount.numberOfLines=0;
     lblCount.lineBreakMode=NSLineBreakByWordWrapping;
     [view addSubview:lblCount];
+    
+    
+    UILabel *lblPrice=[[UILabel alloc]initWithFrame:CGRectMake(240, lbl.frame.size.height, 70, view.frame.size.height/2)];
+    lblPrice.text=[NSString stringWithFormat:@"菜品金额"];
+    lblPrice.textAlignment=NSTextAlignmentLeft;
+    lblPrice.font=[UIFont systemFontOfSize:17];
+    lblPrice.textColor=[UIColor grayColor];
+    lblPrice.backgroundColor=[UIColor clearColor];
+    lblPrice.numberOfLines=0;
+    lblPrice.lineBreakMode=NSLineBreakByWordWrapping;
+    [view addSubview:lblPrice];
+
     
     
     return view;
@@ -234,6 +240,7 @@
 -(void)navigationBarViewbackClick
 {
     [self.navigationController popViewControllerAnimated:YES];
+    [SVProgressHUD dismiss];
 }
 
 - (void)didReceiveMemoryWarning

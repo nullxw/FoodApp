@@ -197,6 +197,7 @@
             break;
         }
     }
+    [SVProgressHUD dismiss];
 //    [self dismissViewControllerAnimated:NO completion:^{
 //        
 //    }];

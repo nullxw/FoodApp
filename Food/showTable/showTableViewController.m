@@ -452,6 +452,7 @@ NSComparator cmptr = ^(id obj1, id obj2){
 //    bs_dispatch_sync_on_main_thread(^{
         [self cancelRequest];
        [self.navigationController popViewControllerAnimated:YES];
+    [SVProgressHUD dismiss];
 //    });
     
 }

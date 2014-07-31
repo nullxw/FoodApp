@@ -67,6 +67,7 @@
 -(void)navigationBarViewbackClick
 {
     [self.navigationController popViewControllerAnimated:YES];
+    [SVProgressHUD dismiss];
 }
 //获取地区
 -(void)getArea{

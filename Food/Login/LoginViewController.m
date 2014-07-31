@@ -339,6 +339,7 @@
                         if(_isChange)
                         {
                             [self.navigationController popViewControllerAnimated:YES];
+                            [SVProgressHUD dismiss];
                         }
                         else
                         {
@@ -417,6 +418,7 @@
     if(buttonIndex==1)
     {
         [self.navigationController popViewControllerAnimated:YES];
+        [SVProgressHUD dismiss];
     }
 }
 -(void)navigationBarViewbackClick

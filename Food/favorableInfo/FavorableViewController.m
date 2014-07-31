@@ -67,6 +67,7 @@
 //    bs_dispatch_sync_on_main_thread(^{
         [self cancelRequest];
         [self.navigationController popViewControllerAnimated:YES];
+    [SVProgressHUD dismiss];
 //    });
     
 }

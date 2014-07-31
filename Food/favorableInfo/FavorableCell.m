@@ -33,7 +33,7 @@
     
     imgTop = [[WebImageView alloc] init];
     imgTop.frame = CGRectMake(0, 0, 100, 80);
-    [imgTop setImage:[UIImage imageNamed:@"yhxxx.png"]];
+    [imgTop setImage:[UIImage imageNamed:@"defaultFood.png"]];
 
     imgTop.backgroundColor = [UIColor clearColor];
     [v addSubview:imgTop];
@@ -72,7 +72,7 @@
     }
     else
     {
-        [imgTop setImageURL:[NSURL URLWithString:[info objectForKey:@"wurl"]] andImageBoundName:@"yhxxx.png"];
+        [imgTop setImageURL:[NSURL URLWithString:[info objectForKey:@"wurl"]] andImageBoundName:@"defaultFood.png"];
     }
     
 }

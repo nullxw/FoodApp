@@ -32,6 +32,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadBookTableNotification" object:nil];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadHotTableNotification" object:nil];
+    [SVProgressHUD dismiss];
 }
 
 - (void)viewDidLoad

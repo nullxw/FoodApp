@@ -185,9 +185,11 @@
     }
     cell.textLabel.text=@"";
     cell.detailTextLabel.text=@"";
+    cell.textLabel.textColor=selfbackgroundColor;
+    cell.detailTextLabel.numberOfLines=2;
     NSDictionary *dict=[_dataArray objectAtIndex:indexPath.row];
     cell.textLabel.text=[NSString stringWithFormat:@"%d、%@",indexPath.row+1,[dict objectForKey:@"firmdes"]];
-    cell.detailTextLabel.text=[NSString stringWithFormat:@"%@ %@",[dict objectForKey:@"dat"],[dict objectForKey:@"datmins"]];
+    cell.detailTextLabel.text=[NSString stringWithFormat:@"就餐时间：%@ %@\n订单编号：%@",[dict objectForKey:@"dat"],[dict objectForKey:@"datmins"],[dict objectForKey:@"resv"]];
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
@@ -207,6 +209,7 @@
 -(void)navigationBarViewbackClick
 {
     [self.navigationController popViewControllerAnimated:YES];
+    [SVProgressHUD dismiss];
 }
 -(void)dealloc
 {

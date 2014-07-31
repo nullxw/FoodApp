@@ -61,7 +61,7 @@
         image.frame=CGRectMake(0,7 , 30, 30);
         
         UILabel *lblBack=[[UILabel alloc]initWithFrame:CGRectMake(30,0, 44, 44)];
-        lblBack.text=[langSetting localizedString:@"Back"];
+//        lblBack.text=[langSetting localizedString:@"Back"];   
         lblBack.backgroundColor=[UIColor clearColor];
         lblBack.textColor=[UIColor whiteColor];
         lblBack.textAlignment=NSTextAlignmentRight;

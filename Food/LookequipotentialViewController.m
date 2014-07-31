@@ -204,6 +204,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 //    刷新叫号台位列表通知
     [[NSNotificationCenter defaultCenter]postNotificationName:@"refushMyWaitList" object:nil];
+    [SVProgressHUD dismiss];
 }
 
 
@@ -216,6 +217,7 @@
 -(void)navigationBarViewbackClick
 {
     [self.navigationController popViewControllerAnimated:YES];
+    [SVProgressHUD dismiss];
 }
 
 - (void)didReceiveMemoryWarning

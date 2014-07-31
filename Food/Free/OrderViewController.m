@@ -30,6 +30,7 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadOrderDetailTableNotification" object:nil];
+    [SVProgressHUD dismiss];
 }
 
 - (void)viewDidLoad

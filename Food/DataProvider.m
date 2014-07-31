@@ -206,7 +206,7 @@ static  DataProvider *_dataProvide = nil;
         if ([aryResult count] > 0) {
             return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"Result",aryResult,@"Message", nil];
         }else
-            return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"失败",@"Message", nil];
+            return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"获取城市信息失败",@"Message", nil];
     }else{
         return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",strNetwork,@"Message", nil];
     }

@@ -169,6 +169,7 @@
 //    if(setPassWord)
 //    {
         [self.navigationController popViewControllerAnimated:YES];
+    [SVProgressHUD dismiss];
 //    }
 //    else
 //    {

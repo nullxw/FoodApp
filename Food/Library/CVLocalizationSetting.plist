@@ -19,7 +19,7 @@
 		<key>Additions:</key>
 		<string>特别备注：</string>
 		<key>Food</key>
-		<string>菜名</string>
+		<string>菜品名称</string>
 		<key>count</key>
 		<string>数量</string>
 		<key>Price</key>

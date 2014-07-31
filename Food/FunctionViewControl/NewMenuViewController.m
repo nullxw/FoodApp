@@ -107,7 +107,8 @@
     [self.view addSubview:imageView];
     
     UIImageView *imageViewTitle=[[UIImageView alloc]init];
-    imageViewTitle.backgroundColor=selfbackgroundColor;
+//    imageViewTitle.backgroundColor=selfbackgroundColor;
+    imageViewTitle.backgroundColor=[UIColor colorWithRed:255/255.0f green:243/255.0f blue:143/255.0f alpha:1];
     imageViewTitle.frame=CGRectMake(0, 0, SUPERVIEWWIDTH, VIEWHEIGHT);
     [self.view addSubview:imageViewTitle];
     
@@ -321,7 +322,7 @@
     {
         OnePic=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 170)];
         [OnePic addSubview:[viewsArray firstObject]];
-        OnePic.backgroundColor=[UIColor yellowColor];
+        OnePic.backgroundColor=[UIColor clearColor];
         OnePic.contentOffset=CGPointMake(0, 0);
         [_background addSubview:OnePic];
         
