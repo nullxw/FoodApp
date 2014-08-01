@@ -193,10 +193,15 @@
             }
             if(!isFound)
             {
-                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"你所在的城市中没有全聚德门店\n默认选择城市为北京" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                [alert show];
-                [DataProvider sharedInstance].localCity=@"北京市";
-                 [[NSNotificationCenter defaultCenter]postNotificationName:@"refushLocal" object:nil];
+                bs_dispatch_sync_on_main_thread(^{
+                    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"你所在的城市中没有全聚德门店\n默认选择城市为北京" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                    [alert show];
+                    [DataProvider sharedInstance].localCity=@"北京市";
+                    [[NSNotificationCenter defaultCenter]postNotificationName:@"refushLocal" object:nil];
+                });
+                
+                
+               
             }
             canPush=YES;
             [SVProgressHUD dismiss];
