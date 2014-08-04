@@ -502,6 +502,8 @@
         }
         
         int MoonDay;
+        selectMoon=[[_dataMoon objectAtIndex:[pickerView selectedRowInComponent:1]] integerValue];
+        
         if(selectMoon==1||selectMoon==3||selectMoon==5||selectMoon==7||selectMoon==8||selectMoon==10||selectMoon==12)
         {
             MoonDay=31;
@@ -523,7 +525,7 @@
         }
         _dataDay=[[NSMutableArray alloc]init];
         NSInteger   dayNum=1;
-        selectMoon=[[_dataMoon objectAtIndex:[pickerView selectedRowInComponent:1]] integerValue];
+
         if([NowMoon integerValue]==selectMoon)
         {
             dayNum=[NowDay integerValue];//当前月份，日期从当前日期开始，否则，从1号开始
@@ -532,9 +534,8 @@
         {
             [_dataDay addObject:[NSString stringWithFormat:@"%d",i]];
         }
+            return [_dataDay count];
     }
-    return [_dataDay count];
-    
 }
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
@@ -558,6 +559,7 @@
     }
     else
     {
+        
         selectDay=[[_dataDay objectAtIndex:row]integerValue];
         return [_dataDay objectAtIndex:row];
     }

@@ -22,6 +22,8 @@
     NSMutableArray  *_ratingViewArray;
     NSString        *_storeId;
     
+    UITextView  *content;
+    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -82,7 +84,10 @@
         {
             [SVProgressHUD dismiss];
             NSArray *valueArray=[[NSArray alloc]initWithArray:[dicCity objectForKey:@"Message"]];
-            [self creatView:valueArray];
+            bs_dispatch_sync_on_main_thread(^{
+                  [self creatView:valueArray];
+            });
+            
         }else{
             [SVProgressHUD showErrorWithStatus:[dicCity objectForKey:@"Message"]];
         }
@@ -148,9 +153,17 @@
         height=rat.frame.origin.y+rat.frame.size.height;
     }
     
+    content=[[UITextView alloc]initWithFrame:CGRectMake(10, height+30,  SUPERVIEWWIDTH-20, 60)];
+    content.delegate=self;
+    content.text=@"写点评价吧，对我们帮助很大的哦!";
+    content.layer.borderColor=selfborderColor.CGColor;
+    content.layer.borderWidth=0.5;
+    content.backgroundColor=[[UIColor darkGrayColor]colorWithAlphaComponent:0.2];
+    [_backGround addSubview:content];
+    
     UIButton *nextButton=[UIButton buttonWithType:UIButtonTypeCustom];
     [nextButton setBackgroundColor:[UIColor whiteColor]];
-    nextButton.frame=CGRectMake(10, height+30, SUPERVIEWWIDTH-20, 30);
+    nextButton.frame=CGRectMake(10, content.frame.origin.y+content.frame.size.height+30, SUPERVIEWWIDTH-20, 30);
     [nextButton setBackgroundImage:[UIImage imageNamed:@"Public_nextButtonNomal.png"] forState:UIControlStateNormal];
     [nextButton setBackgroundImage:[UIImage imageNamed:@"Public_nextButtonSelect.png"] forState:UIControlStateHighlighted];
     nextButton.layer.cornerRadius=5.0;
@@ -168,7 +181,17 @@
     [_backGround addSubview:nextButton];
     
     [_backGround setContentSize:CGSizeMake(ScreenWidth, nextButton.frame.origin.y+nextButton.frame.size.height+30)];
+    
+    UIControl *controller=[[UIControl alloc]initWithFrame:_backGround.frame];
+    [controller addTarget:self action:@selector(keyboardSHow) forControlEvents:UIControlEventTouchUpInside];
+    [_backGround addSubview:controller];
+    [_backGround sendSubviewToBack:controller];
 
+}
+
+-(void)keyboardSHow
+{
+    [content resignFirstResponder];
 }
 
 -(void)nextButtonClick
@@ -200,6 +223,14 @@
     [info setObject:[[NSUserDefaults standardUserDefaults]objectForKey:@"userId"] forKey:@"cardId"];
     [info setObject:[[NSUserDefaults standardUserDefaults]objectForKey:@"userName"] forKey:@"account"];
     [info setObject:[NSString stringWithFormat:@"[%@]",str] forKey:@"scoredtl"];
+    if([content.text isEqualToString:@"写点评价吧，对我们帮助很大的哦!"])
+    {
+        [info setObject:@"" forKey:@"content"];
+    }
+    else
+    {
+        [info setObject:content.text forKey:@"content"];
+    }
     [SVProgressHUD showProgress:-1 status:[langSetting localizedString:@"load..."] maskType:SVProgressHUDMaskTypeBlack];
     [NSThread detachNewThreadSelector:@selector(saveEvalColumn:) toTarget:self withObject:info];
     
@@ -265,6 +296,37 @@
         }
     }
     
+}
+
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
+    
+    if([content.text isEqualToString:@"写点评价吧，对我们帮助很大的哦!"])
+    {
+        content.text=@"";
+    }
+    [UIView animateWithDuration:0.3f animations:^{
+        
+        _backGround.frame=CGRectMake(0, -130, ScreenWidth, ScreenHeight);
+        
+        } completion:^(BOOL finished) {
+        
+    }];
+    
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView
+{
+    [UIView animateWithDuration:0.3f animations:^{
+        
+       _backGround.frame=CGRectMake(0,VIEWHRIGHT, SUPERVIEWWIDTH, SUPERVIEWHEIGHT-VIEWHRIGHT);
+        
+    } completion:^(BOOL finished) {
+        if([textView.text isEqualToString:@""])
+        {
+            textView.text=@"写点评价吧，对我们帮助很大的哦!";
+        }
+    }];
 }
 
 #pragma mark AlertViewDelegate

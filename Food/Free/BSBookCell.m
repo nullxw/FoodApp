@@ -145,7 +145,7 @@
         
         
         _lineView.frame=CGRectMake(80, 36, labelSize.width, 1);
-        if([info objectForKey:@"price3"]==nil)
+        if([info objectForKey:@"price3"]==nil || [[info objectForKey:@"price3"]isEqualToString:[info objectForKey:@"price2"]])
         {
             [_lineView removeFromSuperview];
             [_priceLable removeFromSuperview];
@@ -205,7 +205,7 @@
         
         
         _lineView.frame=CGRectMake(80, 36, labelSize.width, 1);
-        if([info objectForKey:@"price3"]==nil)
+        if([info objectForKey:@"price3"]==nil || [[info objectForKey:@"price3"]isEqualToString:[info objectForKey:@"price2"]])
         {
             [_lineView removeFromSuperview];
             [_priceLable removeFromSuperview];
@@ -285,7 +285,6 @@
 
 //点击套餐图片
 -(void)packageClick{
-    
     cellImageClick(self.dicInfo);
 }
 //点击菜品图片

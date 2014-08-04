@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RatingView.h"
 
-@interface StarRatingViewController : UIViewController<RatingViewDelegate,navigationBarViewDeleGete,UIAlertViewDelegate>
+@interface StarRatingViewController : UIViewController<RatingViewDelegate,navigationBarViewDeleGete,UIAlertViewDelegate,UITextViewDelegate>
 
 
 -(void)setStoreMessage:(NSString *)storeId;
