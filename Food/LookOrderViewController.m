@@ -66,7 +66,7 @@
     imageView.userInteractionEnabled=YES;
     [self.view addSubview:imageView];
     
-    navigationBarView *nvc=[[navigationBarView alloc]initWithFrame:CGRectMake(0, 0, SUPERVIEWWIDTH, VIEWHRIGHT) andTitle:@"预定详情"];
+    navigationBarView *nvc=[[navigationBarView alloc]initWithFrame:CGRectMake(0, 0, SUPERVIEWWIDTH, VIEWHRIGHT) andTitle:@"预订详情"];
     nvc.delegate=self;
     [self.view addSubview:nvc];
     

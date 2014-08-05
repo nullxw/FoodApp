@@ -64,11 +64,11 @@
     NSLog(@"%f",ScreenHeight);
     if(ScreenHeight==568)
     {
-        imageName=@"Author_main3.jpg";
+        imageName=@"Default-568h@2x.png";
     }
     else
     {
-        imageName=@"Author_main.jpg";
+        imageName=@"Default.png";
     }
     UIImageView *imageView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:imageName]];
     imageView.frame=self.view.bounds;

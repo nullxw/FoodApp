@@ -592,7 +592,7 @@ static  DataProvider *_dataProvide = nil;
     datMins = [dicInfo objectForKey:@"Date"];
     firmId = [[dicInfo objectForKey:@"Store"] objectForKey:@"firmid"];
     remark = [dicInfo objectForKey:@"remark"];//特殊备注
-    NSString  *orderId=[dicInfo objectForKey:@"orderId"];//在线预点预定台位id
+    NSString  *orderId=[dicInfo objectForKey:@"orderId"];//在线预点预订台位id
     
     [fdItemDtl appendString:@"["];
     int i = 0;
@@ -1375,7 +1375,7 @@ static  DataProvider *_dataProvide = nil;
     
 }
 
-//获取我的预定
+//获取我的预订
 -(NSDictionary *)getOrderMenus:(NSMutableDictionary *)Info
 {
     NSString *cardId=[Info objectForKey:@"userId"];
@@ -1415,7 +1415,7 @@ static  DataProvider *_dataProvide = nil;
     
 }
 
-//取消预定
+//取消预订
 -(NSDictionary *)cancelOrder:(NSMutableDictionary *)Info
 {
     NSString    *orderId=[Info objectForKey:@"orderId"];

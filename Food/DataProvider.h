@@ -46,8 +46,8 @@
     BOOL           _isFirst;//是否为第一次绑定会员卡
     
     //用于在线预点菜品提交的单利信息
-    BOOL           _isReserveis;//判断是否为在线预定，或者自助点餐，真为在线预定
-    NSString        *_tableId;//在线预定的台位id
+    BOOL           _isReserveis;//判断是否为在线预订，或者自助点餐，真为在线预订
+    NSString        *_tableId;//在线预订的台位id
     NSString       *_phoneNum;//提交信息的电话
     
     //    导航条的北京是否为1透明色
@@ -221,10 +221,10 @@
 -(NSDictionary *)queryConsumeRecord:(NSMutableDictionary *)Info;
 
 
-//获取我的预定
+//获取我的预订
 -(NSDictionary *)getOrderMenus:(NSMutableDictionary *)Info;
 
-//取消预定
+//取消预订
 -(NSDictionary *)cancelOrder:(NSMutableDictionary *)Info;
 
 //获取排队叫号的门店列表

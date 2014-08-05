@@ -169,9 +169,9 @@
 		704710FF192D887A00EE2135 /* addOtherPassVertryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 704710FE192D887A00EE2135 /* addOtherPassVertryViewController.m */; };
 		70471102192DA8AA00EE2135 /* queneSuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70471101192DA8AA00EE2135 /* queneSuccessView.m */; };
 		7047E2A11938358D002C4ED1 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 7047E29B1938358D002C4ED1 /* iTunesArtwork.png */; };
-		7047E2B119387E03002C4ED1 /* Author_main@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7047E2AF19387E03002C4ED1 /* Author_main@2x.jpg */; };
-		7047E2B219387E03002C4ED1 /* Author_main3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7047E2B019387E03002C4ED1 /* Author_main3.jpg */; };
-		7047E2B419387EE6002C4ED1 /* Author_main.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7047E2B319387EE6002C4ED1 /* Author_main.jpg */; };
+		7047E2B119387E03002C4ED1 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7047E2AF19387E03002C4ED1 /* Default@2x.png */; };
+		7047E2B219387E03002C4ED1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7047E2B019387E03002C4ED1 /* Default-568h@2x.png */; };
+		7047E2B419387EE6002C4ED1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7047E2B319387EE6002C4ED1 /* Default.png */; };
 		704A2A461963935400DAA77F /* StarRatingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 704A2A451963935400DAA77F /* StarRatingViewController.m */; };
 		704A2A501963939400DAA77F /* RatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 704A2A4F1963939400DAA77F /* RatingView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		704A2A541963ADDC00DAA77F /* Public_starFull.png in Resources */ = {isa = PBXBuildFile; fileRef = 704A2A511963ADDC00DAA77F /* Public_starFull.png */; };
@@ -216,6 +216,7 @@
 		7077D23D18F3D561006641C3 /* changeCity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7077D23C18F3D561006641C3 /* changeCity.m */; };
 		707DB2051962949C009C818C /* Public_sexcant@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 707DB2041962949C009C818C /* Public_sexcant@2x.png */; };
 		707DB2071962A30E009C818C /* Public_sexcant.png in Resources */ = {isa = PBXBuildFile; fileRef = 707DB2061962A30E009C818C /* Public_sexcant.png */; };
+		7086E7C1198F829200B86D14 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7086E7C0198F829200B86D14 /* CoreText.framework */; };
 		7088A75F1918D44C0038281F /* Map_AnnNomal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7088A7541918D44C0038281F /* Map_AnnNomal.png */; };
 		7088A7601918D44C0038281F /* Map_BusNomal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7088A7551918D44C0038281F /* Map_BusNomal.png */; };
 		7088A7611918D44C0038281F /* Map_BusSelect.png in Resources */ = {isa = PBXBuildFile; fileRef = 7088A7561918D44C0038281F /* Map_BusSelect.png */; };
@@ -678,9 +679,9 @@
 		70471100192DA8AA00EE2135 /* queneSuccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = queneSuccessView.h; sourceTree = "<group>"; };
 		70471101192DA8AA00EE2135 /* queneSuccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = queneSuccessView.m; sourceTree = "<group>"; };
 		7047E29B1938358D002C4ED1 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
-		7047E2AF19387E03002C4ED1 /* Author_main@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Author_main@2x.jpg"; sourceTree = "<group>"; };
-		7047E2B019387E03002C4ED1 /* Author_main3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Author_main3.jpg; sourceTree = "<group>"; };
-		7047E2B319387EE6002C4ED1 /* Author_main.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Author_main.jpg; sourceTree = "<group>"; };
+		7047E2AF19387E03002C4ED1 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Library/images/Default@2x.png"; sourceTree = "<group>"; };
+		7047E2B019387E03002C4ED1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Library/images/Default-568h@2x.png"; sourceTree = "<group>"; };
+		7047E2B319387EE6002C4ED1 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Library/images/Default.png; sourceTree = "<group>"; };
 		704A2A441963935400DAA77F /* StarRatingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarRatingViewController.h; sourceTree = "<group>"; };
 		704A2A451963935400DAA77F /* StarRatingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarRatingViewController.m; sourceTree = "<group>"; };
 		704A2A4E1963939400DAA77F /* RatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingView.h; sourceTree = "<group>"; };
@@ -737,6 +738,7 @@
 		7077D23C18F3D561006641C3 /* changeCity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = changeCity.m; path = showTable/changeCity.m; sourceTree = "<group>"; };
 		707DB2041962949C009C818C /* Public_sexcant@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Public_sexcant@2x.png"; sourceTree = "<group>"; };
 		707DB2061962A30E009C818C /* Public_sexcant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Public_sexcant.png; sourceTree = "<group>"; };
+		7086E7C0198F829200B86D14 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		7088A7541918D44C0038281F /* Map_AnnNomal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Map_AnnNomal.png; sourceTree = "<group>"; };
 		7088A7551918D44C0038281F /* Map_BusNomal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Map_BusNomal.png; sourceTree = "<group>"; };
 		7088A7561918D44C0038281F /* Map_BusSelect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Map_BusSelect.png; sourceTree = "<group>"; };
@@ -992,6 +994,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7086E7C1198F829200B86D14 /* CoreText.framework in Frameworks */,
 				70AB3AEE1917348A0099FC7E /* Security.framework in Frameworks */,
 				1B8F79C118DFCCBA00D024C8 /* CoreGraphics.framework in Frameworks */,
 				70AB3AEC1917346B0099FC7E /* OpenGLES.framework in Frameworks */,
@@ -1067,6 +1070,7 @@
 		1B8F79BD18DFCCBA00D024C8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7086E7C0198F829200B86D14 /* CoreText.framework */,
 				70AB3AED1917348A0099FC7E /* Security.framework */,
 				70AB3AEB1917346B0099FC7E /* OpenGLES.framework */,
 				70AB3AE9191734440099FC7E /* QuartzCore.framework */,
@@ -1435,6 +1439,9 @@
 		706541461989EBC3001DFB74 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				7047E2B319387EE6002C4ED1 /* Default.png */,
+				7047E2AF19387E03002C4ED1 /* Default@2x.png */,
+				7047E2B019387E03002C4ED1 /* Default-568h@2x.png */,
 				706541471989EBC3001DFB74 /* Icon-120.png */,
 				706541481989EBC3001DFB74 /* Icon-72.png */,
 				706541491989EBC3001DFB74 /* Icon-80.png */,
@@ -1630,9 +1637,6 @@
 		70AC2B971907B0C20000634A /* images */ = {
 			isa = PBXGroup;
 			children = (
-				7047E2B319387EE6002C4ED1 /* Author_main.jpg */,
-				7047E2AF19387E03002C4ED1 /* Author_main@2x.jpg */,
-				7047E2B019387E03002C4ED1 /* Author_main3.jpg */,
 				70AC2B991907B0C20000634A /* images */,
 				70AC2BDA1907B0C20000634A /* images@2x */,
 				70AC2C1E1907B0C20000634A /* separator.png */,
@@ -2199,7 +2203,7 @@
 				1B8F79D118DFCCBA00D024C8 /* Images.xcassets in Resources */,
 				1B8A2AFE18FE215F00C4EBD9 /* multipy_unicode.dat in Resources */,
 				706F6C2B1921A409007B2EEE /* Public_balance@2x.png in Resources */,
-				7047E2B119387E03002C4ED1 /* Author_main@2x.jpg in Resources */,
+				7047E2B119387E03002C4ED1 /* Default@2x.png in Resources */,
 				70279674190A0CF6003EA6B8 /* Public_sexSelect.png in Resources */,
 				70AC2C821907B0C20000634A /* Order_padup@2x.png in Resources */,
 				7088A7611918D44C0038281F /* Map_BusSelect.png in Resources */,
@@ -2231,7 +2235,7 @@
 				70279680190A0CF6003EA6B8 /* userImage.png in Resources */,
 				700B04391929EF8F00FE889F /* num_5.png in Resources */,
 				1BE22822191729E20043274B /* yhxx.png in Resources */,
-				7047E2B419387EE6002C4ED1 /* Author_main.jpg in Resources */,
+				7047E2B419387EE6002C4ED1 /* Default.png in Resources */,
 				707DB2051962949C009C818C /* Public_sexcant@2x.png in Resources */,
 				70279677190A0CF6003EA6B8 /* Public_specific.png in Resources */,
 				1BE22823191729E20043274B /* yhxxx.png in Resources */,
@@ -2267,7 +2271,7 @@
 				70AC2C341907B0C20000634A /* Order_butBgW.png in Resources */,
 				700B04291929EF8400FE889F /* vipmessage.png in Resources */,
 				700B04361929EF8F00FE889F /* num_2.png in Resources */,
-				7047E2B219387E03002C4ED1 /* Author_main3.jpg in Resources */,
+				7047E2B219387E03002C4ED1 /* Default-568h@2x.png in Resources */,
 				1BCCD7F618FD320500B81965 /* grayArrow.png in Resources */,
 				70BC28C11908A38B0081FF73 /* Public_specific@2x.png in Resources */,
 				70AC2C3E1907B0C20000634A /* Order_padbg.png in Resources */,
@@ -2620,7 +2624,6 @@
 		1B8F79E818DFCCBB00D024C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphonesimulator7.1]" = "iPhone Distribution: Beijing Choice Century Seience Technology Co., Ltd.";
@@ -2646,7 +2649,6 @@
 		1B8F79E918DFCCBB00D024C8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphonesimulator7.1]" = "iPhone Distribution: Beijing Choice Century Seience Technology Co., Ltd.";

@@ -21,6 +21,8 @@
     
     UITableView         *_tableView;
     NSMutableArray      *_dataArray;
+    
+    NSMutableArray      *_allDataArray;
 }
 
 
@@ -48,7 +50,7 @@
     imageView.userInteractionEnabled=YES;
     [self.view addSubview:imageView];
     
-    navigationBarView *nvc=[[navigationBarView alloc]initWithFrame:CGRectMake(0, 0, SUPERVIEWWIDTH, VIEWHRIGHT) andTitle:[langSetting localizedString:@"My reservation"]];//我的预定
+    navigationBarView *nvc=[[navigationBarView alloc]initWithFrame:CGRectMake(0, 0, SUPERVIEWWIDTH, VIEWHRIGHT) andTitle:[langSetting localizedString:@"My reservation"]];//我的预订
     nvc.delegate=self;
     [self.view addSubview:nvc];
     
@@ -69,7 +71,7 @@
      [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(refushOrder) name:@"refushOrder" object:nil];
 }
 
-//请求获取预定账单
+//请求获取预订账单
 -(void)refushOrder
 {
     [SVProgressHUD showProgress:-1 status:[langSetting localizedString:@"load..."] maskType:SVProgressHUDMaskTypeBlack];
@@ -104,6 +106,7 @@
             if([[dict objectForKey:@"Result"]boolValue])
             {
                 NSArray *dataArray=[[NSArray alloc]initWithArray:[dict objectForKey:@"Message"]];
+                _allDataArray=[[NSMutableArray alloc]initWithArray:dataArray];
                 _dataArray=[[NSMutableArray alloc]init];
                 for (NSDictionary *dict in dataArray)
                 {
@@ -223,7 +226,7 @@
 
 
 /*
- //请求获取预定账单
+ //请求获取预订账单
  -(void)refushOrder
 
  //请求结果处理

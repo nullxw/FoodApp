@@ -340,7 +340,7 @@
     }
     else
     {
-        mainScorllView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 170) animationDuration:10];
+        mainScorllView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 170) animationDuration:6];
         mainScorllView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:1];
         mainScorllView.scrollView.showsHorizontalScrollIndicator=NO;
         [_background addSubview:mainScorllView];

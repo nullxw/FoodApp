@@ -47,7 +47,7 @@
 		<key>stores</key>
 		<string>门       店</string>
 		<key>A due date</key>
-		<string>预定日期</string>
+		<string>预订日期</string>
 		<key>market</key>
 		<string>餐       次</string>
 		<key>time</key>
@@ -145,7 +145,7 @@
 		<key>Password length is not correct</key>
 		<string>密码长度不正确</string>
 		<key>My reservation</key>
-		<string>我的预定</string>
+		<string>我的预订</string>
 		<key>My equipotential</key>
 		<string>我的等位</string>
 		<key>Online booking</key>
@@ -176,9 +176,9 @@
 		<key>Please first binding mobile phone number</key>
 		<string>请先绑定手机号码</string>
 		<key>No reservation record</key>
-		<string>暂无预定记录</string>
+		<string>暂无预订记录</string>
 		<key>Cancel the reservation</key>
-		<string>取消预定</string>
+		<string>取消预订</string>
 		<key>Stores</key>
 		<string>店名</string>
 		<key>Date</key>

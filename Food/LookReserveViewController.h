@@ -11,7 +11,7 @@
 @interface LookReserveViewController : UIViewController<navigationBarViewDeleGete,UIAlertViewDelegate>
 
 
-//设置预定详情
+//设置预订详情
 -(void)setReserve:(NSDictionary *)Info;
 
 @end

@@ -15,7 +15,7 @@
 
 @implementation LookReserveViewController
 {
-    UIView              *_backGround;
+    UIScrollView              *_backGround;
     CGFloat             VIEWHRIGHT;
 
     CVLocalizationSetting *langSetting;
@@ -57,17 +57,17 @@
     imageView.userInteractionEnabled=YES;
     [self.view addSubview:imageView];
     
-    navigationBarView *nvc=[[navigationBarView alloc]initWithFrame:CGRectMake(0, 0, SUPERVIEWWIDTH, VIEWHRIGHT) andTitle:@"预定详情"];
+    navigationBarView *nvc=[[navigationBarView alloc]initWithFrame:CGRectMake(0, 0, SUPERVIEWWIDTH, VIEWHRIGHT) andTitle:@"预订详情"];
     nvc.delegate=self;
     [self.view addSubview:nvc];
     
-    _backGround=[[UIView alloc]init];
-    _backGround.frame=CGRectMake(0,VIEWHRIGHT, SUPERVIEWWIDTH, SUPERVIEWHEIGHT);
+    _backGround=[[UIScrollView alloc]init];
+    _backGround.frame=CGRectMake(0,VIEWHRIGHT, SUPERVIEWWIDTH, SUPERVIEWHEIGHT-VIEWHRIGHT);
     _backGround.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:_backGround];
     
     
-    for (int i=0; i<6; i++)
+    for (int i=0; i<8; i++)
     {
         UIView *backView=[[UIView alloc]initWithFrame:CGRectMake(5,i*41+20, _backGround.frame.size.width-10, 40)];
         backView.backgroundColor=[UIColor clearColor];
@@ -143,13 +143,23 @@
             {
                 //地址
                 lblLeft.text=@"门店地址:";
-//                [NSString stringWithFormat:@"%@:",[langSetting localizedString:@"Address"]];
+                //                [NSString stringWithFormat:@"%@:",[langSetting localizedString:@"Address"]];
                 lblTitle.text=[_info objectForKey:@"addr"];
                 lblTitle.font=[UIFont systemFontOfSize:14];
                 lblTitle.numberOfLines=2;
             }
                 break;
             case 5:
+            {
+                //地址
+                lblLeft.text=@"订单号码:";
+//                [NSString stringWithFormat:@"%@:",[langSetting localizedString:@"Address"]];
+                lblTitle.text=[_info objectForKey:@"resv"];
+                lblTitle.font=[UIFont systemFontOfSize:14];
+                lblTitle.numberOfLines=2;
+            }
+                break;
+            case 6:
             {
                 //电话
                 lblLeft.text=@"门店电话:";
@@ -166,7 +176,7 @@
                 
             }
                 break;
-            case 6:
+            case 7:
             {
                 //备注
                 lblLeft.text=@"订单备注:";
@@ -202,7 +212,7 @@
     [buttonLookOrder setBackgroundImage:[UIImage imageNamed:@"Public_nextButtonNomal.png"] forState:UIControlStateNormal];
     [buttonLookOrder setBackgroundImage:[UIImage imageNamed:@"Public_nextButtonSelect.png"] forState:UIControlStateHighlighted];
     buttonLookOrder.frame=CGRectMake(10, height+30,( _backGround.frame.size.width-30)/2, 40);
-    //取消预定
+    //取消预订
     [buttonLookOrder setTitle:@"菜品详情" forState:UIControlStateNormal];
     [buttonLookOrder addTarget:self action:@selector(buttonClickLookOrder) forControlEvents:UIControlEventTouchUpInside];
     
@@ -212,21 +222,22 @@
     [buttonCancle setBackgroundImage:[UIImage imageNamed:@"Public_nextButtonNomal.png"] forState:UIControlStateNormal];
     [buttonCancle setBackgroundImage:[UIImage imageNamed:@"Public_nextButtonSelect.png"] forState:UIControlStateHighlighted];
     buttonCancle.frame=CGRectMake(( _backGround.frame.size.width-30)/2+20, height+30, ( _backGround.frame.size.width-30)/2, 40);
-    //取消预定
+    //取消预订
     [buttonCancle setTitle:[langSetting localizedString:@"Cancel the reservation"] forState:UIControlStateNormal];
     [buttonCancle addTarget:self action:@selector(buttonClick) forControlEvents:UIControlEventTouchUpInside];
 
     [_backGround addSubview:buttonCancle];
+    [_backGround setContentSize:CGSizeMake(0, buttonCancle.frame.size.height+buttonCancle.frame.origin.y+30)];
     
 }
 
-//取消预定请求事件
+//取消预订请求事件
 -(void)buttonClick
 {
     [SVProgressHUD showProgress:-1 status:[langSetting localizedString:@"load..."] maskType:SVProgressHUDMaskTypeBlack];
     [NSThread detachNewThreadSelector:@selector(cancelOrder) toTarget:self withObject:nil];
 }
-//取消预定处理结果
+//取消预订处理结果
 -(void)cancelOrder
 {
     @autoreleasepool
@@ -239,7 +250,7 @@
         {
             [SVProgressHUD dismiss];
             bs_dispatch_sync_on_main_thread(^{
-                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"预定取消成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"预订取消成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                 [alert show];
                 });
 

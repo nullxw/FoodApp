@@ -284,19 +284,19 @@ NSComparator cmptr = ^(id obj1, id obj2){
 
 
 
--(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
-{
-    return _alphabetArray;
-    //    NSArray *indexList = [NSMutableArray arrayWithObjects:
-    //                          @"A", @"B", @"C", @"D", @"E", @"F",
-    //                          @"G", @"H", @"I", @"J", @"K", @"L",
-    //                          @"M", @"N", @"O", @"P", @"Q", @"R",
-    //                          @"S", @"T", @"U", @"V", @"W", @"X",
-    //                          @"Y", @"Z", @"#", nil
-    //                          ];
-    //    NSLog(@"%@",indexList);
-    //    return indexList ;
-}
+//-(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+//{
+//    return _alphabetArray;
+//    //    NSArray *indexList = [NSMutableArray arrayWithObjects:
+//    //                          @"A", @"B", @"C", @"D", @"E", @"F",
+//    //                          @"G", @"H", @"I", @"J", @"K", @"L",
+//    //                          @"M", @"N", @"O", @"P", @"Q", @"R",
+//    //                          @"S", @"T", @"U", @"V", @"W", @"X",
+//    //                          @"Y", @"Z", @"#", nil
+//    //                          ];
+//    //    NSLog(@"%@",indexList);
+//    //    return indexList ;
+//}
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

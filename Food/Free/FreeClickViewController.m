@@ -203,7 +203,7 @@
             
         }
         
-    }else if (button.tag == 102){//预定日期
+    }else if (button.tag == 102){//预订日期
         flag = 2;
         [self showPickView];
     }else if (button.tag == 103){//市别
@@ -266,7 +266,7 @@
         [SVProgressHUD showErrorWithStatus:[langSetting localizedString:@"Select Stores"]];
         return;
     }
-    //预定日期
+    //预订日期
     UILabel *lblYuDing = (UILabel *)[self.view viewWithTag:202];
     if ([lblYuDing.text isEqualToString:[langSetting localizedString:@"Select Date"]]) {
         [SVProgressHUD showErrorWithStatus:[langSetting localizedString:@"Select Date"]];
@@ -396,7 +396,7 @@
         vPicker = nil;
     }];
     
-    //预定日期
+    //预订日期
     UILabel *lblYuDing = (UILabel *)[self.view viewWithTag:202];
     lblYuDing.frame = CGRectMake(200, 20, 90, 20);
     
