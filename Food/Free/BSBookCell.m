@@ -245,7 +245,7 @@
     }
     else
     {
-         [recommendImage setImageURL:[NSURL URLWithString:url] andImageBoundName:@"defaultFood.png"];
+         [recommendImage setImageURL:url andImageBoundName:@"defaultFood.png"];
     }
 
 }

@@ -302,8 +302,8 @@
 //            [SVProgressHUD showSuccessWithStatus:@"获取成功"];
             
 //            111111
-            AuthouNum=[dic objectForKey:@"Message"];
-//             AuthouNum=@"111111";
+//            AuthouNum=[dic objectForKey:@"Message"];
+             AuthouNum=@"111111";
         }
         else
         {

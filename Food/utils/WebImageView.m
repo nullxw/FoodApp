@@ -24,17 +24,17 @@
     return self;
 }
 
-- (void)setImageURL:(NSURL *)url andImageBoundName:(NSString *)imageName{
+- (void)setImageURL:(NSString *)url andImageBoundName:(NSString *)imageName{
     //同步请求
 //    [self synchronous:url];
     
     //异步请求
     NSString *strurl=[NSString stringWithFormat:@"%@",url];
-        NSArray *array=[strurl componentsSeparatedByString:@"#"];
-    if([[array lastObject]isEqualToString:@"ads"])
-    {
-        strurl=[array firstObject];
-    }
+//        NSArray *array=[strurl componentsSeparatedByString:@"#"];
+//    if([[array lastObject]isEqualToString:@"ads"])
+//    {
+//        strurl=[array firstObject];
+//    }
     _url=[NSString stringWithFormat:@"%@",strurl];
     [self aSynchronous2:strurl andImageName:imageName];
 }
@@ -44,18 +44,24 @@
 {
     NSLog(@"======>>网络");
     WebImageView *__block imageSelf=self;
-    NSURLRequest* requestAft = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+
+    NSMutableURLRequest *requestAft = [[NSMutableURLRequest alloc] init];
+    [requestAft setURL:[NSURL URLWithString:url]];
+    [requestAft setTimeoutInterval:10.0f];
     self.operation = [[AFHTTPRequestOperation alloc] initWithRequest:requestAft];
     //设置下载完成调用的block
     [self.operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation* operation, id responseObject){
-
+// URL: http://www.quanjude.com.cn/upload/app/4f9118a1619d40139c1be271aa608447.jpg, headers: (null)
         //NSLog(@"%@",operation.responseData)
         NSData *data=operation.responseData;
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *localPath = [paths objectAtIndex:0];
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSString *DirectoryPath=[localPath stringByAppendingString:@"/ads"];
+        if(![fileManager fileExistsAtPath:DirectoryPath])
+        {
         [fileManager createDirectoryAtPath:DirectoryPath withIntermediateDirectories:YES attributes:nil error:nil];
+        }
         NSString *filePath;
         if([[[url componentsSeparatedByString:@"#"]lastObject]isEqualToString:@"ads"])
         {
@@ -83,6 +89,7 @@
         
     }failure:^(AFHTTPRequestOperation* operation, NSError* error){
         [imageSelf setImage:[UIImage imageNamed:imageName]];
+        NSLog(@"下载失败%@",error);
     }];
     //开始下载
     [self.operation start];

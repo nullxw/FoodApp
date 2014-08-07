@@ -381,30 +381,30 @@
 -(void)getImage:(NSMutableDictionary *)dict
 {
     @autoreleasepool {
-        NSString *url=[NSString stringWithFormat:@"%@%@#ads",[[DataProvider getIpPlist]objectForKey:@"adPicURL"],[dict objectForKey:@"url"]];
+        NSString *indexUrl=[NSString stringWithFormat:@"%@%@#ads",[[DataProvider getIpPlist]objectForKey:@"adPicURL"],[dict objectForKey:@"url"]];
         //        通过文件后缀含有ads判断缓存文件为广告文件，将广告文件单独缓存在一个文件夹下
         if([[dict objectForKey:@"gif"]boolValue])
         {
             WebwebView *webView=[dict objectForKey:@"imageView"];
-            if([self imageCache:url])
+            if([self imageCache:indexUrl])
             {
-                [webView loadData:[self imageCache:url] MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+                [webView loadData:[self imageCache:indexUrl] MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
             }
             else
             {
-                [webView setImageURL:[NSURL URLWithString:url]];
+                [webView setImageURL:indexUrl];
             }
         }
         else
         {
             WebImageView *imageView=[dict objectForKey:@"imageView"];
-            if([self imageCache:url])
+            if([self imageCache:indexUrl])
             {
-                [imageView setImage:[UIImage imageWithData:[self imageCache:url]]];
+                [imageView setImage:[UIImage imageWithData:[self imageCache:indexUrl]]];
             }
             else
             {
-                [imageView setImageURL:[NSURL URLWithString:url] andImageBoundName:@"ad_logoPng.png"];
+                [imageView setImageURL:indexUrl andImageBoundName:@"ad_logoPng.png"];
             }
         }
     }

@@ -204,7 +204,7 @@
         [_recommendImage setImage:[UIImage imageNamed:@"defaultFood.png"]];
         [self setSmallImage:info];
 //        [NSThread detachNewThreadSelector:@selector(setSmallImage:) toTarget:self withObject:info];
-//        [_recommendImage setImageURL:[NSURL URLWithString:[info objectForKey:@"smallUrl"]]];
+//        [_recommendImage setImageURL:[info objectForKey:@"smallUrl"]];
         
         //初始化点击图片的按钮
         _butImage = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -363,7 +363,7 @@
     }
     else
     {
-        [_recommendImage setImageURL:[NSURL URLWithString:url] andImageBoundName:@"defaultFood.png"];
+        [_recommendImage setImageURL:url andImageBoundName:@"defaultFood.png"];
     }
     
 }
@@ -377,7 +377,7 @@
     }
     else
     {
-        [_recommendImage setImageURL:[NSURL URLWithString:url] andImageBoundName:@"defaultFood.png"];
+        [_recommendImage setImageURL:url andImageBoundName:@"defaultFood.png"];
     }
 }
 

@@ -72,7 +72,7 @@
     }
     else
     {
-        [imgTop setImageURL:[NSURL URLWithString:[info objectForKey:@"wurl"]] andImageBoundName:@"defaultFood.png"];
+        [imgTop setImageURL:[info objectForKey:@"wurl"] andImageBoundName:@"defaultFood.png"];
     }
     
 }

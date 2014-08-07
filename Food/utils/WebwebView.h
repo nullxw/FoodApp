@@ -16,7 +16,7 @@
 
 }
 
-- (void)setImageURL:(NSURL *)url;
+- (void)setImageURL:(NSString *)url;
 -(void)cancelRequest;
 @property(nonatomic,strong)AFHTTPRequestOperation* operation;
 

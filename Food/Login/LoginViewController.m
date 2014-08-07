@@ -62,14 +62,7 @@
     
     NSString *imageName;
     NSLog(@"%f",ScreenHeight);
-    if(ScreenHeight==568)
-    {
-        imageName=@"Default-568h@2x.png";
-    }
-    else
-    {
-        imageName=@"Default.png";
-    }
+    imageName=@"Default.png";
     UIImageView *imageView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:imageName]];
     imageView.frame=self.view.bounds;
     [self.view addSubview:imageView];
@@ -273,8 +266,8 @@
             NSDictionary *dic = [dp getPhoneAuthCode:tfPhone.text];
             if ([[dic objectForKey:@"Result"] boolValue]) {
 //                111111
-                AuthouNum=[dic objectForKey:@"Message"];
-//                AuthouNum=@"111111";
+//                AuthouNum=[dic objectForKey:@"Message"];
+                AuthouNum=@"111111";
             }else
             {
                 _authorPhoneNum=nil;

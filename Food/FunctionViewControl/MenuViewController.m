@@ -415,7 +415,7 @@
             }
             else
             {
-                [webView setImageURL:[NSURL URLWithString:url]];
+                [webView setImageURL:url];
             }
         }
         else
@@ -427,7 +427,7 @@
             }
             else
             {
-                [imageView setImageURL:[NSURL URLWithString:url] andImageBoundName:@""];
+                [imageView setImageURL:url andImageBoundName:@""];
             }
         }
     }

@@ -130,7 +130,7 @@
         }
         else
         {
-            [imgView setImageURL:[NSURL URLWithString:url] andImageBoundName:@"defaultPack.png"];
+            [imgView setImageURL:url andImageBoundName:@"defaultPack.png"];
         }
     }
     

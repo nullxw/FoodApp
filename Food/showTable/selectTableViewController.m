@@ -174,7 +174,7 @@
         }
         else
         {
-            [_imageView setImageURL:[NSURL URLWithString:url] andImageBoundName:@"Public_default.png"];
+            [_imageView setImageURL:url andImageBoundName:@"Public_default.png"];
         }
     }
     

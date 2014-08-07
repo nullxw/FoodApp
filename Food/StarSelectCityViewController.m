@@ -187,9 +187,39 @@
         [SVProgressHUD showErrorWithStatus:[langSetting localizedString:@"Select Stores"]];
         return;
     }
-    StarRatingViewController *star=[[StarRatingViewController alloc]init];
-    [star setStoreMessage:strCityCode];
-    [self.navigationController pushViewController:star animated:YES];
+    
+    [SVProgressHUD showWithStatus:nil];
+    [NSThread detachNewThreadSelector:@selector(getIfEvalue) toTarget:self withObject:nil];
+
+}
+
+-(void)getIfEvalue
+{
+    @autoreleasepool
+    {
+         DataProvider *dp=[DataProvider sharedInstance];
+        NSMutableDictionary *info=[[NSMutableDictionary alloc]init];
+        [info setObject:[[NSUserDefaults standardUserDefaults]objectForKey:@"userId"] forKey:@"cardId"];
+        [info setObject:[dicStore objectForKey:@"firmid"] forKey:@"firmId"];
+        [info setObject:@"1" forKey:@"evalTyp"];
+        NSDictionary *dict=[dp getIfEvalue:info];
+        if(dict)
+        {
+            [SVProgressHUD dismiss];
+            if([[dict objectForKey:@"Result"]boolValue])
+            {
+              bs_dispatch_sync_on_main_thread(^{
+                  StarRatingViewController *star=[[StarRatingViewController alloc]init];
+                  [star setStoreMessage:strCityCode];
+                  [self.navigationController pushViewController:star animated:YES];
+              });
+            }
+            else
+            {
+                [SVProgressHUD showErrorWithStatus:[dict objectForKey:@"Message"]];
+            }
+        }
+    }
 }
 
 -(void)navigationBarViewbackClick

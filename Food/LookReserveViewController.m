@@ -207,26 +207,48 @@
     
      _id=[_info objectForKey:@"id"];
     CGFloat   height= ((UIView *)[[_backGround subviews]lastObject]).frame.origin.y+ ((UIView *)[[_backGround subviews]lastObject]).frame.size.height;
+
     
     UIButton *buttonLookOrder=[UIButton buttonWithType:UIButtonTypeCustom];
     [buttonLookOrder setBackgroundImage:[UIImage imageNamed:@"Public_nextButtonNomal.png"] forState:UIControlStateNormal];
     [buttonLookOrder setBackgroundImage:[UIImage imageNamed:@"Public_nextButtonSelect.png"] forState:UIControlStateHighlighted];
-    buttonLookOrder.frame=CGRectMake(10, height+30,( _backGround.frame.size.width-30)/2, 40);
-    //取消预订
+    buttonLookOrder.frame=CGRectMake(10, height+10,( _backGround.frame.size.width-30)/2, 40);
+    //菜品详情
     [buttonLookOrder setTitle:@"菜品详情" forState:UIControlStateNormal];
     [buttonLookOrder addTarget:self action:@selector(buttonClickLookOrder) forControlEvents:UIControlEventTouchUpInside];
     
     [_backGround addSubview:buttonLookOrder];
 
+    
     UIButton *buttonCancle=[UIButton buttonWithType:UIButtonTypeCustom];
-    [buttonCancle setBackgroundImage:[UIImage imageNamed:@"Public_nextButtonNomal.png"] forState:UIControlStateNormal];
-    [buttonCancle setBackgroundImage:[UIImage imageNamed:@"Public_nextButtonSelect.png"] forState:UIControlStateHighlighted];
-    buttonCancle.frame=CGRectMake(( _backGround.frame.size.width-30)/2+20, height+30, ( _backGround.frame.size.width-30)/2, 40);
+    buttonCancle.frame=CGRectMake(( _backGround.frame.size.width-30)/2+20, height+10, ( _backGround.frame.size.width-30)/2, 40);
     //取消预订
     [buttonCancle setTitle:[langSetting localizedString:@"Cancel the reservation"] forState:UIControlStateNormal];
-    [buttonCancle addTarget:self action:@selector(buttonClick) forControlEvents:UIControlEventTouchUpInside];
-
     [_backGround addSubview:buttonCancle];
+    
+    
+//    判断账单是否过期
+    NSString *orderTime=[NSString stringWithFormat:@"%@ %@",[_info objectForKey:@"dat"],[_info objectForKey:@"datmins"]];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //设定时间格式,这里可以设置成自己需要的格式
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    NSDate *date=[[NSDate alloc]init];
+    date=[[dateFormatter dateFromString:orderTime] dateByAddingTimeInterval:15*60];
+    orderTime=[dateFormatter stringFromDate:date];
+    
+    if([DataProvider compareNowTime:orderTime])
+    {
+        [buttonCancle setBackgroundImage:[UIImage imageNamed:@"Public_nextButtonNomal.png"] forState:UIControlStateNormal];
+        [buttonCancle setBackgroundImage:[UIImage imageNamed:@"Public_nextButtonSelect.png"] forState:UIControlStateHighlighted];
+        [buttonCancle addTarget:self action:@selector(buttonClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    else
+    {
+        [buttonCancle setBackgroundImage:nil forState:UIControlStateNormal];
+        [buttonCancle setBackgroundImage:nil forState:UIControlStateHighlighted];
+        [buttonCancle setBackgroundColor:[UIColor grayColor]];
+    }
+    
     [_backGround setContentSize:CGSizeMake(0, buttonCancle.frame.size.height+buttonCancle.frame.origin.y+30)];
     
 }
@@ -252,15 +274,12 @@
             bs_dispatch_sync_on_main_thread(^{
                 UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"预订取消成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
                 [alert show];
-                });
-
+            });
         }
         else
         {
             [SVProgressHUD showErrorWithStatus:[dict objectForKey:@"Message"]];
         }
-        
-        
     }
 }
 
@@ -305,7 +324,6 @@
     }
 
 }
-
 
 //返回到上一界面后刷新上一个界面的视图通知
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

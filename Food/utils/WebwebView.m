@@ -28,15 +28,15 @@
 
 
 
-- (void)setImageURL:(NSURL *)url{
+- (void)setImageURL:(NSString *)url{
     //同步请求
     //    [self synchronous:url];
     NSString *strurl=[NSString stringWithFormat:@"%@",url];
-    NSArray *array=[strurl componentsSeparatedByString:@"#"];
-    if([[array lastObject]isEqualToString:@"ads"])
-    {
-        strurl=[NSURL URLWithString:[array firstObject]];
-    }
+//    NSArray *array=[strurl componentsSeparatedByString:@"#"];
+//    if([[array lastObject]isEqualToString:@"ads"])
+//    {
+//        strurl=[NSURL URLWithString:[array firstObject]];
+//    }
     _url=[NSString stringWithFormat:@"%@",strurl];
     //异步请求
     [self aSynchronous2:strurl];
@@ -45,7 +45,8 @@
 -(void)aSynchronous2:(NSString *)url
 {
     WebwebView *__block imageSelf=self;
-    NSURLRequest* requestAft = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSMutableURLRequest* requestAft = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+     [requestAft setTimeoutInterval:10.0f];
      self.operation = [[AFHTTPRequestOperation alloc] initWithRequest:requestAft];
     //设置下载完成调用的block
     [self.operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation* operation, id responseObject){
@@ -56,7 +57,11 @@
         NSString *localPath = [paths objectAtIndex:0];
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSString *DirectoryPath=[localPath stringByAppendingString:@"/ads"];
-        [fileManager createDirectoryAtPath:DirectoryPath withIntermediateDirectories:YES attributes:nil error:nil];
+        
+        if(![fileManager fileExistsAtPath:DirectoryPath])
+        {
+            [fileManager createDirectoryAtPath:DirectoryPath withIntermediateDirectories:YES attributes:nil error:nil];
+        }
         NSString *filePath;
         if([[[url componentsSeparatedByString:@"#"]lastObject]isEqualToString:@"ads"])
         {

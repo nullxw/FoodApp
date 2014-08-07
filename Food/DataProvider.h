@@ -120,6 +120,9 @@
 //计算选择的时间是否超过当前时间 没超过返回YES
 +(BOOL)compareNowTime:(NSString *)timeStr;
 
+//计算选择的时间Onw是否超过时间two 没超过返回YES
++(BOOL)compareTimeOne:(NSString *)timeOne  andTimeTwo:(NSString *)timeTwo;
+
 //获取手机验证码
 -(NSDictionary *)getPhoneAuthCode:(NSString *)phone;
 
@@ -273,5 +276,9 @@
 
 //	获取更地址
 -(NSDictionary *)findVersionPADWebService:(NSString *)version andxmlStr:(NSString *)xmlStr;
+
+
+//判断门店是否已经被该账号评价过
+-(NSDictionary *)getIfEvalue:(NSMutableDictionary *)Info;
 
 @end

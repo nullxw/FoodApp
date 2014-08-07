@@ -409,7 +409,7 @@ NSComparator cmptr = ^(id obj1, id obj2){
         }
         else
         {
-            [imageView setImageURL:[NSURL URLWithString:url] andImageBoundName:@"Public_default.png"];
+            [imageView setImageURL:url andImageBoundName:@"Public_default.png"];
              NSLog(@"===>>请求");
         }
 //    }

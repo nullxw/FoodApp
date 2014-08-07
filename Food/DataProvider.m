@@ -120,6 +120,7 @@ static  DataProvider *_dataProvide = nil;
 //计算选择的时间是否超过当前时间 没超过返回YES
 +(BOOL)compareNowTime:(NSString *)timeStr
 {
+    
     NSString *GLOBAL_TIMEFORMAT = @"yyyy-MM-dd HH:mm";
     NSTimeZone* GTMzone = [NSTimeZone timeZoneForSecondsFromGMT:0];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -138,6 +139,32 @@ static  DataProvider *_dataProvide = nil;
     }
     return NO;
 }
+
+
+//计算选择的时间Onw是否超过时间two 没超过返回YES
++(BOOL)compareTimeOne:(NSString *)timeOne  andTimeTwo:(NSString *)timeTwo
+{
+    
+    NSString *GLOBAL_TIMEFORMAT = @"yyyy-MM-dd";
+    NSTimeZone* GTMzone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:GLOBAL_TIMEFORMAT];
+    [dateFormatter setTimeZone:GTMzone];
+    NSDate *bDateOne = [dateFormatter dateFromString:timeOne];
+    NSDate *bDateTwo = [dateFormatter dateFromString:timeTwo];
+    
+    NSDate *firstDate = [NSDate dateWithTimeInterval:-3600*8 sinceDate:bDateOne];
+    NSDate *secondDate = [NSDate dateWithTimeInterval:-3600*8 sinceDate:bDateTwo];
+    
+    NSTimeInterval _fitstDate = [firstDate timeIntervalSince1970]*1;
+    NSTimeInterval _secondDate = [secondDate timeIntervalSince1970]*1;
+    
+    if (_fitstDate - _secondDate >= 0) {
+        return YES;
+    }
+    return NO;
+}
+
 
 - (NSDictionary *)bsService:(NSString *)api arg:(NSString *)arg arg2:(NSString *)arg2{
     BSWebServiceAgent *agent = [[BSWebServiceAgent alloc] init];
@@ -273,7 +300,7 @@ static  DataProvider *_dataProvide = nil;
         //        判断返回的数据为空
         NSMutableArray *aryResult = [[NSMutableArray alloc] init];
         NSString *key=[[[[dic objectForKey:@"listTele"] objectForKey:@"listFirm"]allKeys] firstObject];
-        if([[[[[dic objectForKey:@"listTele"]objectForKey:@"listFirm"]allKeys]firstObject]isEqualToString:@"text"])
+        if([[[[[dic objectForKey:@"listTele"]objectForKey:@"listFirm"]allKeys]firstObject]isEqualToString:@"text"]||key==nil)
         {
             return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"Result",aryResult,@"Message", nil];
         }
@@ -977,7 +1004,22 @@ static  DataProvider *_dataProvide = nil;
         NSString *result =[self getStringByfunctionName:@"queryArea" andDict:dict];
         NSDictionary *dic = [BSWebServiceAgent parseXmlResult:result];
         
-        NSMutableArray *aryResult = [[[dic objectForKey:@"listTele"] objectForKey:@"listFavorArea"] objectForKey:@"com.choice.webService.domain.FavorArea"];
+        NSMutableArray *aryResult=[[NSMutableArray alloc]init];
+        NSArray *array = [result componentsSeparatedByString:@"com.choice.webService.domain.FavorArea"];
+        if([array count]<=2)
+        {
+            NSDictionary *dic2 = [[[dic objectForKey:@"listTele"] objectForKey:@"listFavorArea"] objectForKey:@"com.choice.webService.domain.FavorArea"];
+            if(dic2!=nil)
+            {
+                [aryResult addObject:dic2];
+            }
+        }
+        else
+        {
+            aryResult = [[[dic objectForKey:@"listTele"] objectForKey:@"listFavorArea"] objectForKey:@"com.choice.webService.domain.FavorArea"];
+        }
+        
+        
         if([result isEqualToString:@"false"])
         {
              return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"获取信息失败",@"Message", nil];
@@ -1008,9 +1050,20 @@ static  DataProvider *_dataProvide = nil;
         //解析
         NSString *result =[self getStringByfunctionName:@"queryWebMsgByArea" andDict:dict];
         NSDictionary *dic = [BSWebServiceAgent parseXmlResult:result];
-        
-        NSMutableArray *aryResult = [[dic objectForKey:@"list"] objectForKey:@"com.choice.webService.domain.WebMsg"];
-        
+        NSMutableArray *aryResult=[[NSMutableArray alloc]init];
+       NSArray *array = [result componentsSeparatedByString:@"com.choice.webService.domain.WebMsg"];
+        if([array count]<=2)
+        {
+            NSDictionary *dic2 = [[dic objectForKey:@"list"] objectForKey:@"com.choice.webService.domain.WebMsg"];
+            if(dic2!=nil)
+            {
+                [aryResult addObject:dic2];
+            }
+        }
+        else
+        {
+            aryResult= [[dic objectForKey:@"list"] objectForKey:@"com.choice.webService.domain.WebMsg"];
+        }
         if([result isEqualToString:@"false"])
         {
             return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"获取信息失败",@"Message", nil];
@@ -1019,11 +1072,12 @@ static  DataProvider *_dataProvide = nil;
         {
             return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"该地区暂无优惠信息",@"Message", nil];
         }
-        else if ([aryResult count] > 0) {
+        else if ([aryResult count] > 0)
+        {
             return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"Result",aryResult,@"Message", nil];
         }
         else
-            return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"未知错误",@"Message", nil];
+            return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",@"暂无数据",@"Message", nil];
     }else{
         return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",strNetwork,@"Message", nil];
     }
@@ -1839,13 +1893,13 @@ static  DataProvider *_dataProvide = nil;
     NSString  *firmId=[Info objectForKey:@"firmId"];
     NSString  *score=[Info objectForKey:@"score"];
     NSString *content;
-    if([Info objectForKey:@"content"])
+    if([[Info objectForKey:@"content"]isEqualToString:@""])
     {
-        content=[Info objectForKey:@"content"];
+        content=@"无";
     }
     else
     {
-        content=@"无";
+        content=[Info objectForKey:@"content"];
     }
     NSString *cardId=[Info objectForKey:@"cardId"];
     NSString *account=[Info objectForKey:@"account"];
@@ -1934,5 +1988,41 @@ static  DataProvider *_dataProvide = nil;
     }
 
 }
+
+
+//判断门店是否已经被该账号评价过
+-(NSDictionary *)getIfEvalue:(NSMutableDictionary *)Info
+{
+    NSString  *cardId=[Info objectForKey:@"cardId"];  //卡账号
+    NSString  *firmId=[Info objectForKey:@"firmId"];//门店id
+    NSString   *evalTyp=[Info objectForKey:@"evalTyp"];//评价类型1.门店评价，2为账单评价
+    
+    NSString *strParam = [NSString stringWithFormat:@"?cardId=%@&firmId=%@&evalTyp=%@",cardId,firmId,evalTyp];
+    NSDictionary *dict = [self bsService:@"getIfEvalue" arg:strParam arg2:@"CTF/webService/APPWebService/"];
+    
+    if (dict) {
+        NSString *result =[self getStringByfunctionName:@"getIfEvalue" andDict:dict];
+        NSMutableDictionary *dicResult;
+        if([result isEqualToString:@"true"])//修改成功
+        {
+            
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"你已评价过该门店，感谢你的参与",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+        }
+        else if ([result isEqualToString:@"false"])//当前网络不稳定，请重试
+        {
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"可以评价",@"Message",[NSNumber numberWithBool:YES],@"Result", nil];
+        }
+        else
+        {
+            NSLog(@"无此判断类型");
+        }
+        return dicResult;
+        
+    }else{
+        return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"Result",strNetwork,@"Message", nil];
+    }
+    return nil;
+}
+
 
 @end

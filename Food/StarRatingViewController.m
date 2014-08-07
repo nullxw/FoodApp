@@ -245,9 +245,11 @@
         if ([[dicCity objectForKey:@"Result"] boolValue])
         {
             [SVProgressHUD dismiss];
-            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"评价成功" message:@"感谢您的支持与参与" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            alert.tag=101;
-            [alert show];
+            bs_dispatch_sync_on_main_thread(^{
+                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"评价成功" message:@"感谢您的支持与参与" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                alert.tag=101;
+                [alert show];
+            });
         }
         else
         {

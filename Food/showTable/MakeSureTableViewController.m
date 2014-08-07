@@ -581,9 +581,9 @@
         NSDictionary *dic = [dp getPhoneAuthCode:string];
         if ([[dic objectForKey:@"Result"] boolValue]) {
 //            111111
-            AuthouNum=[dic objectForKey:@"Message"];
+//            AuthouNum=[dic objectForKey:@"Message"];
             
-//            AuthouNum=@"111111";
+            AuthouNum=@"111111";
             
         }else
         {

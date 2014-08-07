@@ -13,9 +13,9 @@
 			<key>CFBundleIconFiles</key>
 			<array>
 				<string>Icon-Small</string>
+				<string>Icon</string>
 				<string>Icon-80</string>
 				<string>Icon-120</string>
-				<string>Icon</string>
 			</array>
 		</dict>
 	</dict>

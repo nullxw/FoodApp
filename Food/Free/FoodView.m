@@ -119,7 +119,7 @@
         }
         else
         {
-            [webImg setImageURL:[NSURL URLWithString:url] andImageBoundName:@"defaultPack.png"];
+            [webImg setImageURL:url andImageBoundName:@"defaultPack.png"];
         }
     }
     
