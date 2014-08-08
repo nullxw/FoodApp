@@ -342,8 +342,11 @@
     }
     else if (![_tfPhoneNum.text isEqualToString:[[NSUserDefaults standardUserDefaults]objectForKey:@"userPhone"]])
     {
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"登陆绑定的手机号码与会员绑定手机号码不符，不可添加绑定" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        [alert show];
+        bs_dispatch_sync_on_main_thread(^{
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"登陆绑定的手机号码与会员绑定手机号码不符，不可添加绑定" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alert show];
+        });
+
     }
     else
     {

@@ -149,7 +149,7 @@
     else
     {
         bs_dispatch_sync_on_main_thread(^{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[langSetting localizedString:@"Prompt"] message:@"你选择的门店\n最晚可预点时间早于当前时间\n请选择其他门店\n或重新选择餐次" delegate:nil cancelButtonTitle:[langSetting localizedString:@"OK"] otherButtonTitles:nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[langSetting localizedString:@"Prompt"] message:@"您选择的门店\n最晚可预点时间早于当前时间\n请选择其他门店\n或重新选择餐次" delegate:nil cancelButtonTitle:[langSetting localizedString:@"OK"] otherButtonTitles:nil];
             [alert show];
         });
     }

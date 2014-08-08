@@ -176,7 +176,7 @@
     [self controlClick];
     if([_tfcardNum.text length]==0)
     {
-//        你还未输入会员卡手机号码
+//        您还未输入会员卡手机号码
          [SVProgressHUD showErrorWithStatus:[langSetting localizedString:@"Please enter the phone number"]];
     }
     else
@@ -202,8 +202,11 @@
             if([[dictValue objectForKey:@"appbind"]isEqualToString:@"Y"])
             {
                 
-                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:[NSString stringWithFormat:@"卡号为%@\n的会员卡已绑定",[dictValue objectForKey:@"cardNo"]] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                [alert show];
+                bs_dispatch_sync_on_main_thread(^{
+                    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:[NSString stringWithFormat:@"卡号为%@\n的会员卡已绑定",[dictValue objectForKey:@"cardNo"]] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                    [alert show];
+                });
+
             }
             else
             {

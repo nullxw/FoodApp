@@ -130,7 +130,7 @@ static  DataProvider *_dataProvide = nil;
     
     NSDate *firstDate = [NSDate dateWithTimeInterval:-3600*8 sinceDate:bdate];
     
-    NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+    NSDate *datenow = [NSDate date];//现在时间,您可以输出来看下是什么格式
     NSTimeInterval _fitstDate = [firstDate timeIntervalSince1970]*1;
     NSTimeInterval _secondDate = [datenow timeIntervalSince1970]*1;
     
@@ -1100,7 +1100,7 @@ static  DataProvider *_dataProvide = nil;
     return callWebview;
 }
 
-//在线订位信息提交
+//App订餐信息提交
 -(NSDictionary *)sendTableMessage:(NSMutableDictionary *)Info
 {
     //    dat :日期    sft：餐次  mobtel：手机号  type：1：大厅 0：包间   idorpax：名称  firmid ：门店id clientid：客户id
@@ -2006,7 +2006,7 @@ static  DataProvider *_dataProvide = nil;
         if([result isEqualToString:@"true"])//修改成功
         {
             
-            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"你已评价过该门店，感谢你的参与",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
+            dicResult =[[NSMutableDictionary alloc]initWithObjectsAndKeys:@"您已评价过该门店，感谢您的参与",@"Message",[NSNumber numberWithBool:NO],@"Result", nil];
         }
         else if ([result isEqualToString:@"false"])//当前网络不稳定，请重试
         {

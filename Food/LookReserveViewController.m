@@ -165,7 +165,7 @@
                 lblLeft.text=@"门店电话:";
                 [NSString stringWithFormat:@"%@:",[langSetting localizedString:@"Telephone"]];
                 lblTitle.text=[_info objectForKey:@"tele"];
-                lblTitle.textAlignment=NSTextAlignmentLeft;
+                lblTitle.textAlignment=NSTextAlignmentCenter;
                 
                 UIButton *buttonPhone=[UIButton buttonWithType:UIButtonTypeCustom];
                 [buttonPhone setBackgroundImage:[UIImage imageNamed:@"Public_tele.png"] forState:UIControlStateNormal];
@@ -308,8 +308,11 @@
             OrderDataArray=[[NSMutableArray alloc]initWithArray:[dict objectForKey:@"Message"]];
             if([OrderDataArray count]<=0)
             {
-                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"此订单未点菜" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alert show];
+                bs_dispatch_sync_on_main_thread(^{
+                    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"此订单未点菜" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [alert show];
+                });
+
             }
             else
             {

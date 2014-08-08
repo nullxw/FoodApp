@@ -189,10 +189,12 @@
 
 }
 
+
 -(void)keyboardSHow
 {
     [content resignFirstResponder];
 }
+
 
 -(void)nextButtonClick
 {

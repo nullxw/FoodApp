@@ -494,7 +494,7 @@
     {
         bs_dispatch_sync_on_main_thread(^{
             typeView=nil;
-            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"是否跳过信息填写" message:@"如果跳过\n你可在设置里重新更改绑定\n否则你将不可进行在线点餐等功能\n" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"跳过", nil];
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"是否跳过信息填写" message:@"如果跳过\n您可在设置里重新更改绑定\n否则您将不可进行在线点餐等功能\n" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"跳过", nil];
             [alert show];
         });
         

@@ -93,7 +93,7 @@
         switch (i) {
             case 0:
             {
-               // 你的等位号码
+               // 您的等位号码
                
                 lblTitle.text=[NSString stringWithFormat:@"%@：%@", [langSetting localizedString:@"Your allelic number"],[_info objectForKey:@"getNo"]];
                 lblTitle.frame=CGRectMake(0, 0, backView.frame.size.width, backView.frame.size.height);

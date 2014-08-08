@@ -588,7 +588,7 @@
 //    {
 //        [_dataCity addObject:[dict objectForKey:@"state"]];
 //    }
-    NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+    NSDate *datenow = [NSDate date];//现在时间,您可以输出来看下是什么格式
     NSTimeZone *zone = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];
     NSInteger interval = [zone secondsFromGMTForDate:datenow]+60*24;
     NSDate *localeDate = [datenow  dateByAddingTimeInterval: interval];

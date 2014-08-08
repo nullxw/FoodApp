@@ -212,7 +212,7 @@
     if(cardCount==0)
     {
         bs_dispatch_sync_on_main_thread(^{
-            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:[langSetting localizedString:@"Prompt"] message:@"你还未添加会员卡" delegate:nil cancelButtonTitle:[langSetting localizedString:@"OK"] otherButtonTitles: nil];
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:[langSetting localizedString:@"Prompt"] message:@"您还未添加会员卡" delegate:nil cancelButtonTitle:[langSetting localizedString:@"OK"] otherButtonTitles: nil];
             [alert show];
         });
         

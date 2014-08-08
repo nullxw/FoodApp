@@ -170,7 +170,7 @@
 -(NSMutableArray *)getTimeArray:(NSString *)startTime andEndTime:(NSString *)endTime andInterval:(NSString *)interval
 {
     NSMutableArray *array=[[NSMutableArray alloc]init];
-    NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+    NSDate *datenow = [NSDate date];//现在时间,您可以输出来看下是什么格式
     NSDate *localeDate = [datenow  dateByAddingTimeInterval:([interval integerValue]*60)];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     //设定时间格式,这里可以设置成自己需要的格式

@@ -213,14 +213,20 @@
             [SVProgressHUD dismiss];
             if([[dict objectForKey:@"Message"]isEqualToString:@"1"])
             {
-                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"发现新版本是否更新" delegate:self cancelButtonTitle:@"下次再说" otherButtonTitles:@"更新", nil];
-                alert.tag=101;
-                [alert show];
+                bs_dispatch_sync_on_main_thread(^{
+                    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"发现新版本是否更新" delegate:self cancelButtonTitle:@"下次再说" otherButtonTitles:@"更新", nil];
+                    alert.tag=101;
+                    [alert show];
+                });
+
             }
             else
             {
-                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"当前版本为最新版本" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                [alert show];
+                bs_dispatch_sync_on_main_thread(^{
+                    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"当前版本为最新版本" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                    [alert show];
+                });
+
             }
         }
         else

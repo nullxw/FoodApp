@@ -147,7 +147,7 @@
     lblMessage=[[UILabel alloc]initWithFrame:CGRectMake(30, messageView.frame.origin.y+messageView.frame.size.height, messageView.frame.size.width-60, 40)];
     lblMessage.numberOfLines=2;
     lblMessage.lineBreakMode=NSLineBreakByWordWrapping;
-    lblMessage.text=[NSString stringWithFormat:@"绑定会员卡需要短信确认，验证码已经发送至你的手机%@......%@,请按照提示操作",[phone substringWithRange:NSMakeRange(0, 3)],[phone substringWithRange:NSMakeRange([phone length]-4, 4)]];
+    lblMessage.text=[NSString stringWithFormat:@"绑定会员卡需要短信确认，验证码已经发送至您的手机%@......%@,请按照提示操作",[phone substringWithRange:NSMakeRange(0, 3)],[phone substringWithRange:NSMakeRange([phone length]-4, 4)]];
     //[langSetting localizedString:@"Binding membership card need SMS confirmation, verification code has been sent to your mobile phone %@......%@, please according to clew operation"]
     lblMessage.font=[UIFont systemFontOfSize:10];
     
@@ -302,8 +302,8 @@
 //            [SVProgressHUD showSuccessWithStatus:@"获取成功"];
             
 //            111111
-//            AuthouNum=[dic objectForKey:@"Message"];
-             AuthouNum=@"111111";
+            AuthouNum=[dic objectForKey:@"Message"];
+             AuthouNum=@"111111/";
         }
         else
         {

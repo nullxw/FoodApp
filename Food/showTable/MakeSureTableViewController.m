@@ -279,7 +279,7 @@
 //    _textView=[[UITextView alloc]initWithFrame:CGRectMake(titlelblx, 40+8*(lblHeight+10), SUPERVIEWWIDTH-titlelblx*2, 50)];
 //    _textView.layer.borderColor=selfborderColor.CGColor;
 //    _textView.layer.borderWidth=0.5;
-////    请输入你的特殊要求!
+////    请输入您的特殊要求!
 //    NSString *strAddition = [[NSUserDefaults standardUserDefaults] objectForKey:@"addition"];
 //    if ([strAddition isEqualToString:@""]) {
 //        _textView.text = [langSetting localizedString:@"Special requirements"];
@@ -381,7 +381,7 @@
         else if (![DataProvider compareNowTime:[NSString stringWithFormat:@"%@ %@",[DataProvider sharedInstance].selectTime,_btSelectTime.titleLabel.text]])
         {
             bs_dispatch_sync_on_main_thread(^{
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[langSetting localizedString:@"Prompt"] message:@"你选择的门店\n最晚可预点时间早于当前时间\n请选择其他门店\n或重新选择餐次" delegate:nil cancelButtonTitle:[langSetting localizedString:@"OK"] otherButtonTitles:nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[langSetting localizedString:@"Prompt"] message:@"您选择的门店\n最晚可预点时间早于当前时间\n请选择其他门店\n或重新选择餐次" delegate:nil cancelButtonTitle:[langSetting localizedString:@"OK"] otherButtonTitles:nil];
                 [alert show];
             });
 
@@ -507,7 +507,7 @@
 }
 -(BOOL)textViewShouldEndEditing:(UITextView *)textView
 {
-    //    你还有什么需求，请再次留言！
+    //    您还有什么需求，请再次留言！
     [self textchange:textView];
     return YES;
 }
@@ -516,7 +516,7 @@
 {
     if ([textView.text isEqualToString:@""]||[textView.text isEqualToString:[langSetting localizedString:@"Special requirements"]])
     {
-        //        你还有什么需求，请再次留言！
+        //        您还有什么需求，请再次留言！
         textView.text=[langSetting localizedString:@"Special requirements"];
     }
     else
@@ -581,9 +581,9 @@
         NSDictionary *dic = [dp getPhoneAuthCode:string];
         if ([[dic objectForKey:@"Result"] boolValue]) {
 //            111111
-//            AuthouNum=[dic objectForKey:@"Message"];
+            AuthouNum=[dic objectForKey:@"Message"];
             
-            AuthouNum=@"111111";
+//            AuthouNum=@"111111";
             
         }else
         {

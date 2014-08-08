@@ -138,15 +138,16 @@
                 [Info setObject:@"" forKey:@"userId"];//没用用户id的时候置为空字符串
  
             }
+            
             NSDictionary *dict=[dp getOrderMenus:Info];
             if([[dict objectForKey:@"Result"]boolValue])
             {
-                NSArray *dataArray=[[NSArray alloc]initWithArray:[dict objectForKey:@"Message"]];
+                NSMutableArray *dataArray=[[NSMutableArray alloc]initWithArray:[dict objectForKey:@"Message"]];
+                dataArray=[[NSMutableArray alloc]initWithArray:[dataArray sortedArrayUsingComparator:sort]];
                 _allDataArray=[[NSMutableArray alloc]initWithArray:dataArray];
                 _dataArray=[[NSMutableArray alloc]init];
                 for (NSDictionary *dict in dataArray)
                 {
-//                    NSString *orderTime=[NSString stringWithFormat:@"%@ 00:00",[dict objectForKey:@"dat"]];
                     NSString *orderTime=[NSString stringWithFormat:@"%@",[dict objectForKey:@"dat"]];
                     
                     if([DataProvider compareTimeOne:orderTime andTimeTwo:[self nowTime]])
@@ -154,6 +155,7 @@
                         [_dataArray addObject:dict];
                     }
                 }
+                _dataArray=[[NSMutableArray alloc]initWithArray:[_dataArray sortedArrayUsingComparator:sort]];
                 [_tableView reloadData];
                 [SVProgressHUD dismiss];
                 if([_dataArray count]==0)
@@ -174,6 +176,22 @@
     }
 }
 
+//对账单按照时间进行排序
+NSComparator sort = ^(id obj1, id obj2){
+    
+    NSString *orderTime1=[NSString stringWithFormat:@"%@ %@",[obj1 objectForKey:@"dat"],[obj1 objectForKey:@"datmins"]];
+    NSString *orderTime2=[NSString stringWithFormat:@"%@ %@",[obj2 objectForKey:@"dat"],[obj2 objectForKey:@"datmins"]];
+    //    降序
+    if (orderTime1> orderTime2) {
+        return (NSComparisonResult)NSOrderedDescending;
+    }
+    //    升序
+    if (orderTime1 < orderTime2) {
+        return (NSComparisonResult)NSOrderedAscending;
+    }
+    //    相同
+    return (NSComparisonResult)NSOrderedSame;
+};
 
 
 #pragma mark  uitableViewDelegate
@@ -215,7 +233,9 @@
     {
         outTime=@"已过期";
     }
-    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"就餐时间:%@ %@ %@\n订单编号:%@",[dict objectForKey:@"dat"],[dict objectForKey:@"datmins"],outTime,[dict objectForKey:@"resv"]]];
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"订单编号:%@ %@\n预订就餐时间:%@ %@",[dict objectForKey:@"resv"],outTime,[dict objectForKey:@"dat"],[dict objectForKey:@"datmins"]]];
+    
+    
     NSString *indexStr=[NSString stringWithFormat:@"%@",str];
     NSRange range=[indexStr rangeOfString:@"已过期"];
     [str addAttribute:NSForegroundColorAttributeName value:selfbackgroundColor range:range];
@@ -225,6 +245,8 @@
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
+
+
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -236,7 +258,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60;
+    return 80;
 }
 
 
@@ -326,10 +348,13 @@
     }
 }
 
+
+
+
 -(NSString *)nowTime
 {
     NSString *nowtime=@"2014-04-01";
-    NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+    NSDate *datenow = [NSDate date];//现在时间,您可以输出来看下是什么格式
     NSTimeZone *zone = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];
     NSInteger interval = [zone secondsFromGMTForDate:datenow]+60*24;
     NSDate *localeDate = [datenow  dateByAddingTimeInterval: interval];
@@ -632,7 +657,7 @@
 
 -(void)initArray
 {
-    NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+    NSDate *datenow = [NSDate date];//现在时间,您可以输出来看下是什么格式
     NSTimeZone *zone = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];
     NSInteger interval = [zone secondsFromGMTForDate:datenow]+60*24;
     NSDate *localeDate = [datenow  dateByAddingTimeInterval: interval];

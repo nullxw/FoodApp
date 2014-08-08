@@ -210,7 +210,7 @@
             {
               bs_dispatch_sync_on_main_thread(^{
                   StarRatingViewController *star=[[StarRatingViewController alloc]init];
-                  [star setStoreMessage:strCityCode];
+                  [star setStoreMessage:[dicStore objectForKey:@"firmid"]];
                   [self.navigationController pushViewController:star animated:YES];
               });
             }

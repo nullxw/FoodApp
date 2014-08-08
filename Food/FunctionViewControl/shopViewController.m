@@ -22,6 +22,8 @@
     
     BMKMapView          *_mapView;
     BMKSearch           *_search;
+    
+     NSDictionary       *DictCity;
 
 }
 
@@ -189,19 +191,37 @@
             for (NSDictionary *dic in ary)
             {
                 if([[DataProvider sharedInstance].localCity rangeOfString:[dic objectForKey:@"des"]].location !=NSNotFound)
+                {
                     isFound=YES;
+                    DictCity=dic;
+                }
             }
             if(!isFound)
             {
                 bs_dispatch_sync_on_main_thread(^{
-                    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"你所在的城市中没有全聚德门店\n默认选择城市为北京" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"您所在的城市中没有全聚德门店\n默认选择城市为北京" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                     [alert show];
-                    [DataProvider sharedInstance].localCity=@"北京市";
+                    for (NSDictionary *dic in ary)
+                    {
+                        if([[dic objectForKey:@"des"]rangeOfString:@"北京"].location !=NSNotFound)
+                        {
+                            DictCity=dic;
+                        }
+                    }
+                    if(DictCity)
+                    {
+                        [DataProvider sharedInstance].localCity=[DictCity objectForKey:@"des"];
+                        changeCity *pro=[[changeCity alloc]init];
+                        pro.selectproviceId=[DictCity objectForKey:@"sno"];
+                        pro.selectprovice=[DictCity objectForKey:@"des"];
+                        [DataProvider sharedInstance].selectCity=pro;
+                    }
+                    else
+                    {
+                        [DataProvider sharedInstance].localCity=@"北京";
+                    }
                     [[NSNotificationCenter defaultCenter]postNotificationName:@"refushLocal" object:nil];
                 });
-                
-                
-               
             }
             canPush=YES;
             [SVProgressHUD dismiss];
@@ -231,9 +251,7 @@
 	BOOL flag = [_search reverseGeocode:pt];
 	if (flag) {
 		NSLog(@"ReverseGeocode search success.");
-        //        定位成功后通知定位
-        _mapView.userTrackingMode = BMKUserTrackingModeNone;
-        _mapView.showsUserLocation = NO;
+     
 	}
     else{
         NSLog(@"ReverseGeocode search failed!");
@@ -256,6 +274,9 @@
         [DataProvider sharedInstance].localAddr=[NSString stringWithFormat:@"%@",result.strAddr];
         [[NSNotificationCenter defaultCenter]postNotificationName:@"refushLocal" object:nil];
         NSLog(@"定位成功====%@",[DataProvider sharedInstance].localCity);
+        //        定位成功后通知定位
+        _mapView.userTrackingMode = BMKUserTrackingModeNone;
+        _mapView.showsUserLocation = NO;
         
 //        获取城市
         [NSThread detachNewThreadSelector:@selector(getOnlyCity) toTarget:self withObject:nil];
@@ -273,33 +294,35 @@
         
        if(canPush)
        {
-           changeCity *change=[[changeCity alloc]init];
-           if([_lblLocalCity.text rangeOfString:@"市"].location !=NSNotFound)//判断字符串中是否包含“市”字
+           if(!DictCity)
            {
-              change.selectprovice=[_lblLocalCity.text substringWithRange:NSMakeRange(0, [_lblLocalCity.text length]-1)];
+               changeCity *change=[[changeCity alloc]init];
+               if([_lblLocalCity.text rangeOfString:@"市"].location !=NSNotFound)//判断字符串中是否包含“市”字
+               {
+                   change.selectprovice=[_lblLocalCity.text substringWithRange:NSMakeRange(0, [_lblLocalCity.text length]-1)];
+               }
+               else
+               {
+                   change.selectprovice=_lblLocalCity.text;
+               }
+               change.selectproviceId=[NSString stringWithFormat:@"0"];
+               [DataProvider sharedInstance].selectCity=change;
+               shopListViewController *shopList=[[shopListViewController alloc]init];
+               [self.navigationController pushViewController:shopList animated:YES];
            }
            else
            {
-              change.selectprovice=_lblLocalCity.text;
+               shopListViewController *shopList=[[shopListViewController alloc]init];
+               [self.navigationController pushViewController:shopList animated:YES];
            }
-           
-           change.selectproviceId=[NSString stringWithFormat:@"0"];
-        [DataProvider sharedInstance].selectCity=change;
-        shopListViewController *shopList=[[shopListViewController alloc]init];
-        [self.navigationController pushViewController:shopList animated:YES];
+        
+       
        }
        else
         {
             [SVProgressHUD showWithStatus:@"城市定位中..." maskType:SVProgressHUDMaskTypeNone];
             _mapView.userTrackingMode = BMKUserTrackingModeNone;
             _mapView.showsUserLocation = YES;
-            
-//            bs_dispatch_sync_on_main_thread(^{
-//                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:[langSetting localizedString:@"Prompt"] message:[NSString stringWithFormat:@"%@\n%@",[langSetting localizedString:@"Locate failure"],[langSetting localizedString:@"Please select a city"]] delegate:self cancelButtonTitle:[langSetting localizedString:@"OK"] otherButtonTitles: nil];
-//                alert.tag=10010;
-//                [alert show];
-//            });
-            
         }
     }
     else if(button.tag==101)

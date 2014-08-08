@@ -163,7 +163,7 @@
         switch (i)
         {
             case 0:
-                lbltitle.text=[langSetting localizedString:@"Online booking"];//@"在线订位";
+                lbltitle.text=[langSetting localizedString:@"Online booking"];//@"App订餐";
                 break;
             case 1:
                 lbltitle.text=[langSetting localizedString:@"Preferential information"];//@"优惠信息";

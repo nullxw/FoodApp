@@ -25,7 +25,7 @@
 		<key>Price</key>
 		<string>单价</string>
 		<key>Special requirements</key>
-		<string>请输入你的特殊要求!</string>
+		<string>请输入您的特殊要求!</string>
 		<key>tao</key>
 		<string>套</string>
 		<key>Menu</key>
@@ -135,11 +135,11 @@
 		<key>skip</key>
 		<string>跳  过</string>
 		<key>You haven&apos;t choose province</key>
-		<string>你还未选择省份</string>
+		<string>您还未选择省份</string>
 		<key>You haven&apos;t choose city</key>
-		<string>你还未选择城市</string>
+		<string>您还未选择城市</string>
 		<key>You haven&apos;t choose region</key>
-		<string>你还未选择地区</string>
+		<string>您还未选择地区</string>
 		<key>Please enter the user name six to ten</key>
 		<string>请输入六到十位的用户名</string>
 		<key>Password length is not correct</key>
@@ -149,8 +149,7 @@
 		<key>My equipotential</key>
 		<string>我的等位</string>
 		<key>Online booking</key>
-		<string>在线订位
-</string>
+		<string>App订桌</string>
 		<key>Self order</key>
 		<string>自助点餐</string>
 		<key>Preferential information</key>
@@ -204,7 +203,7 @@
 		<key>No equipotential record</key>
 		<string>暂无等位记录</string>
 		<key>Your allelic number</key>
-		<string>你的等位号码</string>
+		<string>您的等位号码</string>
 		<key>Cancel the allelic</key>
 		<string>取消等位</string>
 		<key>Please enter the card payment password</key>
@@ -238,7 +237,7 @@
 		<key>The next time</key>
 		<string>下次再说</string>
 		<key>You haven&apos;t input the card number</key>
-		<string>你还未输入会员卡号</string>
+		<string>您还未输入会员卡号</string>
 		<key>Fill in the card information</key>
 		<string>填写会员卡信息</string>
 		<key>Enter the id number</key>
@@ -258,7 +257,7 @@
 		<key>Back</key>
 		<string>返 回</string>
 		<key>binding membership card need SMS confirmation, verification code has been sent to your mobile phone %@......%@, please according to clew operation</key>
-		<string>绑定会员卡需要短信确认，验证码已经发送至你的手机%@......%@,请按照提示操作</string>
+		<string>绑定会员卡需要短信确认，验证码已经发送至您的手机%@......%@,请按照提示操作</string>
 		<key>Verification code error</key>
 		<string>验证码错误</string>
 		<key>Failed to get verification code, please get it again</key>
@@ -384,15 +383,15 @@
 		<key>The current has called to %@</key>
 		<string>当前已叫至%@桌</string>
 		<key>Your line number</key>
-		<string>你的排队号码</string>
+		<string>您的排队号码</string>
 		<key>Select the table type</key>
 		<string>选择台位类型</string>
 		<key>Before you have</key>
-		<string>你之前还有</string>
+		<string>您之前还有</string>
 		<key>tables</key>
 		<string>桌客人</string>
 		<key>Your choice is</key>
-		<string>你选择的是</string>
+		<string>您选择的是</string>
 		<key>Take number information please go to the APP page under&apos;my allelic&apos;queries in!</key>
 		<string>取号信息请到APP主页下方“我的等位”内查询!</string>
 		<key>Helpful hints</key>

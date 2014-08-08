@@ -299,20 +299,20 @@
         DataProvider *provider=[DataProvider sharedInstance];
         if([provider.selectOnlyCity isEqualToString:@""])
         {
-            [SVProgressHUD showErrorWithStatus:@"你还未选择城市"];
+            [SVProgressHUD showErrorWithStatus:@"您还未选择城市"];
         }
         else if ([provider.selectTime isEqualToString:@""])
         {
             
-            [SVProgressHUD showErrorWithStatus:@"你还未选择日期"];
+            [SVProgressHUD showErrorWithStatus:@"您还未选择日期"];
         }
         else if ([provider.selectCanCi isEqualToString:@""])
         {
-            [SVProgressHUD showErrorWithStatus:@"你还未选择餐次"];
+            [SVProgressHUD showErrorWithStatus:@"您还未选择餐次"];
         }
         else if([_selectBrank isEqualToString:@""])
         {
-            [SVProgressHUD showErrorWithStatus:@"你还未选择品牌"];
+            [SVProgressHUD showErrorWithStatus:@"您还未选择品牌"];
         }
         else
         {
@@ -569,7 +569,7 @@
 -(NSString *)nowTime
 {
     NSString *nowtime=@"2014-04-01";
-    NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+    NSDate *datenow = [NSDate date];//现在时间,您可以输出来看下是什么格式
     NSTimeZone *zone = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];
     NSInteger interval = [zone secondsFromGMTForDate:datenow]+60*24;
     NSDate *localeDate = [datenow  dateByAddingTimeInterval: interval];
@@ -599,7 +599,7 @@
     {
         [_dataCity addObject:[dict objectForKey:@"state"]];
     }
-    NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+    NSDate *datenow = [NSDate date];//现在时间,您可以输出来看下是什么格式
     NSTimeZone *zone = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];
     NSInteger interval = [zone secondsFromGMTForDate:datenow]+60*24;
     NSDate *localeDate = [datenow  dateByAddingTimeInterval: interval];

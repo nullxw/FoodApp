@@ -143,7 +143,7 @@
     
     _backGround=[[UIView alloc]init];
     _backGround.frame=CGRectMake(0,VIEWHRIGHT, SUPERVIEWWIDTH, SUPERVIEWHEIGHT);
-    _backGround.backgroundColor=[UIColor greenColor];
+    _backGround.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:_backGround];
     
     _mapView = [[BMKMapView alloc]initWithFrame:CGRectMake(0, 0, _backGround.frame.size.width,_backGround.frame.size.height-VIEWHRIGHT-44)];
@@ -396,6 +396,7 @@
         [DataProvider sharedInstance].localCity= [NSString stringWithFormat:@"%@",item.title];
         [DataProvider sharedInstance].localAddr=[NSString stringWithFormat:@"%@",result.strAddr];
         NSLog(@"定位成功===>%@",[DataProvider sharedInstance].localCity);
+        
         [[NSNotificationCenter defaultCenter]postNotificationName:@"refushLocal" object:nil];
            [SVProgressHUD showProgress:-1 status:[langSetting localizedString:@"load..."] maskType:SVProgressHUDMaskTypeBlack];
             [NSThread detachNewThreadSelector:@selector(getStore) toTarget:self withObject:nil];
