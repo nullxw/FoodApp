@@ -237,9 +237,10 @@ NSComparator cmptr = ^(id obj1, id obj2){
         return (NSComparisonResult)NSOrderedDescending;
     }
 //    升序
-    if ([[obj1 objectForKey:@"tablePax"] integerValue] < [[obj2 objectForKey:@"tablePax"] integerValue]) {
+   else if ([[obj1 objectForKey:@"tablePax"] integerValue] < [[obj2 objectForKey:@"tablePax"] integerValue]) {
         return (NSComparisonResult)NSOrderedAscending;
     }
+    else
 //    相同
     return (NSComparisonResult)NSOrderedSame;
 };

@@ -123,6 +123,10 @@
 //计算选择的时间Onw是否超过时间two 没超过返回YES
 +(BOOL)compareTimeOne:(NSString *)timeOne  andTimeTwo:(NSString *)timeTwo;
 
+
+//按照时间进行排序
++(NSMutableArray *)sortByTime:(NSMutableArray *)dateArray;
+
 //获取手机验证码
 -(NSDictionary *)getPhoneAuthCode:(NSString *)phone;
 
@@ -280,5 +284,8 @@
 
 //判断门店是否已经被该账号评价过
 -(NSDictionary *)getIfEvalue:(NSMutableDictionary *)Info;
+
+
+
 
 @end

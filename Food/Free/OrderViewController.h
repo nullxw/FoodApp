@@ -14,6 +14,10 @@
     float allPrice;
     UILabel *lblAddition,*lblCount,*lblSum,*lblAdd;
     CVLocalizationSetting *langSetting;
+    
+    NSDictionary *_sendTableInfo;
 }
 @property (nonatomic,strong) NSMutableDictionary *dicInfo;
+
+@property (nonatomic,strong) NSDictionary *sendTableInfo;
 @end

@@ -42,6 +42,8 @@
     
     int         minCount;//验证码倒计时
     NSTimer     *minCountTimer;//验证码计时器
+    
+    NSDictionary   *sendTableInfo;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -388,8 +390,47 @@
         }
         else
         {
-            [SVProgressHUD showProgress:-1 status:[langSetting localizedString:@"load..."] maskType:SVProgressHUDMaskTypeBlack];
-            [NSThread detachNewThreadSelector:@selector(sendTableMessage) toTarget:self withObject:nil];
+            
+            //        dat :日期    sft：餐次  mobtel：手机号  type：1：大厅 0：包间   idorpax：名称  firmid ：门店id clientid：客户id
+            DataProvider *dp=[DataProvider sharedInstance];
+            NSMutableDictionary *info=[[NSMutableDictionary alloc]init];
+            [info setObject:dp.selectTime forKey:@"dat"];
+            if([dp.selectCanCi isEqualToString:@"午餐"])
+            {
+                [info setObject:@"1" forKey:@"sft"];
+            }
+            else
+            {
+                [info setObject:@"2" forKey:@"sft"];
+            }
+            
+            [info setObject:_btSelectTime.titleLabel.text forKey:@"datmins"];
+            [info setObject:_tfPhoneNum.text forKey:@"mobtel"];
+            if(dp.isRoom)
+            {
+                [info setObject:[NSString stringWithFormat:@"0"] forKey:@"type"];
+            }
+            else
+            {
+                [info setObject:[NSString stringWithFormat:@"1"] forKey:@"type"];
+            }
+            
+            [info setObject:dp.selecttableName forKey:@"idorpax"];
+            [info setObject:dp.storeMessage.storeFirmid forKey:@"firmId"];
+            [info setObject:[[NSUserDefaults standardUserDefaults]objectForKey:@"userId"] forKey:@"clientId"];
+            [info setObject:_tfPeopleNum.text forKey:@"pax"];
+            
+            sendTableInfo=info;
+            
+            //            订单成功\n是否点餐
+            bs_dispatch_sync_on_main_thread(^{
+                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"%@\n%@",[langSetting localizedString:@"Successful order"],[langSetting localizedString:@"Whether to order a meal"]] delegate:self cancelButtonTitle:[langSetting localizedString:@"No"] otherButtonTitles:[langSetting localizedString:@"Sure"], nil];
+                alert.tag=1001;
+                [alert show];
+            });
+
+//            [SVProgressHUD showProgress:-1 status:[langSetting localizedString:@"load..."] maskType:SVProgressHUDMaskTypeBlack];
+//            [NSThread detachNewThreadSelector:@selector(sendTableMessage) toTarget:self withObject:nil];
             
         }
     }
@@ -403,47 +444,26 @@
     {
         
         DataProvider *dp=[DataProvider sharedInstance];
-        NSMutableDictionary *info=[[NSMutableDictionary alloc]init];
-        [info setObject:dp.selectTime forKey:@"dat"];
-        if([dp.selectCanCi isEqualToString:@"午餐"])
-        {
-            [info setObject:@"1" forKey:@"sft"];
-        }
-        else
-        {
-         [info setObject:@"2" forKey:@"sft"];
-        }
         
-        [info setObject:_btSelectTime.titleLabel.text forKey:@"datmins"];
-        [info setObject:_tfPhoneNum.text forKey:@"mobtel"];
-        if(dp.isRoom)
-        {
-            [info setObject:[NSString stringWithFormat:@"0"] forKey:@"type"];
-        }
-        else
-        {
-             [info setObject:[NSString stringWithFormat:@"1"] forKey:@"type"];
-        }
+        NSDictionary *dict=[dp sendTableMessage:[[NSMutableDictionary alloc]initWithDictionary:sendTableInfo]];
         
-        [info setObject:dp.selecttableName forKey:@"idorpax"];
-        [info setObject:dp.storeMessage.storeFirmid forKey:@"firmId"];
-        [info setObject:[[NSUserDefaults standardUserDefaults]objectForKey:@"userId"] forKey:@"clientId"];
-        [info setObject:_tfPeopleNum.text forKey:@"pax"];
-        
-
-//        dat :日期    sft：餐次  mobtel：手机号  type：1：大厅 0：包间   idorpax：名称  firmid ：门店id clientid：客户id
-        NSDictionary *dict=[dp sendTableMessage:info];
         if ([[dict objectForKey:@"Result"] boolValue])
         {
             [SVProgressHUD dismiss];
             dp.phoneNum=_tfPhoneNum.text;
             dp.tableId=[dict objectForKey:@"Message"];
-//            订单成功\n是否点餐
             bs_dispatch_sync_on_main_thread(^{
-                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"%@\n%@",[langSetting localizedString:@"Successful order"],[langSetting localizedString:@"Whether to order a meal"]] delegate:self cancelButtonTitle:[langSetting localizedString:@"No"] otherButtonTitles:[langSetting localizedString:@"Sure"], nil];
-                alert.tag=1001;
+                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"订单可为您预留15分钟，超时作废\n请合理安排就餐时间" delegate:self cancelButtonTitle:[langSetting localizedString:@"Sure"] otherButtonTitles:nil];
+                alert.tag=1002;
                 [alert show];
             });
+            
+////            订单成功\n是否点餐
+//            bs_dispatch_sync_on_main_thread(^{
+//                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"%@\n%@",[langSetting localizedString:@"Successful order"],[langSetting localizedString:@"Whether to order a meal"]] delegate:self cancelButtonTitle:[langSetting localizedString:@"No"] otherButtonTitles:[langSetting localizedString:@"Sure"], nil];
+//                alert.tag=1001;
+//                [alert show];
+//            });
             
         }else
         {
@@ -620,6 +640,8 @@
     {
         if (buttonIndex==1)
         {
+    
+
             NSMutableDictionary *dic = [NSMutableDictionary dictionary];
             DataProvider *dp=[DataProvider sharedInstance];
             [dic setObject:((changeCity *)dp.selectCity).selectproviceId forKey:@"city"];
@@ -636,19 +658,20 @@
             [dic setObject:dp.selectCanCi forKey:@"shiBie"];
             [dic setObject:dp.selectTime forKey:@"targetDate"];
             
-            NSLog(@"%@",dic);
             BSBookViewController *book = [[BSBookViewController alloc] init];
             book.dicInfo = dic;
+            book.sendTableInf=sendTableInfo;
             [self.navigationController pushViewController:book animated:YES];
             //        [self textchange:_textView];
+            
         }
         else
         {
-            bs_dispatch_sync_on_main_thread(^{
-                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"订单可为您预留15分钟，超时作废\n请合理安排就餐时间" delegate:self cancelButtonTitle:[langSetting localizedString:@"Sure"] otherButtonTitles:nil];
-                alert.tag=1002;
-                [alert show];
-            });
+            
+            [SVProgressHUD showProgress:-1 status:[langSetting localizedString:@"load..."] maskType:SVProgressHUDMaskTypeBlack];
+            [NSThread detachNewThreadSelector:@selector(sendTableMessage) toTarget:self withObject:nil];
+
+
         }
     }
     else if(1002==alertView.tag)

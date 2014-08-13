@@ -15,7 +15,8 @@
 @end
 
 @implementation OrderViewController
-@synthesize dicInfo;
+@synthesize dicInfo,sendTableInfo=_sendTableInfo;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,6 +51,7 @@
         [self.view addSubview:nvc];
     }
     
+    NSLog(@"%@",_sendTableInfo);
     
     //上面视图
     UIView *viewUp = [[UIView alloc] init];
@@ -161,15 +163,44 @@
         [dicInfo setObject:phone forKey:@"phone"];
         [dicInfo setObject:lblAdd.text forKey:@"remark"];
         
+        
         [SVProgressHUD showProgress:-1 status:[langSetting localizedString:@"load..."] maskType:SVProgressHUDMaskTypeBlack];
-        [NSThread detachNewThreadSelector:@selector(send:) toTarget:self withObject:dicInfo];
+        [NSThread detachNewThreadSelector:@selector(sendTableMessage) toTarget:self withObject:nil];
+        
     }
     else
     {
         [SVProgressHUD showErrorWithStatus:@"请先绑定手机号码和用户数据，然后提交"];
     }
-   
+    
+}
+
+-(void)sendTableMessage
+{
+    @autoreleasepool
+    {
+        
+        DataProvider *dp=[DataProvider sharedInstance];
+        
+        NSDictionary *dict=[dp sendTableMessage:[[NSMutableDictionary alloc]initWithDictionary:_sendTableInfo]];
+        
+        if ([[dict objectForKey:@"Result"] boolValue])
+        {
+//            dp.phoneNum=_tfPhoneNum.text;
+            dp.tableId=[dict objectForKey:@"Message"];
+            bs_dispatch_sync_on_main_thread(^{
+                [NSThread detachNewThreadSelector:@selector(send:) toTarget:self withObject:dicInfo];
+            });
+            
+        }else
+        {
+            //            获取失败
+            [SVProgressHUD showErrorWithStatus:[langSetting localizedString:@"Failed to get information"]];
+        }
+        
     }
+}
+
 
 -(void)send:(NSMutableDictionary *)info
 {

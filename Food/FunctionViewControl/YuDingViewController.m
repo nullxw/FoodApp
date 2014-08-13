@@ -142,8 +142,7 @@
             NSDictionary *dict=[dp getOrderMenus:Info];
             if([[dict objectForKey:@"Result"]boolValue])
             {
-                NSMutableArray *dataArray=[[NSMutableArray alloc]initWithArray:[dict objectForKey:@"Message"]];
-                dataArray=[[NSMutableArray alloc]initWithArray:[dataArray sortedArrayUsingComparator:sort]];
+                NSMutableArray *dataArray=[[NSMutableArray alloc]initWithArray:[DataProvider sortByTime:[dict objectForKey:@"Message"]]];
                 _allDataArray=[[NSMutableArray alloc]initWithArray:dataArray];
                 _dataArray=[[NSMutableArray alloc]init];
                 for (NSDictionary *dict in dataArray)
@@ -155,7 +154,7 @@
                         [_dataArray addObject:dict];
                     }
                 }
-                _dataArray=[[NSMutableArray alloc]initWithArray:[_dataArray sortedArrayUsingComparator:sort]];
+                _dataArray=[[NSMutableArray alloc]initWithArray:[DataProvider sortByTime:_dataArray]];
                 [_tableView reloadData];
                 [SVProgressHUD dismiss];
                 if([_dataArray count]==0)
@@ -186,12 +185,16 @@ NSComparator sort = ^(id obj1, id obj2){
         return (NSComparisonResult)NSOrderedDescending;
     }
     //    升序
-    if (orderTime1 < orderTime2) {
+   else if (orderTime1 < orderTime2) {
         return (NSComparisonResult)NSOrderedAscending;
     }
+    else
     //    相同
     return (NSComparisonResult)NSOrderedSame;
 };
+
+
+
 
 
 #pragma mark  uitableViewDelegate
@@ -335,11 +338,12 @@ NSComparator sort = ^(id obj1, id obj2){
                         [_dataArray addObject:dict];
                     }
                 }
+                _dataArray=[[NSMutableArray alloc]initWithArray:[DataProvider sortByTime:_dataArray]];
             }
             else
             {
                 [_rightButton setTitle:@"历史账单" forState:UIControlStateNormal];
-                _dataArray=[[NSMutableArray alloc]initWithArray:_allDataArray];
+                _dataArray=[[NSMutableArray alloc]initWithArray:[DataProvider sortByTime:_allDataArray]];
                 
             }
             [_tableView reloadData];

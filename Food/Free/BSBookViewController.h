@@ -57,6 +57,9 @@
     UILabel *lblTotal,*lblCount;
     CVLocalizationSetting *langSetting;
     NSMutableArray *aryCell;
+    
+    
+    NSDictionary *_sendTableInf;
 }
 @property (nonatomic,strong) NSMutableArray *aryResult,*aryAddition;
 @property (nonatomic,strong) NSString *strUnitKey,*strPriceKey;
@@ -66,6 +69,7 @@
 @property (nonatomic,strong) UISearchBar *searchBar;
 
 @property (nonatomic,strong) NSDictionary *dicInfo;
+@property (nonatomic,strong) NSDictionary *sendTableInf;
 - (void )getFoodList;
 
 @end

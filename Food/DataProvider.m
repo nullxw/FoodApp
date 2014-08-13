@@ -165,6 +165,49 @@ static  DataProvider *_dataProvide = nil;
     return NO;
 }
 
+//按照时间进行排序
++(NSMutableArray *)sortByTime:(NSMutableArray *)dateArray
+{
+    NSMutableArray *array=[[NSMutableArray alloc]initWithArray:dateArray];
+    
+    NSString *GLOBAL_TIMEFORMAT = @"yyyy-MM-dd HH:mm";
+    NSTimeZone* GTMzone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:GLOBAL_TIMEFORMAT];
+    [dateFormatter setTimeZone:GTMzone];
+   if([dateArray count])
+   {
+    for (int i=0; i<[array count]-1; i++)
+    {
+        NSMutableDictionary *dateInfoOne=[[NSMutableDictionary alloc]initWithDictionary:[dateArray objectAtIndex:i]];
+        
+        NSString *orderTimeOne=[NSString stringWithFormat:@"%@ %@",[dateInfoOne objectForKey:@"dat"],[dateInfoOne objectForKey:@"datmins"]];
+        
+        
+        NSMutableDictionary *dateInfoTwo=[[NSMutableDictionary alloc]initWithDictionary:[dateArray objectAtIndex:i+1]];
+        
+        NSString *orderTimeTwo=[NSString stringWithFormat:@"%@ %@",[dateInfoTwo objectForKey:@"dat"],[dateInfoTwo objectForKey:@"datmins"]];
+        
+        
+        NSDate *bDateOne = [dateFormatter dateFromString:orderTimeOne];
+        NSDate *bDateTwo = [dateFormatter dateFromString:orderTimeTwo];
+        
+        NSDate *firstDate = [NSDate dateWithTimeInterval:-3600*8 sinceDate:bDateOne];
+        NSDate *secondDate = [NSDate dateWithTimeInterval:-3600*8 sinceDate:bDateTwo];
+        
+        NSTimeInterval _fitstDate = [firstDate timeIntervalSince1970]*1;
+        NSTimeInterval _secondDate = [secondDate timeIntervalSince1970]*1;
+        
+        if (_fitstDate - _secondDate >= 0)
+        {
+            [array exchangeObjectAtIndex:i withObjectAtIndex:i+1];
+        }
+    }
+   }
+    return array;
+}
+
+
 
 - (NSDictionary *)bsService:(NSString *)api arg:(NSString *)arg arg2:(NSString *)arg2{
     BSWebServiceAgent *agent = [[BSWebServiceAgent alloc] init];

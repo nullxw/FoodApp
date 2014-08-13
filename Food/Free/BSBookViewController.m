@@ -25,7 +25,7 @@
 
 @implementation BSBookViewController
 @synthesize aryResult,strPriceKey,strUnitKey,aryAddition;
-@synthesize searchByName,tfInput,contactDic,searchBar,dicInfo;
+@synthesize searchByName,tfInput,contactDic,searchBar,dicInfo,sendTableInf=_sendTableInf;
 
 static bool boolSearch = NO;
 
@@ -378,6 +378,7 @@ static bool boolSearch = NO;
     bs_dispatch_sync_on_main_thread(^{
         OrderDetailViewController *vcOrder = [[OrderDetailViewController alloc] init];
         vcOrder.dicInfo = dicInfo;
+        vcOrder.sendTableInfo=_sendTableInf;
         [self.navigationController pushViewController:vcOrder animated:YES];
         
         [self cancelRequest];//取消图片请求

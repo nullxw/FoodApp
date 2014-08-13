@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Food/Free/BSBookViewController.m"
-            timestampString = "428478040.069382"
+            timestampString = "429584521.881677"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "787"
-            endingLineNumber = "787"
+            startingLineNumber = "788"
+            endingLineNumber = "788"
             landmarkName = "-addToShow:cellx:celly:"
             landmarkType = "5">
          </BreakpointContent>

@@ -16,6 +16,8 @@
 
 @implementation OrderDetailViewController
 
+@synthesize sendTableInfo=_sendTableInfo;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -264,6 +266,7 @@
     }
     OrderViewController *order = [[OrderViewController alloc] init];
     order.dicInfo = (NSMutableDictionary *)self.dicInfo;
+    order.sendTableInfo=_sendTableInfo;
     [self.navigationController pushViewController:order animated:YES];
 }
 

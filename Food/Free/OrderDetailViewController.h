@@ -18,6 +18,9 @@
     UIView *viewUp,*viewDown,*viewBottom,*viewUpUp;
     CVLocalizationSetting *langSetting;
     UIButton *butSubmit;
+    
+    NSDictionary     *_sendTableInfo;
 }
 @property (nonatomic,strong) NSDictionary *dicInfo;
+@property (nonatomic,strong) NSDictionary *sendTableInfo;
 @end
