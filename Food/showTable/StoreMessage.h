@@ -29,6 +29,8 @@
     NSString            *_lunchendtime;     //   午餐自提结束时间
     NSString            *_lunchstart;     //      午餐自提开始时间
     
+    NSString            *_mustselfood;  //台位是否必须选菜
+    
     
     double              _storelongitude;   //经度信息
     double              _storelatitude;    //维度信息
@@ -61,9 +63,13 @@
 @property(nonatomic,strong)    NSString       *lunchendtime;     //   午餐自提结束时间
 @property(nonatomic,strong)    NSString       *lunchstart;     //      午餐自提开始时间
 
+@property(nonatomic,strong)    NSString       *mustselfood;
 
 @property(nonatomic)    double       storelongitude;   //经度信息
 @property(nonatomic)    double       storelatitude;
+
+
+
 
 @property(nonatomic,strong)    NSMutableArray     *storeTableArray;
 @property(nonatomic,strong)    NSMutableArray     *storeRoomArray;

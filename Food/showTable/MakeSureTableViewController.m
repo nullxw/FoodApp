@@ -422,12 +422,40 @@
             
             sendTableInfo=info;
             
-            //            订单成功\n是否点餐
-            bs_dispatch_sync_on_main_thread(^{
-                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"%@\n%@",[langSetting localizedString:@"Successful order"],[langSetting localizedString:@"Whether to order a meal"]] delegate:self cancelButtonTitle:[langSetting localizedString:@"No"] otherButtonTitles:[langSetting localizedString:@"Sure"], nil];
-                alert.tag=1001;
-                [alert show];
-            });
+            if([dp.storeMessage.mustselfood isEqualToString:@"Y"])
+            {
+                NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+                DataProvider *dp=[DataProvider sharedInstance];
+                [dic setObject:((changeCity *)dp.selectCity).selectproviceId forKey:@"city"];
+                NSMutableDictionary *valueStore=[[NSMutableDictionary alloc]init];
+                
+                [valueStore setObject:dp.storeMessage.storeFirmid forKey:@"firmid"];
+                [valueStore setObject:dp.storeMessage.storeFirmdes forKey:@"firmdes"];
+                [valueStore setObject:dp.storeMessage.storeInit forKey:@"init"];
+                [valueStore setObject:dp.storeMessage.storeTele forKey:@"tele"];
+                [valueStore setObject:dp.storeMessage.storeArea forKey:@"area"];
+                
+                [dic setObject:valueStore forKey:@"Store"];
+                [dic setObject:_btSelectTime.titleLabel.text forKey:@"Date"];
+                [dic setObject:dp.selectCanCi forKey:@"shiBie"];
+                [dic setObject:dp.selectTime forKey:@"targetDate"];
+                
+                BSBookViewController *book = [[BSBookViewController alloc] init];
+                book.dicInfo = dic;
+                book.sendTableInf=sendTableInfo;
+                [self.navigationController pushViewController:book animated:YES];
+                //        [self textchange:_textView];
+
+            }
+            else
+            {
+                //            订单成功\n是否点餐
+                bs_dispatch_sync_on_main_thread(^{
+                    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"%@\n%@",[langSetting localizedString:@"Successful order"],[langSetting localizedString:@"Whether to order a meal"]] delegate:self cancelButtonTitle:[langSetting localizedString:@"No"] otherButtonTitles:[langSetting localizedString:@"Sure"], nil];
+                    alert.tag=1001;
+                    [alert show];
+                });
+            }
 
 //            [SVProgressHUD showProgress:-1 status:[langSetting localizedString:@"load..."] maskType:SVProgressHUDMaskTypeBlack];
 //            [NSThread detachNewThreadSelector:@selector(sendTableMessage) toTarget:self withObject:nil];

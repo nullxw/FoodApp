@@ -31,6 +31,8 @@
 @synthesize lunchendtime=_lunchendtime,lunchstart=_lunchstart;
 @synthesize dinnerendtime=_dinnerendtime,dinnerstart=_dinnerstart;
 
+@synthesize mustselfood=_mustselfood;
+
 @synthesize storeRoomArray=_storeRoomArray;
 @synthesize storeTableArray=_storeTableArray;
 

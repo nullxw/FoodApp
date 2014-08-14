@@ -121,7 +121,20 @@
         else
         {
             button.tag=[[[storemessage.storeTableArray objectAtIndex:i]objectForKey:@"tablePax"]integerValue];
-            lbl.text=[NSString stringWithFormat:[langSetting localizedString:@"Table for %@"], [[storemessage.storeTableArray objectAtIndex:i]objectForKey:@"tablePax"]];
+            
+            NSString *index=@"";
+            if([[[storemessage.storeTableArray objectAtIndex:i]objectForKey:@"mustselfood"]isEqualToString:@"Y"])
+            {
+                index=@"(必点菜)";
+            }
+            
+            
+            NSRange range=NSRangeFromString(index);
+            NSAttributedString *tableName=[[NSAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@人桌 %@", [[storemessage.storeTableArray objectAtIndex:i]objectForKey:@"tablePax"],index]];
+            
+            
+            
+//            lbl.text=;
         }
         [button addSubview:lbl];
         

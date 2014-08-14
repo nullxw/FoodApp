@@ -102,6 +102,7 @@
                 store.lunchendtime=[dic objectForKey:@"lunchendtime"];
                 store.dinnerstart=[dic objectForKey:@"dinnerstart"];
                 store.dinnerendtime=[dic objectForKey:@"dinnerendtime"];
+                store.mustselfood=[dic objectForKey:@"mustselfood"];
                 
                 store.storeFirstAlp=@"";
                 store.storeRoomArray=nil;
@@ -154,6 +155,8 @@
         [tableMessage setObject:storei.storetableNum forKey:@"tableNum"];
         [tableMessage setObject:storei.storetableName forKey:@"tableName"];
         [tableMessage setObject:storei.storetableId forKey:@"tableId"];
+        [tableMessage setObject:storei.mustselfood forKey:@"mustselfood"];
+        
         if([storei.storetabletyp isEqualToString:[langSetting localizedString:@"rooms"]])
         {
             [storei.storeRoomArray addObject:tableMessage];
@@ -175,6 +178,7 @@
                 [tableMessage setObject:storej.storetableNum forKey:@"tableNum"];
                 [tableMessage setObject:storej.storetableName forKey:@"tableName"];
                 [tableMessage setObject:storej.storetableId forKey:@"tableId"];
+                [tableMessage setObject:storej.mustselfood forKey:@"mustselfood"];
                 if([storej.storetabletyp isEqualToString:[langSetting localizedString:@"rooms"]])
                 {
                     [storei.storeRoomArray addObject:tableMessage];
