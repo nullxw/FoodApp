@@ -257,6 +257,7 @@
 }
 //跳转到菜单页
 -(void)showOrder{
+    
     if ([lblAddition.text isEqualToString:[langSetting localizedString:@"Special requirements"]]) {
         [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"addition"];
         [[NSUserDefaults standardUserDefaults] synchronize];

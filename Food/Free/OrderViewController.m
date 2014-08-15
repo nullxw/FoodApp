@@ -51,7 +51,7 @@
         [self.view addSubview:nvc];
     }
     
-    NSLog(@"%@",_sendTableInfo);
+   
     
     //上面视图
     UIView *viewUp = [[UIView alloc] init];
@@ -150,7 +150,7 @@
     {
         
         NSString *name = [[NSUserDefaults standardUserDefaults]objectForKey:@"userName"];
-        NSString *phone;
+        NSString *phone=@"";
         if(dp.isReserveis)
         {
             phone= dp.phoneNum;
@@ -159,6 +159,7 @@
         {
             phone= [[NSUserDefaults standardUserDefaults]objectForKey:@"userPhone"];
         }
+        NSLog(@"%@",_sendTableInfo);
         [dicInfo setObject:name forKey:@"name"];
         [dicInfo setObject:phone forKey:@"phone"];
         [dicInfo setObject:lblAdd.text forKey:@"remark"];

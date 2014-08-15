@@ -38,6 +38,12 @@ static bool boolSearch = NO;
     langSetting = [CVLocalizationSetting sharedInstance];
     aryCell = [[NSMutableArray alloc] init];
     [self getTypeFoodList:@"-1"]; //页面初始化的时候加载所有的菜品
+
+//    删除保存菜品
+    DataProvider  *dp=[DataProvider sharedInstance];
+    NSMutableArray *ary = [dp orderedFood];
+    [ary removeAllObjects];
+    [dp saveOrders];
     
     //全部菜品按钮
     butHot = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -224,18 +230,22 @@ static bool boolSearch = NO;
 //返回事件
 -(void)navigationBarViewbackClick
 {
-    if([DataProvider sharedInstance].isReserveis)
+    
+    if([[DataProvider sharedInstance].storeMessage.mustselfood isEqualToString:@"Y"])
     {
-        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:[self.navigationController.viewControllers count]-6] animated:YES];
-        [self cancelRequest];//取消图片请求
+        bs_dispatch_sync_on_main_thread(^{
+            UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"提示" message:@"预订台位为必选菜台位\n是否放弃该台位预订" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            [alert show];
+        });
+        
     }
     else
     {
-    [self.navigationController popViewControllerAnimated:YES];
-    [self cancelRequest];//取消图片请求
-        
+        bs_dispatch_sync_on_main_thread(^{
+            UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"提示" message:@"是否放弃预订台位" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            [alert show];
+        });
     }
-    [SVProgressHUD dismiss];
 }
 
 -(void)dealloc
@@ -883,4 +893,28 @@ static bool boolSearch = NO;
 }
 
 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex==1)
+    {
+        [self popDisMiss];
+    }
+}
+
+-(void)popDisMiss
+{
+    if([DataProvider sharedInstance].isReserveis)
+    {
+        
+        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:[self.navigationController.viewControllers count]-6] animated:YES];
+        [self cancelRequest];//取消图片请求
+    }
+    else
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+        [self cancelRequest];//取消图片请求
+        
+    }
+    [SVProgressHUD dismiss];
+}
 @end

@@ -2495,7 +2495,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "全聚德App";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "2dd32c18-20d9-417a-a96f-8d1727a7955d";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
@@ -2520,7 +2520,7 @@
 					"$(SDKROOT)/usr/lib/system",
 				);
 				PRODUCT_NAME = "全聚德App";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "2dd32c18-20d9-417a-a96f-8d1727a7955d";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";

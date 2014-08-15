@@ -89,8 +89,22 @@
         }
         else
         {
-            lbl.text=[NSString stringWithFormat:[langSetting localizedString:@"Table for %@"],[[storeMessage.storeTableArray objectAtIndex:i]objectForKey:@"tablePax"]];
+            
+            
+            NSString *index=@"";
+            if([[[storeMessage.storeTableArray objectAtIndex:i]objectForKey:@"mustselfood"]isEqualToString:@"Y"])
+            {
+                index=@"(必点菜)";
+            }
+            NSMutableAttributedString *tableName=[[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@人桌 %@", [[storeMessage.storeTableArray objectAtIndex:i]objectForKey:@"tablePax"],index]];
+            NSString *name=[NSString stringWithFormat:@"%@",tableName];
+            NSRange range=[name rangeOfString:index];
+            [tableName addAttribute:NSForegroundColorAttributeName value:selfbackgroundColor range:range];
+            [tableName addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:range];
+            lbl.attributedText=tableName;
+
             lblNum.text=[[storeMessage.storeTableArray objectAtIndex:i]objectForKey:@"tableNum"];
+            
         }
         
         height=lineImage.frame.origin.y;

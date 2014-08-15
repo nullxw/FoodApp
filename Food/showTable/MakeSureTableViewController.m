@@ -689,6 +689,8 @@
             BSBookViewController *book = [[BSBookViewController alloc] init];
             book.dicInfo = dic;
             book.sendTableInf=sendTableInfo;
+            dp.phoneNum=_tfPhoneNum.text;
+            
             [self.navigationController pushViewController:book animated:YES];
             //        [self textchange:_textView];
             

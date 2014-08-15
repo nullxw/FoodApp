@@ -114,6 +114,7 @@
         
         UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(button.frame.size.width*0.3, 0, button.frame.size.width*0.7, button.frame.size.height)];
         lbl.textAlignment=NSTextAlignmentLeft;
+        lbl.font=[UIFont systemFontOfSize:14];
         if([storemessage.storeRoomArray count]>0 && i==index-1)
         {
              lbl.text=[langSetting localizedString:@"rooms"];
@@ -127,14 +128,12 @@
             {
                 index=@"(必点菜)";
             }
-            
-            
-            NSRange range=NSRangeFromString(index);
-            NSAttributedString *tableName=[[NSAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@人桌 %@", [[storemessage.storeTableArray objectAtIndex:i]objectForKey:@"tablePax"],index]];
-            
-            
-            
-//            lbl.text=;
+            NSMutableAttributedString *tableName=[[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@人桌 %@", [[storemessage.storeTableArray objectAtIndex:i]objectForKey:@"tablePax"],index]];
+            NSString *name=[NSString stringWithFormat:@"%@",tableName];
+            NSRange range=[name rangeOfString:index];
+            [tableName addAttribute:NSForegroundColorAttributeName value:selfbackgroundColor range:range];
+            [tableName addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:range];
+            lbl.attributedText=tableName;
         }
         [button addSubview:lbl];
         
@@ -324,10 +323,24 @@
     UIView *RowView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 40)];
     RowView.backgroundColor=[UIColor clearColor];
     UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(0,0, ScreenWidth, 40)];
-    lbl.text=[NSString stringWithFormat:@"%@:%@%@",[[_dataArray objectAtIndex:row]objectForKey:@"tableName"],[[_dataArray objectAtIndex:row]objectForKey:@"tablePax"],[langSetting localizedString:@"people"]];
     lbl.textAlignment=NSTextAlignmentCenter;
     lbl.font=[UIFont systemFontOfSize:15];
     lbl.textColor=[UIColor blackColor];
+    
+    NSString *index=@"";
+    if([[[_dataArray objectAtIndex:row]objectForKey:@"tableName"]isEqualToString:@"Y"])
+    {
+        index=@"(必点菜)";
+    }
+    NSMutableAttributedString *tableName=[[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@:%@%@ %@",[[_dataArray objectAtIndex:row]objectForKey:@"tableName"],[[_dataArray objectAtIndex:row]objectForKey:@"tablePax"],[langSetting localizedString:@"people"],index]];
+    NSString *name=[NSString stringWithFormat:@"%@",tableName];
+    NSRange range=[name rangeOfString:index];
+    
+    [tableName addAttribute:NSForegroundColorAttributeName value:selfbackgroundColor range:range];
+    [tableName addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:range];
+
+    lbl.attributedText=tableName;
+  
     [RowView addSubview:lbl];
     
     return RowView;
