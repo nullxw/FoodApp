@@ -33,7 +33,7 @@
     BOOL                isSelectTabel;//是否已经选择台位
     CVLocalizationSetting *langSetting;
     
-    NSString            *roomName;
+    NSMutableAttributedString *roomName;
     
 }
 
@@ -118,6 +118,7 @@
         if([storemessage.storeRoomArray count]>0 && i==index-1)
         {
              lbl.text=[langSetting localizedString:@"rooms"];
+            lbl.tag=10086;
         }
         else
         {
@@ -276,8 +277,12 @@
     }completion:^(BOOL finished) {
         [vPicker removeFromSuperview];
         vPicker = nil;
-        
     }];
+    UILabel *label=(UILabel *)[self.view viewWithTag:10086];
+    if([label.text isEqualToString:[langSetting localizedString:@"rooms"]])
+    {
+        isSelectTabel=NO;
+    }
 }
 
 - (void)confirmClicked{
@@ -287,24 +292,26 @@
         [vPicker removeFromSuperview];
         vPicker = nil;
     }];
+    UILabel *label=(UILabel *)[self.view viewWithTag:10086];
+    if(roomName)
+    {
+        label.attributedText=roomName;
+        
+    }
+    
 }
 
 
 #pragma mark pickViewDelegate
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    for (NSObject *view in ((UIButton *)[_dataButton lastObject]).subviews)
-    {
-        if([view isKindOfClass:[UILabel class]])
-        {
-            [(UILabel *)view setText:[NSString stringWithFormat:@"%@",[[_dataArray objectAtIndex:row]objectForKey:@"tableName"]]];
-        }
-    }
+    
+    UILabel *label=(UILabel *)[self.view viewWithTag:10086];
+    label.text=[NSString stringWithFormat:@"%@",[[_dataArray objectAtIndex:row]objectForKey:@"tableName"]];
     isSelectTabel=YES;
     [DataProvider sharedInstance].isRoom=YES;//选择台位为包间
     [DataProvider sharedInstance].selecttableName=[[_dataArray objectAtIndex:row]objectForKey:@"tableId"];
      _lblpeopleNum.text=[NSString stringWithFormat:[langSetting localizedString:@"Suitable for 1~%@ people"],[[_dataArray objectAtIndex:row]objectForKey:@"tablePax"]];
-    
 }
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
@@ -342,6 +349,8 @@
     lbl.attributedText=tableName;
   
     [RowView addSubview:lbl];
+    
+    roomName=tableName;
     
     return RowView;
 }
@@ -405,6 +414,7 @@
 //    是否已经选择台位判断
     if(isSelectTabel)
     {
+        
 //        bs_dispatch_sync_on_main_thread(^{
            [_imageView cancelRequest];
             MakeSureTableViewController *makeSure=[[MakeSureTableViewController alloc]init];

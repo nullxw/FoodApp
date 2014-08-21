@@ -153,13 +153,12 @@
         NSString *phone=@"";
         if(dp.isReserveis)
         {
-            phone= dp.phoneNum;
+            phone= [_sendTableInfo objectForKey:@"mobtel"];
         }
         else
         {
             phone= [[NSUserDefaults standardUserDefaults]objectForKey:@"userPhone"];
         }
-        NSLog(@"%@",_sendTableInfo);
         [dicInfo setObject:name forKey:@"name"];
         [dicInfo setObject:phone forKey:@"phone"];
         [dicInfo setObject:lblAdd.text forKey:@"remark"];

@@ -207,8 +207,8 @@
     _tfPhoneNum.delegate=self;
     _tfPhoneNum.borderStyle=UITextBorderStyleRoundedRect;
     _tfPhoneNum.keyboardType=UIKeyboardTypeNumberPad;
-    _tfPhoneNum.clearButtonMode=UITextFieldViewModeAlways;
-    _tfPhoneNum.placeholder=[langSetting localizedString:@"Please enter the phone number"];
+    _tfPhoneNum.text=[[NSUserDefaults standardUserDefaults]objectForKey:@"userPhone"];
+    _tfPhoneNum.enabled=NO;
     [_backgroundView addSubview:_tfPhoneNum];
     
     UILabel  *lblverify=[[UILabel alloc]initWithFrame:CGRectMake(titlelblx, heightIndex+30+5*(lblHeight+10), labeltitleWidth, lblHeight)];

@@ -148,7 +148,14 @@
     for (int i=0; i<6; i++)
     {
         UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame=CGRectMake(((SELFVIEWWEATH-150)/3+40)*(i%3)+35, (210-34)+(i/3)*((SELFVIEWWEATH-150)/3+40),(SELFVIEWWEATH-150)/3 ,(SELFVIEWWEATH-150)/3);
+        if(ScreenHeight==568)
+        {
+        button.frame=CGRectMake(((SELFVIEWWEATH-120)/3+40)*(i%3)+20, (210)+(i/3)*((SELFVIEWWEATH-120)/3+60),(SELFVIEWWEATH-120)/3 ,(SELFVIEWWEATH-120)/3);
+        }
+        else
+        {
+         button.frame=CGRectMake(((SELFVIEWWEATH-150)/3+40)*(i%3)+35, (210-34)+(i/3)*((SELFVIEWWEATH-150)/3+40),(SELFVIEWWEATH-150)/3 ,(SELFVIEWWEATH-150)/3);
+        }
         button.tag=i+1000+1;
         [button addTarget:self action:@selector(MenuSelectClick:) forControlEvents:UIControlEventTouchUpInside];
         [button setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"Menu_newmenu%d.png",i+1]] forState:UIControlStateNormal];
