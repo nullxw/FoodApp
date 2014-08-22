@@ -43,6 +43,8 @@ static NSMutableArray *aryOrders = nil;
 @synthesize StartTime=_StartTime;
 @synthesize EndTime=_EndTime;
 
+@synthesize App_version=_App_version;
+
 static  DataProvider *_dataProvide = nil;
 +(DataProvider *)sharedInstance
 {

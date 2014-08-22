@@ -19,6 +19,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSLog(@"%@",NSHomeDirectory());
+    
+    [DataProvider sharedInstance].App_version=@"0";
+    
+   
+    
     [self _initNSUserDefaults];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
@@ -55,6 +60,10 @@
     [self.window makeKeyAndVisible];
     return YES;
 }
+
+
+
+
 
 //初始化NSUserDefaults
 -(void)_initNSUserDefaults{

@@ -81,10 +81,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
 	// Do any additional setup after loading the view.
     langSetting=[CVLocalizationSetting sharedInstance];
     self.navigationController.navigationBar.hidden=YES;
     self.view.backgroundColor=[UIColor whiteColor];
+    
+    
+//    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+//    NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+//    [NSThread detachNewThreadSelector:@selector(chcekVersion:) toTarget:self withObject:app_Version];
     
     CGFloat     buttonHeight;//底部俩个按键的y坐标
     if([[[UIDevice currentDevice]systemVersion]floatValue]>=7.0)
@@ -145,6 +151,7 @@
     yudingLeft.frame=CGRectMake(MyYuding.center.x-50, 15, 20, 20);
     [MyYuding addSubview:yudingLeft];
     
+    
     for (int i=0; i<6; i++)
     {
         UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
@@ -197,9 +204,39 @@
     
     [self addScrollView:[self getCacheAdPic] andIsFirst:YES];
     
-    [NSThread detachNewThreadSelector:@selector(findPic) toTarget:self withObject:nil];
     
 }
+
+//-(void)chcekVersion:(NSString *)version
+//{
+//    @autoreleasepool
+//    {
+//        NSDictionary *dict=[[DataProvider sharedInstance]isTypUpdateWebService:version andXml:@""];
+//        if(![dict objectForKey:@"Result"])
+//        {
+//            if(![[dict objectForKey:@"Message"]isEqualToString:@"1"])
+//            {
+//                [DataProvider sharedInstance].App_version=@"1";
+//               [self updateVersion];
+//            }
+//        }
+//    }
+//}
+
+
+//-(void)updateVersion
+//{
+//    if([[DataProvider sharedInstance].App_version boolValue])
+//    {
+//
+//        bs_dispatch_sync_on_main_thread(^{
+//            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"发现新版本是否更新" delegate:self cancelButtonTitle:@"下次再说" otherButtonTitles:@"更新", nil];
+//            [alert show];
+//        });
+//    }
+//
+//}
+
 
 -(NSMutableArray *)getCacheAdPic
 {
@@ -552,12 +589,21 @@
     }
 }
 
+
 -(void)ViewButtonClick:(UIButton *)button
 {
     YuDingViewController *yuding=[[YuDingViewController alloc]init];
     [self.navigationController pushViewController:yuding animated:YES];
 }
 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex==1)
+    {
+        otherSetViewController *otherView=[[otherSetViewController alloc]init];//其他设置
+        [self.navigationController pushViewController:otherView animated:YES];
+    }
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

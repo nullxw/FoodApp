@@ -66,6 +66,8 @@
     NSString        *_StartTime; //        市别开始时间
     NSString        *_EndTime;     //      市别结束时间
     
+    NSString        *_App_version;
+    
 }
 @property(nonatomic,strong)    NSString    *selectOnlyCity;  //只选择城市
 @property(nonatomic,strong)    NSString    *selectTime;   //选择时间
@@ -79,6 +81,8 @@
 
 @property(nonatomic,strong)    NSString    *goalCity;
 @property(nonatomic,strong)    NSString    *goalAddr;
+
+@property(nonatomic,strong)    NSString    *App_version;
 
 @property(nonatomic)    double              latitude;
 @property(nonatomic)    double              longitude;

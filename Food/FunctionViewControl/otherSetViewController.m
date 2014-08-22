@@ -116,7 +116,14 @@
            UILabel *lbl_Version=[[UILabel alloc]initWithFrame:CGRectMake(cell.contentView.frame.size.width-100, 0, 100,cell.contentView.frame.size.height)];
             NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
             app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+            if([[DataProvider sharedInstance].App_version boolValue])
+            {
+             lbl_Version.text=[NSString stringWithFormat:@"有新版本"];   
+            }
+            else
+            {
             lbl_Version.text=[NSString stringWithFormat:@"v%@", app_Version];
+            }
             lbl_Version.textAlignment=NSTextAlignmentCenter;
             lbl_Version.font=[UIFont systemFontOfSize:14];
             lbl_Version.textColor=selfbackgroundColor;

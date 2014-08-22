@@ -10,7 +10,7 @@
 #import "BMapKit.h"
 
 
-@interface NewMenuViewController : UIViewController<UIScrollViewDelegate,BMKMapViewDelegate,BMKUserLocationDelegate,BMKSearchDelegate>
+@interface NewMenuViewController : UIViewController<UIScrollViewDelegate,BMKMapViewDelegate,BMKUserLocationDelegate,BMKSearchDelegate,UIAlertViewDelegate>
 
 
 @end
