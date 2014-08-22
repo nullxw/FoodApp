@@ -82,6 +82,8 @@
     BOOL                isShowChangeType;
     BOOL                isPost; //是否开始请求数据
     CVLocalizationSetting *langSetting;
+    
+    NSDictionary        *indexCityDict;
 
 }
 
@@ -398,9 +400,51 @@
         NSLog(@"定位成功===>%@",[DataProvider sharedInstance].localCity);
         
         [[NSNotificationCenter defaultCenter]postNotificationName:@"refushLocal" object:nil];
-           [SVProgressHUD showProgress:-1 status:[langSetting localizedString:@"load..."] maskType:SVProgressHUDMaskTypeBlack];
-            [NSThread detachNewThreadSelector:@selector(getStore) toTarget:self withObject:nil];
+        [SVProgressHUD showProgress:-1 status:[langSetting localizedString:@"load..."] maskType:SVProgressHUDMaskTypeBlack];
+        [NSThread detachNewThreadSelector:@selector(getOnlyCity) toTarget:self withObject:nil];
+
 	}
+}
+
+
+
+
+
+//选择城市通过接口
+-(void)getOnlyCity
+{
+    @autoreleasepool {
+        DataProvider *dp = [[DataProvider alloc] init];
+        NSDictionary *dicCity = [dp getCity];
+        if ([[dicCity objectForKey:@"Result"] boolValue]) {
+            NSArray *ary = [dicCity objectForKey:@"Message"];
+            BOOL  isFound=NO;
+            for (NSDictionary *dic in ary)
+            {
+                if([[DataProvider sharedInstance].localCity rangeOfString:[dic objectForKey:@"des"]].location !=NSNotFound)
+                {
+                    isFound=YES;
+                    indexCityDict=dic;
+                    
+                }
+            }
+            if(isFound)
+            {
+                [SVProgressHUD showProgress:-1 status:[langSetting localizedString:@"load..."] maskType:SVProgressHUDMaskTypeBlack];
+                [NSThread detachNewThreadSelector:@selector(getStore) toTarget:self withObject:nil];
+            }
+            else
+            {
+                [SVProgressHUD dismiss];
+                isPost=YES;
+            }
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:[dicCity objectForKey:@"Message"]];
+        }
+    }
+    
 }
 
 //获取门店数据
@@ -417,8 +461,8 @@
             dp.localCity=[dp.localCity substringWithRange:NSMakeRange(0, [dp.localCity length]-1)];
             
         }
-        [dictValue setValue:dp.localCity forKey:@"area"];
-        [dictValue setValue:@"1" forKey:@"type"];
+        [dictValue setValue:[indexCityDict objectForKey:@"sno"] forKey:@"area"];
+        [dictValue setValue:@"0" forKey:@"type"];
         dp.isShop=YES;
         NSDictionary *dictStore=[[NSDictionary alloc]initWithDictionary:[dp getStoreByArea:dictValue]];
         

@@ -217,6 +217,8 @@
     double dist  = theta*er;
     return dist;
 }
+
+
 //两地间的距离百度提供
 - (CLLocationDistance) getCLLocationDistance:(CLLocationCoordinate2D)coordinateA TheTowCoordinate:(CLLocationCoordinate2D )coordinateB
 {

@@ -242,6 +242,8 @@
     }
 }
 
+
+//添加广告视图
 -(void)addScrollView:(NSMutableArray *)array andIsFirst:(BOOL)isFirst
 {
     NSMutableArray  *viewsArray=[[NSMutableArray alloc]init];//广告图片

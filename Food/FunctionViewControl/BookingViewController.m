@@ -37,6 +37,7 @@
     
     NSString            *NowMoon;  //当前月份
     NSString            *NowDay;    //当前日
+    NSString            *NowYear;  //当前年
     NSString            *_selectBrank;//选择的品牌
     
     CVLocalizationSetting   *langSetting;
@@ -465,6 +466,22 @@
     if(component==0)
     {
         selectYear =[[_dataYear objectAtIndex:row]integerValue];
+        if([NowYear intValue]!=selectYear)
+        {
+            _dataMoon=[[NSMutableArray alloc]init];
+            for(int i=1;i<=12;i++)
+            {
+                [_dataMoon addObject:[NSString stringWithFormat:@"%d",i]];
+            }
+        }
+        else
+        {
+            _dataMoon=[[NSMutableArray alloc]init];
+            for(int i=[NowMoon intValue];i<=12;i++)
+            {
+                [_dataMoon addObject:[NSString stringWithFormat:@"%d",i]];
+            }
+        }
         [_pickViewTime reloadAllComponents];
     }
     else if(component==1)
@@ -490,6 +507,8 @@
     }
     else
     {
+        
+        
         //判断平年闰年
         BOOL rainYear=NO;
         if(selectYear%4==0 ||(selectYear%100==0 &&selectYear%400==0))
@@ -526,7 +545,7 @@
         _dataDay=[[NSMutableArray alloc]init];
         NSInteger   dayNum=1;
 
-        if([NowMoon integerValue]==selectMoon)
+        if([NowMoon integerValue]==selectMoon && [NowYear intValue]==selectYear)
         {
             dayNum=[NowDay integerValue];//当前月份，日期从当前日期开始，否则，从1号开始
         }
@@ -559,7 +578,6 @@
     }
     else
     {
-        
         selectDay=[[_dataDay objectAtIndex:row]integerValue];
         return [_dataDay objectAtIndex:row];
     }
@@ -608,8 +626,10 @@
     [dateFormatter setDateFormat:@"yyyy"];
     //用[NSDate date]可以获取系统当前时间
     NSString *yy = [dateFormatter stringFromDate:localeDate];
-    
     [dateFormatter setDateFormat:@"MM"];
+    NowYear=yy;
+    
+    
     //用[NSDate date]可以获取系统当前时间
     NSString *MM = [dateFormatter stringFromDate:localeDate];
     NowMoon=MM;
@@ -619,7 +639,15 @@
     NowDay=dd;
     _dataMoon=[[NSMutableArray alloc]init];
     _dataDay=[[NSMutableArray alloc]init];
+    if([MM integerValue] == 12)
+    {
+     _dataYear=[[NSMutableArray alloc]initWithObjects:yy,[NSString stringWithFormat:@"%d",[yy intValue]+1], nil];
+    }
+    else
+    {
     _dataYear=[[NSMutableArray alloc]initWithObjects:yy, nil];
+    }
+    
     for(int i=[MM integerValue];i<=12;i++)
     {
         [_dataMoon addObject:[NSString stringWithFormat:@"%d",i]];

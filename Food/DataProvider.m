@@ -313,7 +313,7 @@ static  DataProvider *_dataProvide = nil;
     NSString *strParam;
     if(self.isShop)
     {
-        if([dicCityCode objectForKey:@"type"])
+        if([[dicCityCode objectForKey:@"type"] boolValue])
         {
 #pragma worring     ---area
             //           strParam = [NSString stringWithFormat:@"?area=%@&type=1",[dicCityCode objectForKey:@"area"]];
