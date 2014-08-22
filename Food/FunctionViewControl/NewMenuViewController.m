@@ -237,6 +237,14 @@
 //
 //}
 
+//-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//    if(buttonIndex==1)
+//    {
+//        otherSetViewController *otherView=[[otherSetViewController alloc]init];//其他设置
+//        [self.navigationController pushViewController:otherView animated:YES];
+//    }
+//}
 
 -(NSMutableArray *)getCacheAdPic
 {
@@ -596,14 +604,6 @@
     [self.navigationController pushViewController:yuding animated:YES];
 }
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(buttonIndex==1)
-    {
-        otherSetViewController *otherView=[[otherSetViewController alloc]init];//其他设置
-        [self.navigationController pushViewController:otherView animated:YES];
-    }
-}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
